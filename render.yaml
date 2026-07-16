@@ -1,21 +1,18 @@
 # Render Blueprint for Rellouse Messenger
 # This file defines all services needed to deploy the application
 
-services:
-  # PostgreSQL Database
-  - type: pserv
-    name: rellouse-db
-    env: docker
+databases:
+  - name: rellouse-db
+    databaseName: rellouse_db
+    user: rellouse_user
     plan: starter
     region: frankfurt
-    databases:
-      - name: rellouse_db
-        user: rellouse_user
 
+services:
   # Backend API Service
   - type: web
     name: rellouse-backend
-    env: python
+    runtime: python
     region: frankfurt
     plan: starter
     buildCommand: "cd backend && pip install -r requirements.txt"
@@ -72,7 +69,7 @@ services:
   # Frontend Static Site
   - type: web
     name: rellouse-frontend
-    env: static
+    runtime: static
     region: frankfurt
     buildCommand: "cd frontend && npm install && npm run build"
     staticPublishPath: frontend/dist

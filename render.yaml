@@ -6,14 +6,12 @@ databases:
     databaseName: rellouse_db
     user: rellouse_user
     plan: starter
-    region: frankfurt
 
 services:
   # Backend API Service
   - type: web
     name: rellouse-backend
     runtime: python
-    region: frankfurt
     plan: starter
     buildCommand: "cd backend && pip install -r requirements.txt"
     startCommand: "cd backend && uvicorn main:app --host 0.0.0.0 --port $PORT"
@@ -70,7 +68,6 @@ services:
   - type: web
     name: rellouse-frontend
     runtime: static
-    region: frankfurt
     buildCommand: "cd frontend && npm install && npm run build"
     staticPublishPath: frontend/dist
     routes:

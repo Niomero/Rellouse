@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { Send } from 'lucide-react'
 
@@ -55,7 +55,7 @@ const ChatPage = () => {
                   No messages yet. Start the conversation!
                 </div>
               ) : (
-                messages.map((msg, idx) => (
+                messages.map((_msg, idx) => (
                   <div key={idx} className="message-bubble">
                     {/* Message rendering */}
                   </div>

@@ -4,7 +4,7 @@ import { getRoleBadge } from '../utils/roleUtils'
 import { Mail, Calendar } from 'lucide-react'
 
 const ProfilePage = () => {
-  const { username } = useParams()
+  const { username: _username } = useParams()
   const { user: currentUser } = useAuthStore()
 
   // TODO: Fetch user profile data

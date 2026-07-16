@@ -1,0 +1,85 @@
+# Render Blueprint for Rellouse Messenger
+# This file defines all services needed to deploy the application
+
+services:
+  # PostgreSQL Database
+  - type: pserv
+    name: rellouse-db
+    env: docker
+    plan: starter
+    region: frankfurt
+    databases:
+      - name: rellouse_db
+        user: rellouse_user
+
+  # Backend API Service
+  - type: web
+    name: rellouse-backend
+    env: python
+    region: frankfurt
+    plan: starter
+    buildCommand: "cd backend && pip install -r requirements.txt"
+    startCommand: "cd backend && uvicorn main:app --host 0.0.0.0 --port $PORT"
+    healthCheckPath: /health
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: rellouse-db
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: ENCRYPTION_KEY
+        generateValue: true
+      - key: ALGORITHM
+        value: HS256
+      - key: ACCESS_TOKEN_EXPIRE_MINUTES
+        value: 30
+      - key: REFRESH_TOKEN_EXPIRE_DAYS
+        value: 7
+      - key: APP_NAME
+        value: Rellouse Messenger
+      - key: APP_VERSION
+        value: 1.0.0
+      - key: DEBUG
+        value: false
+      - key: ALLOWED_ORIGINS
+        value: https://rellouse-frontend.onrender.com
+      - key: RATE_LIMIT_PER_MINUTE
+        value: 60
+      - key: RATE_LIMIT_PER_HOUR
+        value: 1000
+      - key: WS_HEARTBEAT_INTERVAL
+        value: 30
+      - key: WS_MAX_CONNECTIONS_PER_USER
+        value: 5
+      - key: OWNER_USERNAME
+        value: Rellouse
+      - key: OWNER_PASSWORD
+        value: none
+      - key: OWNER_ADDITIONAL_USERNAMES
+        value: admin,user,test,none
+      - key: S3_ENDPOINT_URL
+        sync: false
+      - key: S3_ACCESS_KEY_ID
+        sync: false
+      - key: S3_SECRET_ACCESS_KEY
+        sync: false
+      - key: S3_BUCKET_NAME
+        sync: false
+      - key: S3_REGION
+        value: us-east-1
+
+  # Frontend Static Site
+  - type: web
+    name: rellouse-frontend
+    env: static
+    region: frankfurt
+    buildCommand: "cd frontend && npm install && npm run build"
+    staticPublishPath: frontend/dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: VITE_API_URL
+        value: https://rellouse-backend.onrender.com

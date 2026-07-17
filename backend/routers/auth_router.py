@@ -13,7 +13,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-router = APIRouter()
+router = APIRouter(prefix="/api/auth", tags=["Authentication"])
 
 
 # Request/Response Models

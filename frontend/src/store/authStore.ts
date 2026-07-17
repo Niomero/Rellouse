@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
-import axios from 'axios'
+import api from '../services/api'
 
 interface User {
   id: number
@@ -39,7 +39,7 @@ export const useAuthStore = create<AuthState>()(
       login: async (login: string, password: string) => {
         set({ isLoading: true })
         try {
-          const response = await axios.post('/api/auth/login', { login, password })
+          const response = await api.post('/api/auth/login', { login, password })
           const { access_token, refresh_token, user } = response.data
           
           set({
@@ -50,8 +50,9 @@ export const useAuthStore = create<AuthState>()(
             isLoading: false,
           })
           
-          // Set default authorization header
-          axios.defaults.headers.common['Authorization'] = `Bearer ${access_token}`
+          // Store tokens in localStorage
+          localStorage.setItem('access_token', access_token)
+          localStorage.setItem('refresh_token', refresh_token)
         } catch (error: any) {
           set({ isLoading: false })
           throw new Error(error.response?.data?.detail || 'Login failed')
@@ -61,7 +62,7 @@ export const useAuthStore = create<AuthState>()(
       register: async (login: string, password: string, username: string) => {
         set({ isLoading: true })
         try {
-          const response = await axios.post('/api/auth/register', {
+          const response = await api.post('/api/auth/register', {
             login,
             password,
             username,
@@ -76,8 +77,9 @@ export const useAuthStore = create<AuthState>()(
             isLoading: false,
           })
           
-          // Set default authorization header
-          axios.defaults.headers.common['Authorization'] = `Bearer ${access_token}`
+          // Store tokens in localStorage
+          localStorage.setItem('access_token', access_token)
+          localStorage.setItem('refresh_token', refresh_token)
         } catch (error: any) {
           set({ isLoading: false })
           throw new Error(error.response?.data?.detail || 'Registration failed')
@@ -89,9 +91,7 @@ export const useAuthStore = create<AuthState>()(
         
         try {
           if (accessToken) {
-            await axios.post('/api/auth/logout', {}, {
-              headers: { Authorization: `Bearer ${accessToken}` }
-            })
+            await api.post('/api/auth/logout')
           }
         } catch (error) {
           console.error('Logout error:', error)
@@ -103,8 +103,9 @@ export const useAuthStore = create<AuthState>()(
             isAuthenticated: false,
           })
           
-          // Remove authorization header
-          delete axios.defaults.headers.common['Authorization']
+          // Remove tokens from localStorage
+          localStorage.removeItem('access_token')
+          localStorage.removeItem('refresh_token')
         }
       },
 
@@ -117,17 +118,12 @@ export const useAuthStore = create<AuthState>()(
         }
         
         try {
-          const response = await axios.get('/api/auth/me', {
-            headers: { Authorization: `Bearer ${accessToken}` }
-          })
+          const response = await api.get('/api/auth/me')
           
           set({
             user: response.data,
             isAuthenticated: true,
           })
-          
-          // Set default authorization header
-          axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`
         } catch (error) {
           // Token invalid, try to refresh
           await get().refreshAccessToken()
@@ -143,16 +139,14 @@ export const useAuthStore = create<AuthState>()(
         }
         
         try {
-          const response = await axios.post('/api/auth/refresh', {
+          const response = await api.post('/api/auth/refresh', {
             refresh_token: refreshToken,
           })
           
           const { access_token } = response.data
           
           set({ accessToken: access_token })
-          
-          // Set default authorization header
-          axios.defaults.headers.common['Authorization'] = `Bearer ${access_token}`
+          localStorage.setItem('access_token', access_token)
           
           // Re-check auth
           await get().checkAuth()
@@ -164,6 +158,8 @@ export const useAuthStore = create<AuthState>()(
             refreshToken: null,
             isAuthenticated: false,
           })
+          localStorage.removeItem('access_token')
+          localStorage.removeItem('refresh_token')
         }
       },
 

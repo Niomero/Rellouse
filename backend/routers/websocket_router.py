@@ -14,7 +14,7 @@ from models import User, Message
 from websocket_service import manager
 from security import token_manager
 
-router = APIRouter()
+router = APIRouter(tags=["WebSocket"])
 
 logger = logging.getLogger(__name__)
 

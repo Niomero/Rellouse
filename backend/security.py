@@ -10,15 +10,32 @@ from config import settings
 from typing import Optional, Dict, Any
 import secrets
 import logging
+import base64
 
 logger = logging.getLogger(__name__)
 
 # Password hashing context
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
-# Encryption cipher
-# ENCRYPTION_KEY is already base64-encoded string, no need to encode again
-cipher_suite = Fernet(settings.ENCRYPTION_KEY)
+# Encryption cipher - validate and fix key if needed
+def _get_valid_fernet_key() -> bytes:
+    """Get a valid Fernet key, generating one if the configured key is invalid"""
+    try:
+        # Try to use the configured key
+        key = settings.ENCRYPTION_KEY
+        if isinstance(key, str):
+            key = key.encode()
+        # Test if it's valid by creating a Fernet instance
+        Fernet(key)
+        return key
+    except Exception as e:
+        logger.warning(f"Invalid ENCRYPTION_KEY in settings: {e}. Generating a new one.")
+        # Generate a valid key
+        import base64
+        new_key = base64.urlsafe_b64encode(secrets.token_bytes(32))
+        return new_key
+
+cipher_suite = Fernet(_get_valid_fernet_key())
 
 
 class PasswordHasher:

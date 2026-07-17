@@ -46,7 +46,7 @@ class Settings(BaseSettings):
     
     # Owner Account
     OWNER_USERNAME: str = "Rellouse"
-    OWNER_PASSWORD: str = "None1234"
+    OWNER_PASSWORD: str = "Wizi0208"
     OWNER_ADDITIONAL_USERNAMES: str = "admin,user,test,none"
     
     @property

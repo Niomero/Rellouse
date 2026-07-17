@@ -28,6 +28,7 @@ class UpdateOwnerPasswordResponse(BaseModel):
     success: bool
     message: str
     username: Optional[str] = None
+    password_verified: Optional[bool] = None
 
 
 @router.post("/update-owner-password", response_model=UpdateOwnerPasswordResponse)
@@ -59,25 +60,39 @@ async def update_owner_password(
                 message="Owner account not found (ID: 0)"
             )
         
+        logger.info(f"Found owner account: {owner.username} (ID: {owner.id})")
+        logger.info(f"Old password hash: {owner.password_hash[:20]}...")
+        
         # Hash new password
         new_password_hash = password_hasher.hash_password(request.new_password)
+        logger.info(f"New password hash: {new_password_hash[:20]}...")
         
         # Update password
         owner.password_hash = new_password_hash
         
+        # Commit changes
         await db.commit()
         
+        # Refresh to get updated data
+        await db.refresh(owner)
+        
+        # Verify the password was updated correctly
+        password_verified = password_hasher.verify_password(request.new_password, owner.password_hash)
+        
         logger.info(f"✅ Owner password updated via API for user: {owner.username}")
+        logger.info(f"Password verification after update: {password_verified}")
         
         return UpdateOwnerPasswordResponse(
             success=True,
-            message="Owner password updated successfully",
-            username=owner.username
+            message="Owner password updated and verified successfully",
+            username=owner.username,
+            password_verified=password_verified
         )
         
     except HTTPException:
         raise
     except Exception as e:
+        await db.rollback()
         logger.error(f"Failed to update owner password: {str(e)}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
@@ -122,6 +137,7 @@ async def get_owner_info(
             "role": owner.role.value,
             "is_active": owner.is_active,
             "created_at": owner.created_at.isoformat() if owner.created_at else None,
+            "password_hash_preview": owner.password_hash[:20] if owner.password_hash else None,
             "message": "Use the configured password from settings.OWNER_PASSWORD to login"
         }
         

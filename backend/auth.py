@@ -4,7 +4,7 @@ Handles user registration, login, and session management
 """
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, or_
-from models import User, Bot, Session, SecurityLog, UserRole
+from models import User, Session, SecurityLog, UserRole
 from security import password_hasher, token_manager, username_validator, security_validator
 from datetime import datetime, timedelta
 from typing import Optional, Dict, Any

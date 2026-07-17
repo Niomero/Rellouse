@@ -1,43 +1,50 @@
-2026-07-17T18:48:34.083791735Z ==> Cloning from https://github.com/Niomero/Rellouse
-2026-07-17T18:48:34.777056985Z ==> Checking out commit ceb09f6ca8f99ce46e929594a8be5e2b86ee7381 in branch main
-2026-07-17T18:48:36.133928174Z ==> Running build command 'cd frontend && npm install && npm run build'...
-2026-07-17T18:48:36.303356032Z ==> Using Node.js version 24.14.1 (default)
-2026-07-17T18:48:36.303370802Z ==> Docs on specifying a Node.js version: https://render.com/docs/node-version
-2026-07-17T18:50:48.115413983Z 
-2026-07-17T18:50:48.115457754Z added 283 packages, and audited 284 packages in 2m
-2026-07-17T18:50:48.115472404Z 
-2026-07-17T18:50:48.115733949Z 67 packages are looking for funding
-2026-07-17T18:50:48.11577244Z   run `npm fund` for details
-2026-07-17T18:50:48.399612411Z 
-2026-07-17T18:50:48.399651351Z 8 vulnerabilities (1 moderate, 7 high)
-2026-07-17T18:50:48.399656901Z 
-2026-07-17T18:50:48.399663241Z To address issues that do not require attention, run:
-2026-07-17T18:50:48.399668691Z   npm audit fix
-2026-07-17T18:50:48.399673552Z 
-2026-07-17T18:50:48.399678382Z To address all issues (including breaking changes), run:
-2026-07-17T18:50:48.399683722Z   npm audit fix --force
-2026-07-17T18:50:48.399688282Z 
-2026-07-17T18:50:48.399694042Z Run `npm audit` for details.
-2026-07-17T18:50:48.821830051Z 
-2026-07-17T18:50:48.821868071Z > rellouse-messenger-frontend@1.0.0 build
-2026-07-17T18:50:48.821874072Z > tsc && vite build
-2026-07-17T18:50:48.821878762Z 
-2026-07-17T18:50:51.993462885Z vite v5.4.21 building for production...
-2026-07-17T18:50:52.078286324Z transforming...
-2026-07-17T18:50:52.893319957Z ✓ 4 modules transformed.
-2026-07-17T18:50:52.902081668Z x Build failed in 869ms
-2026-07-17T18:50:52.90222836Z error during build:
-2026-07-17T18:50:52.90223741Z [vite:css] [postcss] /opt/render/project/src/frontend/src/index.css:1:1: The `border-border` class does not exist. If `border-border` is a custom class, make sure it is defined within a `@layer` directive.
-2026-07-17T18:50:52.90224307Z file: /opt/render/project/src/frontend/src/index.css:1:0
-2026-07-17T18:50:52.90224861Z     at Input.error (/opt/render/project/src/frontend/node_modules/postcss/lib/input.js:135:16)
-2026-07-17T18:50:52.90225351Z     at AtRule.error (/opt/render/project/src/frontend/node_modules/postcss/lib/node.js:166:32)
-2026-07-17T18:50:52.902258781Z     at processApply (/opt/render/project/src/frontend/node_modules/tailwindcss/lib/lib/expandApplyAtRules.js:380:29)
-2026-07-17T18:50:52.902263991Z     at /opt/render/project/src/frontend/node_modules/tailwindcss/lib/lib/expandApplyAtRules.js:551:9
-2026-07-17T18:50:52.902268911Z     at /opt/render/project/src/frontend/node_modules/tailwindcss/lib/processTailwindFeatures.js:55:50
-2026-07-17T18:50:52.902273931Z     at async plugins (/opt/render/project/src/frontend/node_modules/tailwindcss/lib/plugin.js:38:17)
-2026-07-17T18:50:52.902278701Z     at async LazyResult.runAsync (/opt/render/project/src/frontend/node_modules/postcss/lib/lazy-result.js:299:11)
-2026-07-17T18:50:52.902283401Z     at async compileCSS (file:///opt/render/project/src/frontend/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:36898:21)
-2026-07-17T18:50:52.902289001Z     at async Object.transform (file:///opt/render/project/src/frontend/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:36171:11)
-2026-07-17T18:50:52.902326092Z     at async transform (file:///opt/render/project/src/frontend/node_modules/rollup/dist/es/shared/node-entry.js:21726:16)
-2026-07-17T18:50:53.004960906Z ==> Build failed 😞
-2026-07-17T18:50:53.004995717Z ==> Common ways to troubleshoot your deploy: https://render.com/docs/troubleshooting-deploys
+2026-07-17T20:21:47.616820662Z 
+2026-07-17T20:21:47.616823853Z Run `npm audit` for details.
+2026-07-17T20:21:47.823783209Z 
+2026-07-17T20:21:47.823820822Z > rellouse-messenger-frontend@1.0.0 build
+2026-07-17T20:21:47.823824652Z > tsc && vite build
+2026-07-17T20:21:47.823827452Z 
+2026-07-17T20:21:51.27924877Z src/components/ImageUpload.tsx(7,8): error TS2613: Module '"/opt/render/project/src/frontend/src/services/api"' has no default export. Did you mean to use 'import { api } from "/opt/render/project/src/frontend/src/services/api"' instead?
+2026-07-17T20:21:51.279385799Z src/components/ui/Button.tsx(69,8): error TS2322: Type '{ children: Element; form?: string | undefined; formAction?: string | undefined; formEncType?: string | undefined; formMethod?: string | undefined; formNoValidate?: boolean | undefined; ... 270 more ...; whileTap: { ...; }; }' is not assignable to type 'Omit<HTMLMotionProps<"button">, "ref">'.
+2026-07-17T20:21:51.27939456Z   Types of property 'onAnimationStart' are incompatible.
+2026-07-17T20:21:51.27939751Z     Type 'AnimationEventHandler<HTMLButtonElement> | undefined' is not assignable to type '((definition: AnimationDefinition) => void) | undefined'.
+2026-07-17T20:21:51.27940023Z       Type 'AnimationEventHandler<HTMLButtonElement>' is not assignable to type '(definition: AnimationDefinition) => void'.
+2026-07-17T20:21:51.279405151Z         Types of parameters 'event' and 'definition' are incompatible.
+2026-07-17T20:21:51.279407841Z           Type 'AnimationDefinition' is not assignable to type 'AnimationEvent<HTMLButtonElement>'.
+2026-07-17T20:21:51.279410411Z             Type 'string' is not assignable to type 'AnimationEvent<HTMLButtonElement>'.
+2026-07-17T20:21:51.279417031Z src/components/ui/Card.tsx(37,8): error TS2322: Type '{ children: ReactNode; defaultChecked?: boolean | undefined; defaultValue?: string | number | readonly string[] | undefined; suppressContentEditableWarning?: boolean | undefined; ... 262 more ...; animate: { ...; }; }' is not assignable to type 'Omit<HTMLMotionProps<"div">, "ref">'.
+2026-07-17T20:21:51.279419182Z   Types of property 'onAnimationStart' are incompatible.
+2026-07-17T20:21:51.279439583Z     Type 'AnimationEventHandler<HTMLDivElement> | undefined' is not assignable to type '((definition: AnimationDefinition) => void) | undefined'.
+2026-07-17T20:21:51.279443323Z       Type 'AnimationEventHandler<HTMLDivElement>' is not assignable to type '(definition: AnimationDefinition) => void'.
+2026-07-17T20:21:51.279446673Z         Types of parameters 'event' and 'definition' are incompatible.
+2026-07-17T20:21:51.279450024Z           Type 'AnimationDefinition' is not assignable to type 'AnimationEvent<HTMLDivElement>'.
+2026-07-17T20:21:51.279453134Z             Type 'string' is not assignable to type 'AnimationEvent<HTMLDivElement>'.
+2026-07-17T20:21:51.279456484Z src/components/ui/Input.tsx(27,12): error TS2322: Type '{ accept?: string | undefined; alt?: string | undefined; autoComplete?: HTMLInputAutoCompleteAttribute | undefined; capture?: boolean | "user" | "environment" | undefined; ... 291 more ...; whileFocus: { ...; }; }' is not assignable to type 'Omit<HTMLMotionProps<"input">, "ref">'.
+2026-07-17T20:21:51.279459054Z   Types of property 'onAnimationStart' are incompatible.
+2026-07-17T20:21:51.279461185Z     Type 'AnimationEventHandler<HTMLInputElement> | undefined' is not assignable to type '((definition: AnimationDefinition) => void) | undefined'.
+2026-07-17T20:21:51.279463215Z       Type 'AnimationEventHandler<HTMLInputElement>' is not assignable to type '(definition: AnimationDefinition) => void'.
+2026-07-17T20:21:51.279465215Z         Types of parameters 'event' and 'definition' are incompatible.
+2026-07-17T20:21:51.279467255Z           Type 'AnimationDefinition' is not assignable to type 'AnimationEvent<HTMLInputElement>'.
+2026-07-17T20:21:51.279469185Z             Type 'string' is not assignable to type 'AnimationEvent<HTMLInputElement>'.
+2026-07-17T20:21:51.279478196Z src/pages/ChannelPage.tsx(8,3): error TS6133: 'Settings' is declared but its value is never read.
+2026-07-17T20:21:51.279486156Z src/pages/ChannelPage.tsx(13,3): error TS6133: 'Copy' is declared but its value is never read.
+2026-07-17T20:21:51.279488647Z src/pages/ChannelPage.tsx(14,3): error TS6133: 'CheckCircle' is declared but its value is never read.
+2026-07-17T20:21:51.279497197Z src/pages/ChannelPage.tsx(23,8): error TS2613: Module '"/opt/render/project/src/frontend/src/services/api"' has no default export. Did you mean to use 'import { api } from "/opt/render/project/src/frontend/src/services/api"' instead?
+2026-07-17T20:21:51.27953686Z src/pages/ChannelPage.tsx(81,9): error TS6133: 'currentUser' is declared but its value is never read.
+2026-07-17T20:21:51.279592874Z src/pages/ChannelPage.tsx(92,10): error TS6133: 'showInvite' is declared but its value is never read.
+2026-07-17T20:21:51.279599914Z src/pages/ChannelPage.tsx(92,22): error TS6133: 'setShowInvite' is declared but its value is never read.
+2026-07-17T20:21:51.279612125Z src/pages/ChannelPage.tsx(163,9): error TS6133: 'handleLeaveChannel' is declared but its value is never read.
+2026-07-17T20:21:51.279632866Z src/pages/ChannelPage.tsx(234,9): error TS6133: 'copyInviteLink' is declared but its value is never read.
+2026-07-17T20:21:51.279636127Z src/pages/ChatPage.tsx(8,3): error TS6133: 'Paperclip' is declared but its value is never read.
+2026-07-17T20:21:51.279662619Z src/pages/ChatPage.tsx(21,8): error TS2613: Module '"/opt/render/project/src/frontend/src/services/api"' has no default export. Did you mean to use 'import { api } from "/opt/render/project/src/frontend/src/services/api"' instead?
+2026-07-17T20:21:51.279665559Z src/pages/CreateChannelPage.tsx(7,8): error TS2613: Module '"/opt/render/project/src/frontend/src/services/api"' has no default export. Did you mean to use 'import { api } from "/opt/render/project/src/frontend/src/services/api"' instead?
+2026-07-17T20:21:51.27967951Z src/pages/ProfilePage.tsx(14,3): error TS6133: 'Loader2' is declared but its value is never read.
+2026-07-17T20:21:51.27968182Z src/pages/ProfilePage.tsx(20,8): error TS2613: Module '"/opt/render/project/src/frontend/src/services/api"' has no default export. Did you mean to use 'import { api } from "/opt/render/project/src/frontend/src/services/api"' instead?
+2026-07-17T20:21:51.279759365Z src/pages/SearchPage.tsx(3,57): error TS6133: 'Loader2' is declared but its value is never read.
+2026-07-17T20:21:51.279764216Z src/pages/SearchPage.tsx(5,1): error TS6133: 'cn' is declared but its value is never read.
+2026-07-17T20:21:51.279767136Z src/pages/SearchPage.tsx(8,8): error TS2613: Module '"/opt/render/project/src/frontend/src/services/api"' has no default export. Did you mean to use 'import { api } from "/opt/render/project/src/frontend/src/services/api"' instead?
+2026-07-17T20:21:51.279772906Z src/services/api.ts(2,1): error TS6133: 'showToast' is declared but its value is never read.
+2026-07-17T20:21:51.279843581Z src/services/api.ts(4,29): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+2026-07-17T20:21:51.279855102Z src/services/websocket.ts(10,31): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+2026-07-17T20:21:51.358807639Z ==> Build failed 😞
+2026-07-17T20:21:51.358827521Z ==> Common ways to troubleshoot your deploy: https://render.com/docs/troubleshooting-deploys

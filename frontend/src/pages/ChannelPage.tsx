@@ -5,13 +5,10 @@ import {
   ArrowLeft,
   Hash,
   Users,
-  Settings,
   Send,
   Image as ImageIcon,
   Loader2,
   UserPlus,
-  Copy,
-  CheckCircle,
   X,
 } from 'lucide-react'
 import { cn } from '../utils/cn'

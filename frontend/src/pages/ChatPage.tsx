@@ -5,7 +5,6 @@ import {
   ArrowLeft,
   Send,
   Image as ImageIcon,
-  Paperclip,
   User,
   Bot,
   CheckCircle,

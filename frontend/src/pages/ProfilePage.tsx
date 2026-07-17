@@ -11,7 +11,6 @@ import {
   Clock,
   Shield,
   Crown,
-  Loader2,
 } from 'lucide-react'
 import { cn } from '../utils/cn'
 import { useToast } from '../hooks/useToast'

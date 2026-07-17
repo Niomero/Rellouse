@@ -1,100 +1,52 @@
-2026-07-17T21:26:07.134277405Z 2026-07-17 21:26:07,134 - database - INFO - Database connection closed
-2026-07-17T21:26:07.134324056Z 2026-07-17 21:26:07,134 - main - INFO - ✅ Shutdown complete
-2026-07-17T21:26:07.134453809Z INFO:     Application shutdown complete.
-2026-07-17T21:26:07.134511151Z INFO:     Finished server process [39]
-2026-07-17T21:26:07.574383615Z ==> Your service is live 🎉
-2026-07-17T21:26:07.681996919Z ==> 
-2026-07-17T21:26:07.684664622Z ==> ///////////////////////////////////////////////////////////
-2026-07-17T21:26:07.687114582Z ==> 
-2026-07-17T21:26:07.691050418Z ==> Available at your primary URL https://rellouse.onrender.com
-2026-07-17T21:26:07.693487877Z ==> 
-2026-07-17T21:26:07.696005751Z ==> ///////////////////////////////////////////////////////////
-2026-07-17T21:27:21.882290943Z 2026-07-17 21:27:21,882 - main - INFO - 📤 GET /users/search - Status: 404
-2026-07-17T21:27:21.882526289Z INFO:     89.169.53.104:0 - "GET /users/search?query=Gandon&limit=20 HTTP/1.1" 404 Not Found
-2026-07-17T21:28:30.144961317Z 2026-07-17 21:28:30,144 - main - INFO - 📥 GET / - 89.169.53.104
-2026-07-17T21:28:30.147124027Z 2026-07-17 21:28:30,145 - main - INFO - 📤 GET / - Status: 200
-2026-07-17T21:28:30.147152887Z INFO:     89.169.53.104:0 - "GET / HTTP/1.1" 200 OK
-2026-07-17T21:28:31.047164905Z 2026-07-17 21:28:31,046 - main - INFO - 📥 GET /favicon.ico - 89.169.53.104
-2026-07-17T21:28:31.048537613Z 2026-07-17 21:28:31,048 - main - INFO - 📤 GET /favicon.ico - Status: 401
-2026-07-17T21:28:31.048984175Z INFO:     89.169.53.104:0 - "GET /favicon.ico HTTP/1.1" 401 Unauthorized
-2026-07-17T21:28:35.763007448Z 2026-07-17 21:28:35,762 - main - INFO - 📥 GET /users - 89.169.53.104
-2026-07-17T21:28:35.764421527Z 2026-07-17 21:28:35,764 - main - INFO - 📤 GET /users - Status: 401
-2026-07-17T21:28:35.764599302Z INFO:     89.169.53.104:0 - "GET /users HTTP/1.1" 401 Unauthorized
-2026-07-17T21:28:36.143135888Z 2026-07-17 21:28:36,142 - main - INFO - 📥 GET /favicon.ico - 89.169.53.104
-2026-07-17T21:28:36.144576507Z 2026-07-17 21:28:36,144 - main - INFO - 📤 GET /favicon.ico - Status: 401
-2026-07-17T21:28:36.144806853Z INFO:     89.169.53.104:0 - "GET /favicon.ico HTTP/1.1" 401 Unauthorized
-2026-07-17T21:29:08.21684775Z 2026-07-17 21:29:08,216 - main - INFO - 📥 GET /users/search - 89.169.53.104
-2026-07-17T21:29:08.218014622Z 2026-07-17 21:29:08,217 - main - INFO - 📤 GET /users/search - Status: 404
-2026-07-17T21:29:08.218482285Z INFO:     89.169.53.104:0 - "GET /users/search?query=rellouse HTTP/1.1" 404 Not Found
-2026-07-17T21:29:08.58287554Z 2026-07-17 21:29:08,582 - main - INFO - 📥 GET /favicon.ico - 89.169.53.104
-2026-07-17T21:29:08.584268668Z 2026-07-17 21:29:08,584 - main - INFO - 📤 GET /favicon.ico - Status: 401
-2026-07-17T21:29:08.584448103Z INFO:     89.169.53.104:0 - "GET /favicon.ico HTTP/1.1" 401 Unauthorized
-2026-07-17T21:31:06.451904496Z ==> Detected service running on port 10000
-2026-07-17T21:31:06.548018811Z ==> Docs on specifying a port: https://render.com/docs/web-services#port-binding
-2026-07-17T21:31:49.050137331Z 2026-07-17 21:31:49,049 - main - INFO - 📥 GET /docs - 89.169.53.104
-2026-07-17T21:31:49.05156416Z 2026-07-17 21:31:49,051 - main - INFO - 📤 GET /docs - Status: 401
-2026-07-17T21:31:49.051793427Z INFO:     89.169.53.104:0 - "GET /docs HTTP/1.1" 401 Unauthorized
-2026-07-17T21:34:55.413677854Z 2026-07-17 21:34:55,413 - main - INFO - 📥 GET /users/search - 89.169.53.104
-2026-07-17T21:34:55.41462697Z 2026-07-17 21:34:55,414 - main - INFO - 📤 GET /users/search - Status: 404
-2026-07-17T21:34:55.415113113Z INFO:     89.169.53.104:0 - "GET /users/search?query=Ver&limit=20 HTTP/1.1" 404 Not Found
-2026-07-17T21:34:55.917518779Z 2026-07-17 21:34:55,917 - main - INFO - 📥 GET /users/search - 89.169.53.104
-2026-07-17T21:34:55.918547647Z 2026-07-17 21:34:55,918 - main - INFO - 📤 GET /users/search - Status: 404
-2026-07-17T21:34:55.918733643Z INFO:     89.169.53.104:0 - "GET /users/search?query=Verify&limit=20 HTTP/1.1" 404 Not Found
-2026-07-17T21:35:44.888258809Z ==> Deploying...
-2026-07-17T21:35:44.962516074Z ==> Setting WEB_CONCURRENCY=1 by default, based on available CPUs in the instance
-2026-07-17T21:35:59.040333464Z ==> Running 'cd backend && uvicorn main:app --host 0.0.0.0 --port $PORT'
-2026-07-17T21:36:14.829558159Z Invalid ENCRYPTION_KEY in settings: Fernet key must be 32 url-safe base64-encoded bytes.. Generating a new one.
-2026-07-17T21:36:15.93957088Z INFO:     Started server process [57]
-2026-07-17T21:36:15.939613734Z INFO:     Waiting for application startup.
-2026-07-17T21:36:15.939858763Z 2026-07-17 21:36:15,939 - main - INFO - 🚀 Starting Rellouse Messenger...
-2026-07-17T21:36:20.311457567Z 2026-07-17 21:36:20,309 - database - INFO - Dropped all existing tables
-2026-07-17T21:36:25.815212583Z 2026-07-17 21:36:25,814 - database - INFO - Database initialized successfully
-2026-07-17T21:36:25.815335882Z 2026-07-17 21:36:25,815 - main - INFO - ✅ Database initialized
-2026-07-17T21:36:26.95261701Z 2026-07-17 21:36:26,952 - init_system - INFO - Initializing system for first time...
-2026-07-17T21:36:28.832227416Z 2026-07-17 21:36:28,831 - init_system - INFO - ✅ Owner account created: @Rellouse (ID: 0)
-2026-07-17T21:36:28.832264539Z 2026-07-17 21:36:28,832 - init_system - INFO - ✅ @Verify bot created as User (ID: 1)
-2026-07-17T21:36:28.832366467Z 2026-07-17 21:36:28,832 - init_system - INFO - ✅ System initialization completed successfully
-2026-07-17T21:36:28.83277044Z 2026-07-17 21:36:28,832 - main - INFO - ✅ System initialization complete
-2026-07-17T21:36:28.832792632Z 2026-07-17 21:36:28,832 - main - INFO - 🌐 Server running on Rellouse Messenger v1.0.0
-2026-07-17T21:36:28.83301427Z INFO:     Application startup complete.
-2026-07-17T21:36:28.833382929Z INFO:     Uvicorn running on http://0.0.0.0:10000 (Press CTRL+C to quit)
-2026-07-17T21:36:29.444391413Z 2026-07-17 21:36:29,444 - main - INFO - 📥 HEAD / - 127.0.0.1
-2026-07-17T21:36:29.529804168Z 2026-07-17 21:36:29,529 - main - INFO - 📤 HEAD / - Status: 405
-2026-07-17T21:36:29.529997984Z INFO:     127.0.0.1:55174 - "HEAD / HTTP/1.1" 405 Method Not Allowed
-2026-07-17T21:36:35.442165524Z INFO:     Shutting down
-2026-07-17T21:36:35.542635042Z INFO:     Waiting for application shutdown.
-2026-07-17T21:36:35.542739215Z 2026-07-17 21:36:35,542 - main - INFO - 🛑 Shutting down Rellouse Messenger...
-2026-07-17T21:36:35.543194167Z 2026-07-17 21:36:35,543 - database - INFO - Database connection closed
-2026-07-17T21:36:35.543237249Z 2026-07-17 21:36:35,543 - main - INFO - ✅ Shutdown complete
-2026-07-17T21:36:35.543414644Z INFO:     Application shutdown complete.
-2026-07-17T21:36:35.543466815Z INFO:     Finished server process [57]
-2026-07-17T21:36:35.858027837Z ==> Your service is live 🎉
-2026-07-17T21:36:35.927150316Z 2026-07-17 21:36:35,926 - main - INFO - 📥 GET / - 34.145.120.165
-2026-07-17T21:36:35.928387406Z 2026-07-17 21:36:35,928 - main - INFO - 📤 GET / - Status: 200
-2026-07-17T21:36:35.928672539Z INFO:     34.145.120.165:0 - "GET / HTTP/1.1" 200 OK
-2026-07-17T21:36:35.946956446Z ==> 
-2026-07-17T21:36:35.949671652Z ==> ///////////////////////////////////////////////////////////
-2026-07-17T21:36:35.952250328Z ==> 
-2026-07-17T21:36:35.954930402Z ==> Available at your primary URL https://rellouse.onrender.com
-2026-07-17T21:36:35.957815758Z ==> 
-2026-07-17T21:36:35.960204843Z ==> ///////////////////////////////////////////////////////////
-2026-07-17T21:37:37.32320981Z 2026-07-17 21:37:37,323 - main - INFO - 📥 OPTIONS /api/auth/register - 89.169.53.104
-2026-07-17T21:37:37.324033646Z 2026-07-17 21:37:37,323 - main - INFO - 📤 OPTIONS /api/auth/register - Status: 200
-2026-07-17T21:37:37.324216141Z INFO:     89.169.53.104:0 - "OPTIONS /api/auth/register HTTP/1.1" 200 OK
-2026-07-17T21:37:37.618048954Z 2026-07-17 21:37:37,617 - main - INFO - 📥 POST /api/auth/register - 89.169.53.104
-2026-07-17T21:37:39.051434884Z 2026-07-17 21:37:39,051 - main - INFO - 📤 POST /api/auth/register - Status: 400
-2026-07-17T21:37:39.051636021Z INFO:     89.169.53.104:0 - "POST /api/auth/register HTTP/1.1" 400 Bad Request
-2026-07-17T21:37:54.460185739Z 2026-07-17 21:37:54,460 - main - INFO - 📥 POST /api/auth/register - 89.169.53.104
-2026-07-17T21:37:57.797154889Z 2026-07-17 21:37:57,796 - auth - ERROR - Registration error: (sqlalchemy.dialects.postgresql.asyncpg.IntegrityError) <class 'asyncpg.exceptions.UniqueViolationError'>: duplicate key value violates unique constraint "users_pkey"
-2026-07-17T21:37:57.797183911Z DETAIL:  Key (id)=(1) already exists.
-2026-07-17T21:37:57.797189272Z [SQL: INSERT INTO users (login, password_hash, username, display_name, additional_usernames, avatar_url, bio, role, is_active, is_bot, is_online, last_seen, created_at, updated_at, last_login) VALUES ($1::VARCHAR, $2::VARCHAR, $3::VARCHAR, $4::VARCHAR, $5::VARCHAR, $6::VARCHAR, $7::VARCHAR, $8::userrole, $9::BOOLEAN, $10::BOOLEAN, $11::BOOLEAN, $12::TIMESTAMP WITHOUT TIME ZONE, $13::TIMESTAMP WITHOUT TIME ZONE, $14::TIMESTAMP WITHOUT TIME ZONE, $15::TIMESTAMP WITHOUT TIME ZONE) RETURNING users.id]
-2026-07-17T21:37:57.797213013Z [parameters: ('Gandon', '$2b$12$udTryFooFMErSV4VIFdmZuwHpJ0N5TlBhxzxA/uEtNe51fWmt7M/m', '@gandon', None, None, None, None, 'USER', True, False, False, None, datetime.datetime(2026, 7, 17, 21, 37, 57, 539368), datetime.datetime(2026, 7, 17, 21, 37, 57, 539371), None)]
-2026-07-17T21:37:57.797217494Z (Background on this error at: https://sqlalche.me/e/20/gkpj)
-2026-07-17T21:37:57.798057392Z 2026-07-17 21:37:57,797 - main - INFO - 📤 POST /api/auth/register - Status: 400
-2026-07-17T21:37:57.798265798Z INFO:     89.169.53.104:0 - "POST /api/auth/register HTTP/1.1" 400 Bad Request
-2026-07-17T21:38:14.755925344Z 2026-07-17 21:38:14,755 - main - INFO - 📥 OPTIONS /api/auth/login - 89.169.53.104
-2026-07-17T21:38:14.756713708Z 2026-07-17 21:38:14,756 - main - INFO - 📤 OPTIONS /api/auth/login - Status: 200
-2026-07-17T21:38:14.756920374Z INFO:     89.169.53.104:0 - "OPTIONS /api/auth/login HTTP/1.1" 200 OK
-2026-07-17T21:38:15.096584389Z 2026-07-17 21:38:15,096 - main - INFO - 📥 POST /api/auth/login - 89.169.53.104
-2026-07-17T21:38:17.940047077Z 2026-07-17 21:38:17,939 - main - INFO - 📤 POST /api/auth/login - Status: 401
-2026-07-17T21:38:17.940255463Z INFO:     89.169.53.104:0 - "POST /api/auth/login HTTP/1.1" 401 Unauthorized
+2026-07-17T21:41:29.151632377Z ==> Running 'cd backend && uvicorn main:app --host 0.0.0.0 --port $PORT'
+2026-07-17T21:41:40.243144399Z Invalid ENCRYPTION_KEY in settings: Fernet key must be 32 url-safe base64-encoded bytes.. Generating a new one.
+2026-07-17T21:41:41.547541088Z INFO:     Started server process [57]
+2026-07-17T21:41:41.54756587Z INFO:     Waiting for application startup.
+2026-07-17T21:41:41.547821453Z 2026-07-17 21:41:41,547 - main - INFO - 🚀 Starting Rellouse Messenger...
+2026-07-17T21:41:45.829444043Z 2026-07-17 21:41:45,829 - database - INFO - Dropped all existing tables
+2026-07-17T21:41:51.054383609Z 2026-07-17 21:41:51,054 - database - INFO - Database initialized successfully
+2026-07-17T21:41:51.054463903Z 2026-07-17 21:41:51,054 - main - INFO - ✅ Database initialized
+2026-07-17T21:41:52.631258741Z 2026-07-17 21:41:52,631 - init_system - INFO - Initializing system for first time...
+2026-07-17T21:41:54.499505161Z 2026-07-17 21:41:54,499 - init_system - ERROR - ❌ System initialization failed: Textual SQL expression "SELECT setval('users_id_s..." should be explicitly declared as text("SELECT setval('users_id_s...")
+2026-07-17T21:41:54.499536282Z 2026-07-17 21:41:54,499 - init_system - ERROR - Failed to initialize system: Textual SQL expression "SELECT setval('users_id_s..." should be explicitly declared as text("SELECT setval('users_id_s...")
+2026-07-17T21:41:54.499625027Z 2026-07-17 21:41:54,499 - main - ERROR - ❌ Startup failed: Textual SQL expression "SELECT setval('users_id_s..." should be explicitly declared as text("SELECT setval('users_id_s...")
+2026-07-17T21:41:54.502659666Z ERROR:    Traceback (most recent call last):
+2026-07-17T21:41:54.502672277Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/starlette/routing.py", line 738, in lifespan
+2026-07-17T21:41:54.502676747Z     async with self.lifespan_context(app) as maybe_state:
+2026-07-17T21:41:54.502680017Z   File "/opt/render/project/python/Python-3.11.0/lib/python3.11/contextlib.py", line 204, in __aenter__
+2026-07-17T21:41:54.502683697Z     return await anext(self.gen)
+2026-07-17T21:41:54.502686938Z            ^^^^^^^^^^^^^^^^^^^^^
+2026-07-17T21:41:54.502693098Z   File "/opt/render/project/src/backend/main.py", line 62, in lifespan
+2026-07-17T21:41:54.502696318Z     await check_and_initialize(db)
+2026-07-17T21:41:54.502700958Z   File "/opt/render/project/src/backend/init_system.py", line 92, in check_and_initialize
+2026-07-17T21:41:54.502706439Z     await initialize_system(db)
+2026-07-17T21:41:54.502711549Z   File "/opt/render/project/src/backend/init_system.py", line 73, in initialize_system
+2026-07-17T21:41:54.502716169Z     await db.execute("SELECT setval('users_id_seq', 2, false)")
+2026-07-17T21:41:54.50272187Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/session.py", line 455, in execute
+2026-07-17T21:41:54.50272687Z     result = await greenlet_spawn(
+2026-07-17T21:41:54.50273115Z              ^^^^^^^^^^^^^^^^^^^^^
+2026-07-17T21:41:54.50273475Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/sqlalchemy/util/_concurrency_py3k.py", line 189, in greenlet_spawn
+2026-07-17T21:41:54.50273786Z     result = context.switch(*args, **kwargs)
+2026-07-17T21:41:54.50274092Z              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-17T21:41:54.502744011Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2308, in execute
+2026-07-17T21:41:54.502747101Z     return self._execute_internal(
+2026-07-17T21:41:54.502750161Z            ^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-17T21:41:54.502753301Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2088, in _execute_internal
+2026-07-17T21:41:54.502769202Z     statement = coercions.expect(roles.StatementRole, statement)
+2026-07-17T21:41:54.502771332Z                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-17T21:41:54.502773352Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/sqlalchemy/sql/coercions.py", line 413, in expect
+2026-07-17T21:41:54.502775322Z     resolved = impl._literal_coercion(
+2026-07-17T21:41:54.502777273Z                ^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-17T21:41:54.502779253Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/sqlalchemy/sql/coercions.py", line 638, in _literal_coercion
+2026-07-17T21:41:54.502781263Z     return self._text_coercion(element, argname, **kw)
+2026-07-17T21:41:54.502783213Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-17T21:41:54.502785123Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/sqlalchemy/sql/coercions.py", line 631, in _text_coercion
+2026-07-17T21:41:54.502787113Z     return _no_text_coercion(element, argname)
+2026-07-17T21:41:54.502789073Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-17T21:41:54.502790993Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/sqlalchemy/sql/coercions.py", line 601, in _no_text_coercion
+2026-07-17T21:41:54.502793923Z     raise exc_cls(
+2026-07-17T21:41:54.502797294Z sqlalchemy.exc.ArgumentError: Textual SQL expression "SELECT setval('users_id_s..." should be explicitly declared as text("SELECT setval('users_id_s...")
+2026-07-17T21:41:54.502799303Z 
+2026-07-17T21:41:54.502882498Z ERROR:    Application startup failed. Exiting.
+2026-07-17T21:41:57.379242867Z ==> Exited with status 3
+2026-07-17T21:41:57.381239298Z ==> Common ways to troubleshoot your deploy: https://render.com/docs/troubleshooting-deploys

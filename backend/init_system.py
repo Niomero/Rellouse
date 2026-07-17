@@ -3,7 +3,7 @@ System Initialization
 Creates the owner account and system bots on first run
 """
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select
+from sqlalchemy import select, text
 from models import User, UserRole
 from security import password_hasher
 from config import settings
@@ -70,7 +70,7 @@ async def initialize_system(db: AsyncSession) -> bool:
         
         # Reset the auto-increment sequence to start from 2
         # This prevents conflicts with manually assigned IDs (0 and 1)
-        await db.execute("SELECT setval('users_id_seq', 2, false)")
+        await db.execute(text("SELECT setval('users_id_seq', 2, false)"))
         await db.commit()
         
         logger.info(f"✅ Owner account created: @{settings.OWNER_USERNAME} (ID: 0)")

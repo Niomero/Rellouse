@@ -67,7 +67,7 @@ class ChannelResponse(BaseModel):
         from_attributes = True
 
 
-class CreatePost Request(BaseModel):
+class CreatePostRequest(BaseModel):
     content: str = Field(..., min_length=1)
     message_type: MessageType = MessageType.TEXT
 

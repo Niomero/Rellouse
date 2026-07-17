@@ -1,108 +1,50 @@
-2026-07-17T21:18:45.737123556Z   Using cached cffi-2.1.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (217 kB)
-2026-07-17T21:18:45.814905525Z Collecting annotated-types>=0.4.0
-2026-07-17T21:18:45.816157318Z   Using cached annotated_types-0.7.0-py3-none-any.whl (13 kB)
-2026-07-17T21:18:47.120901073Z Collecting pydantic-core==2.14.6
-2026-07-17T21:18:47.125181746Z   Using cached pydantic_core-2.14.6-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.1 MB)
-2026-07-17T21:18:47.184793068Z Collecting dnspython>=2.0.0
-2026-07-17T21:18:47.186354179Z   Using cached dnspython-2.8.0-py3-none-any.whl (331 kB)
-2026-07-17T21:18:47.218112782Z Collecting idna>=2.0.0
-2026-07-17T21:18:47.220258768Z   Using cached idna-3.18-py3-none-any.whl (65 kB)
-2026-07-17T21:18:47.272325013Z Collecting limits>=2.3
-2026-07-17T21:18:47.273826812Z   Using cached limits-5.8.0-py3-none-any.whl (60 kB)
-2026-07-17T21:18:47.300773089Z Collecting six>=1.5
-2026-07-17T21:18:47.302236467Z   Using cached six-1.17.0-py2.py3-none-any.whl (11 kB)
-2026-07-17T21:18:47.352344331Z Collecting iniconfig
-2026-07-17T21:18:47.354075096Z   Using cached iniconfig-2.3.0-py3-none-any.whl (7.5 kB)
-2026-07-17T21:18:47.490598235Z Collecting packaging
-2026-07-17T21:18:47.492376112Z   Using cached packaging-26.2-py3-none-any.whl (100 kB)
-2026-07-17T21:18:47.521750112Z Collecting pluggy<2.0,>=0.12
-2026-07-17T21:18:47.523303823Z   Using cached pluggy-1.6.0-py3-none-any.whl (20 kB)
-2026-07-17T21:18:47.586025317Z Collecting anyio
-2026-07-17T21:18:47.587615269Z   Using cached anyio-4.14.2-py3-none-any.whl (125 kB)
-2026-07-17T21:18:47.624977388Z Collecting certifi
-2026-07-17T21:18:47.626694473Z   Using cached certifi-2026.6.17-py3-none-any.whl (133 kB)
-2026-07-17T21:18:47.663259822Z Collecting httpcore==1.*
-2026-07-17T21:18:47.66471599Z   Using cached httpcore-1.0.9-py3-none-any.whl (78 kB)
-2026-07-17T21:18:47.684396426Z Collecting sniffio
-2026-07-17T21:18:47.685719591Z   Using cached sniffio-1.3.1-py3-none-any.whl (10 kB)
-2026-07-17T21:18:47.733528144Z Collecting pycparser
-2026-07-17T21:18:47.734835048Z   Using cached pycparser-3.0-py3-none-any.whl (48 kB)
-2026-07-17T21:18:47.814773644Z Collecting deprecated>=1.2
-2026-07-17T21:18:47.816129269Z   Using cached deprecated-1.3.1-py2.py3-none-any.whl (11 kB)
-2026-07-17T21:18:47.999517397Z Collecting MarkupSafe>=0.9.2
-2026-07-17T21:18:48.001092509Z   Using cached markupsafe-3.0.3-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (22 kB)
-2026-07-17T21:18:48.534479162Z Collecting wrapt<3,>=1.10
-2026-07-17T21:18:48.536094384Z   Using cached wrapt-2.2.2-cp311-cp311-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (159 kB)
-2026-07-17T21:18:48.556837028Z WARNING: The candidate selected for download or install is a yanked version: 'email-validator' candidate (version 2.1.0 at https://files.pythonhosted.org/packages/90/41/4767ff64e422734487a06384a66e62615b1f5cf9cf3b23295e22d3ecf711/email_validator-2.1.0-py3-none-any.whl (from https://pypi.org/simple/email-validator/) (requires-python:>=3.7))
-2026-07-17T21:18:48.556848948Z Reason for being yanked: Forgot to drop Python 3.7 from python_requires, see https://github.com/JoshData/python-email-validator/pull/118
-2026-07-17T21:18:48.79187815Z Installing collected packages: pytz, passlib, wrapt, websockets, uvloop, typing-extensions, sniffio, six, pyyaml, python-multipart, python-dotenv, pycparser, pyasn1, pluggy, Pillow, packaging, MarkupSafe, iniconfig, idna, httptools, h11, greenlet, dnspython, click, certifi, bcrypt, async-timeout, annotated-types, uvicorn, sqlalchemy, rsa, python-dateutil, pytest, pydantic-core, Mako, httpcore, email-validator, ecdsa, deprecated, cffi, asyncpg, anyio, watchfiles, starlette, python-jose, pytest-asyncio, pydantic, limits, httpx, cryptography, alembic, slowapi, pydantic-settings, fastapi
-2026-07-17T21:18:52.579424633Z Successfully installed Mako-1.3.12 MarkupSafe-3.0.3 Pillow-10.2.0 alembic-1.13.1 annotated-types-0.7.0 anyio-4.14.2 async-timeout-5.0.1 asyncpg-0.29.0 bcrypt-5.0.0 certifi-2026.6.17 cffi-2.1.0 click-8.4.2 cryptography-42.0.0 deprecated-1.3.1 dnspython-2.8.0 ecdsa-0.19.2 email-validator-2.1.0 fastapi-0.109.0 greenlet-3.5.3 h11-0.16.0 httpcore-1.0.9 httptools-0.8.0 httpx-0.26.0 idna-3.18 iniconfig-2.3.0 limits-5.8.0 packaging-26.2 passlib-1.7.4 pluggy-1.6.0 pyasn1-0.6.4 pycparser-3.0 pydantic-2.5.3 pydantic-core-2.14.6 pydantic-settings-2.1.0 pytest-7.4.4 pytest-asyncio-0.23.3 python-dateutil-2.8.2 python-dotenv-1.0.0 python-jose-3.3.0 python-multipart-0.0.6 pytz-2023.3 pyyaml-6.0.3 rsa-4.9.1 six-1.17.0 slowapi-0.1.9 sniffio-1.3.1 sqlalchemy-2.0.25 starlette-0.35.1 typing-extensions-4.16.0 uvicorn-0.27.0 uvloop-0.22.1 watchfiles-1.2.0 websockets-12.0 wrapt-2.2.2
-2026-07-17T21:18:52.616076804Z 
-2026-07-17T21:18:52.616095675Z [notice] A new release of pip available: 22.3 -> 26.1.2
-2026-07-17T21:18:52.616100365Z [notice] To update, run: pip install --upgrade pip
-2026-07-17T21:18:53.740939043Z ==> Uploading build...
-2026-07-17T21:18:58.569531024Z ==> Uploaded in 3.3s. Compression took 1.6s
-2026-07-17T21:18:58.622859712Z ==> Build successful 🎉
-2026-07-17T21:19:03.162389644Z ==> Deploying...
-2026-07-17T21:19:03.226849779Z ==> Setting WEB_CONCURRENCY=1 by default, based on available CPUs in the instance
-2026-07-17T21:19:17.557695631Z ==> Running 'cd backend && uvicorn main:app --host 0.0.0.0 --port $PORT'
-2026-07-17T21:19:36.136162136Z ==> Exited with status 1
-2026-07-17T21:19:36.138362559Z ==> Common ways to troubleshoot your deploy: https://render.com/docs/troubleshooting-deploys
-2026-07-17T21:19:28.768022488Z Invalid ENCRYPTION_KEY in settings: Fernet key must be 32 url-safe base64-encoded bytes.. Generating a new one.
-2026-07-17T21:19:29.161517027Z Traceback (most recent call last):
-2026-07-17T21:19:29.161546048Z   File "/opt/render/project/src/.venv/bin/uvicorn", line 8, in <module>
-2026-07-17T21:19:29.161560728Z     sys.exit(main())
-2026-07-17T21:19:29.161569518Z              ^^^^^^
-2026-07-17T21:19:29.161573349Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/click/core.py", line 1569, in __call__
-2026-07-17T21:19:29.161808744Z     return self.main(*args, **kwargs)
-2026-07-17T21:19:29.161814884Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^
-2026-07-17T21:19:29.161818804Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/click/core.py", line 1490, in main
-2026-07-17T21:19:29.162022739Z     rv = self.invoke(ctx)
-2026-07-17T21:19:29.162028269Z          ^^^^^^^^^^^^^^^^
-2026-07-17T21:19:29.162031149Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/click/core.py", line 1353, in invoke
-2026-07-17T21:19:29.162220743Z     return ctx.invoke(self.callback, **ctx.params)
-2026-07-17T21:19:29.162227903Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2026-07-17T21:19:29.162230733Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/click/core.py", line 907, in invoke
-2026-07-17T21:19:29.162390247Z     return callback(*args, **kwargs)
-2026-07-17T21:19:29.162397437Z            ^^^^^^^^^^^^^^^^^^^^^^^^^
-2026-07-17T21:19:29.162399777Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/uvicorn/main.py", line 418, in main
-2026-07-17T21:19:29.1625228Z     run(
-2026-07-17T21:19:29.16253771Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/uvicorn/main.py", line 587, in run
-2026-07-17T21:19:29.162610942Z     server.run()
-2026-07-17T21:19:29.162615392Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/uvicorn/server.py", line 62, in run
-2026-07-17T21:19:29.162701314Z     return asyncio.run(self.serve(sockets=sockets))
-2026-07-17T21:19:29.162712014Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2026-07-17T21:19:29.162715814Z   File "/opt/render/project/python/Python-3.11.0/lib/python3.11/asyncio/runners.py", line 190, in run
-2026-07-17T21:19:29.162848027Z     return runner.run(main)
-2026-07-17T21:19:29.162854807Z            ^^^^^^^^^^^^^^^^
-2026-07-17T21:19:29.162858098Z   File "/opt/render/project/python/Python-3.11.0/lib/python3.11/asyncio/runners.py", line 118, in run
-2026-07-17T21:19:29.162928169Z     return self._loop.run_until_complete(task)
-2026-07-17T21:19:29.162932509Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2026-07-17T21:19:29.162936109Z   File "uvloop/loop.pyx", line 1518, in uvloop.loop.Loop.run_until_complete
-2026-07-17T21:19:29.163120624Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/uvicorn/server.py", line 69, in serve
-2026-07-17T21:19:29.163186555Z     config.load()
-2026-07-17T21:19:29.163189985Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/uvicorn/config.py", line 458, in load
-2026-07-17T21:19:29.163330978Z     self.loaded_app = import_from_string(self.app)
-2026-07-17T21:19:29.163334288Z                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2026-07-17T21:19:29.163336858Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/uvicorn/importer.py", line 21, in import_from_string
-2026-07-17T21:19:29.163458111Z     module = importlib.import_module(module_str)
-2026-07-17T21:19:29.163472241Z              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2026-07-17T21:19:29.163475821Z   File "/opt/render/project/python/Python-3.11.0/lib/python3.11/importlib/__init__.py", line 126, in import_module
-2026-07-17T21:19:29.163571304Z     return _bootstrap._gcd_import(name[level:], package, level)
-2026-07-17T21:19:29.163598914Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2026-07-17T21:19:29.163606035Z   File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
-2026-07-17T21:19:29.163609084Z   File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
-2026-07-17T21:19:29.163611645Z   File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
-2026-07-17T21:19:29.163614205Z   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
-2026-07-17T21:19:29.163621285Z   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
-2026-07-17T21:19:29.163625755Z   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
-2026-07-17T21:19:29.163628835Z   File "/opt/render/project/src/backend/main.py", line 23, in <module>
-2026-07-17T21:19:29.163709277Z     from routers import (
-2026-07-17T21:19:29.163713507Z   File "/opt/render/project/src/backend/routers/__init__.py", line 4, in <module>
-2026-07-17T21:19:29.163771788Z     from . import auth_router, user_router, message_router, bot_router, verification_router, websocket_router, channel_router, upload_router
-2026-07-17T21:19:29.163775148Z   File "/opt/render/project/src/backend/routers/bot_router.py", line 11, in <module>
-2026-07-17T21:19:29.163870701Z     from bot_service import bot_service
-2026-07-17T21:19:29.163874761Z   File "/opt/render/project/src/backend/bot_service.py", line 7, in <module>
-2026-07-17T21:19:29.163943682Z     from models import Bot, Message, User
-2026-07-17T21:19:29.163946992Z ImportError: cannot import name 'Bot' from 'models' (/opt/render/project/src/backend/models.py)
-2026-07-17T21:19:40.065516817Z ==> Running 'cd backend && uvicorn main:app --host 0.0.0.0 --port $PORT'
+2026-07-17T21:23:01.454705925Z     rv = self.invoke(ctx)
+2026-07-17T21:23:01.454711356Z          ^^^^^^^^^^^^^^^^
+2026-07-17T21:23:01.454715196Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/click/core.py", line 1353, in invoke
+2026-07-17T21:23:01.454974472Z     return ctx.invoke(self.callback, **ctx.params)
+2026-07-17T21:23:01.454986783Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-17T21:23:01.454990872Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/click/core.py", line 907, in invoke
+2026-07-17T21:23:01.455165657Z     return callback(*args, **kwargs)
+2026-07-17T21:23:01.455171747Z            ^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-17T21:23:01.455175567Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/uvicorn/main.py", line 418, in main
+2026-07-17T21:23:01.45531596Z     run(
+2026-07-17T21:23:01.455322001Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/uvicorn/main.py", line 587, in run
+2026-07-17T21:23:01.455455634Z     server.run()
+2026-07-17T21:23:01.455461124Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/uvicorn/server.py", line 62, in run
+2026-07-17T21:23:01.455566577Z     return asyncio.run(self.serve(sockets=sockets))
+2026-07-17T21:23:01.455571197Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-17T21:23:01.455574017Z   File "/opt/render/project/python/Python-3.11.0/lib/python3.11/asyncio/runners.py", line 190, in run
+2026-07-17T21:23:01.455682249Z     return runner.run(main)
+2026-07-17T21:23:01.45568584Z            ^^^^^^^^^^^^^^^^
+2026-07-17T21:23:01.45568857Z   File "/opt/render/project/python/Python-3.11.0/lib/python3.11/asyncio/runners.py", line 118, in run
+2026-07-17T21:23:01.455793582Z     return self._loop.run_until_complete(task)
+2026-07-17T21:23:01.455804843Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-17T21:23:01.455808572Z   File "uvloop/loop.pyx", line 1518, in uvloop.loop.Loop.run_until_complete
+2026-07-17T21:23:01.455986387Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/uvicorn/server.py", line 69, in serve
+2026-07-17T21:23:01.45610066Z     config.load()
+2026-07-17T21:23:01.45610781Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/uvicorn/config.py", line 458, in load
+2026-07-17T21:23:01.456275424Z     self.loaded_app = import_from_string(self.app)
+2026-07-17T21:23:01.456280804Z                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-17T21:23:01.456284294Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/uvicorn/importer.py", line 21, in import_from_string
+2026-07-17T21:23:01.456370136Z     module = importlib.import_module(module_str)
+2026-07-17T21:23:01.456375786Z              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-17T21:23:01.456379657Z   File "/opt/render/project/python/Python-3.11.0/lib/python3.11/importlib/__init__.py", line 126, in import_module
+2026-07-17T21:23:01.456489779Z     return _bootstrap._gcd_import(name[level:], package, level)
+2026-07-17T21:23:01.45650494Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-17T21:23:01.45650882Z   File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+2026-07-17T21:23:01.45651182Z   File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+2026-07-17T21:23:01.45652241Z   File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+2026-07-17T21:23:01.45652845Z   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+2026-07-17T21:23:01.45653136Z   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+2026-07-17T21:23:01.45653394Z   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+2026-07-17T21:23:01.45653659Z   File "/opt/render/project/src/backend/main.py", line 23, in <module>
+2026-07-17T21:23:01.456645183Z     from routers import (
+2026-07-17T21:23:01.456651353Z   File "/opt/render/project/src/backend/routers/__init__.py", line 4, in <module>
+2026-07-17T21:23:01.456702634Z     from . import auth_router, user_router, message_router, bot_router, verification_router, websocket_router, channel_router, upload_router
+2026-07-17T21:23:01.457024732Z   File "/opt/render/project/src/backend/routers/channel_router.py", line 70
+2026-07-17T21:23:01.457031862Z     class CreatePost Request(BaseModel):
+2026-07-17T21:23:01.457034662Z                      ^^^^^^^
+2026-07-17T21:23:01.457036673Z SyntaxError: invalid syntax
+2026-07-17T21:23:07.973378625Z ==> Exited with status 1
+2026-07-17T21:23:07.97765444Z ==> Common ways to troubleshoot your deploy: https://render.com/docs/troubleshooting-deploys
+2026-07-17T21:23:11.824001605Z ==> Running 'cd backend && uvicorn main:app --host 0.0.0.0 --port $PORT'

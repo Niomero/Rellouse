@@ -77,7 +77,8 @@ async def send_message(
     message = Message(
         sender_id=current_user.id,
         recipient_id=request.recipient_id,
-        encrypted_content=encrypted_content,
+        content=encrypted_content,
+        is_encrypted=True,
         encryption_key_id="default",
         is_read=False,
         created_at=datetime.utcnow()

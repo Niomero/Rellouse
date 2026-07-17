@@ -67,3 +67,64 @@ async def test_owner_login(
             "success": False,
             "error": str(e)
         }
+
+
+@router.get("/test-login-flow")
+async def test_login_flow(
+    login: str,
+    password: str,
+    db: AsyncSession = Depends(get_db)
+):
+    """
+    Test the complete login flow
+    WARNING: This is a debug endpoint - remove in production!
+    """
+    try:
+        # Step 1: Find user by login
+        result = await db.execute(
+            select(User).where(User.login == login)
+        )
+        user = result.scalar_one_or_none()
+        
+        if not user:
+            return {
+                "success": False,
+                "step": "find_user",
+                "message": f"User not found with login: {login}",
+                "tried_login": login
+            }
+        
+        # Step 2: Check if user is active
+        if not user.is_active:
+            return {
+                "success": False,
+                "step": "check_active",
+                "message": "User account is inactive",
+                "user_id": user.id,
+                "user_login": user.login,
+                "is_active": user.is_active
+            }
+        
+        # Step 3: Verify password
+        password_match = password_hasher.verify_password(password, user.password_hash)
+        
+        return {
+            "success": True,
+            "step": "complete",
+            "user_found": True,
+            "user_id": user.id,
+            "user_login": user.login,
+            "user_username": user.username,
+            "user_role": user.role.value,
+            "is_active": user.is_active,
+            "password_matches": password_match,
+            "password_hash_preview": user.password_hash[:20] if user.password_hash else None,
+            "message": "Login would succeed" if password_match else "Password does not match"
+        }
+        
+    except Exception as e:
+        logger.error(f"Debug login flow test failed: {str(e)}")
+        return {
+            "success": False,
+            "error": str(e)
+        }

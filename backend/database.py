@@ -46,8 +46,12 @@ async def get_db() -> AsyncSession:
 
 
 async def init_db():
-    """Initialize database - create all tables"""
+    """Initialize database - drop and recreate all tables"""
     async with engine.begin() as conn:
+        # Drop all tables first to ensure clean schema
+        await conn.run_sync(Base.metadata.drop_all)
+        logger.info("Dropped all existing tables")
+        # Create all tables with current schema
         await conn.run_sync(Base.metadata.create_all)
     logger.info("Database initialized successfully")
 

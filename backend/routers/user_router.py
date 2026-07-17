@@ -61,8 +61,8 @@ class UpdateProfileRequest(BaseModel):
 async def search_users(
     query: str = Query(..., min_length=1, max_length=100),
     limit: int = Query(20, ge=1, le=50),
-    current_user: User = Depends(get_current_user),
-    db: AsyncSession = Depends(get_db)
+    db: AsyncSession = Depends(get_db),
+    current_user: User = Depends(get_current_user)
 ):
     """
     Search users by login, username, or display name
@@ -110,8 +110,8 @@ async def search_users(
 @router.get("/{user_id}", response_model=UserProfileResponse)
 async def get_user_profile(
     user_id: int,
-    current_user: User = Depends(get_current_user),
-    db: AsyncSession = Depends(get_db)
+    db: AsyncSession = Depends(get_db),
+    current_user: User = Depends(get_current_user)
 ):
     """
     Get detailed user profile by ID
@@ -150,8 +150,8 @@ async def get_user_profile(
 @router.get("/username/{username}", response_model=UserProfileResponse)
 async def get_user_by_username(
     username: str,
-    current_user: User = Depends(get_current_user),
-    db: AsyncSession = Depends(get_db)
+    db: AsyncSession = Depends(get_db),
+    current_user: User = Depends(get_current_user)
 ):
     """
     Get user profile by username (@username)
@@ -197,8 +197,8 @@ async def get_user_by_username(
 @router.put("/profile", response_model=UserProfileResponse)
 async def update_profile(
     update_data: UpdateProfileRequest,
-    current_user: User = Depends(get_current_user),
-    db: AsyncSession = Depends(get_db)
+    db: AsyncSession = Depends(get_db),
+    current_user: User = Depends(get_current_user)
 ):
     """
     Update current user's profile
@@ -243,8 +243,8 @@ async def update_profile(
 
 @router.get("/online/list", response_model=List[int])
 async def get_online_users(
-    current_user: User = Depends(get_current_user),
-    db: AsyncSession = Depends(get_db)
+    db: AsyncSession = Depends(get_db),
+    current_user: User = Depends(get_current_user)
 ):
     """
     Get list of online user IDs

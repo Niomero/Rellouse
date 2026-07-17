@@ -6,6 +6,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, or_
 from models import User, Session, SecurityLog, UserRole
 from security import password_hasher, token_manager, username_validator, security_validator
+from database import get_db
 from datetime import datetime, timedelta
 from typing import Optional, Dict, Any
 import logging
@@ -339,6 +340,24 @@ auth_service = AuthService()
 
 
 # Helper function for dependency injection
-async def get_current_user(db: AsyncSession, token: str) -> Optional[User]:
-    """Helper function to get current user from token"""
-    return await auth_service.get_current_user(db, token)
+from fastapi import Depends, HTTPException, status
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+
+security = HTTPBearer()
+
+async def get_current_user(
+    credentials: HTTPAuthorizationCredentials = Depends(security),
+    db: AsyncSession = Depends(get_db)
+) -> User:
+    """FastAPI dependency to get current authenticated user"""
+    token = credentials.credentials
+    user = await auth_service.get_current_user(db, token)
+    
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid authentication credentials",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+    
+    return user

@@ -1,50 +1,30 @@
-2026-07-17T20:27:47.561673048Z ==> Docs on specifying a Node.js version: https://render.com/docs/node-version
-2026-07-17T20:27:50.610982429Z 
-2026-07-17T20:27:50.611013401Z up to date, audited 305 packages in 3s
-2026-07-17T20:27:50.611025661Z 
-2026-07-17T20:27:50.611146958Z 67 packages are looking for funding
-2026-07-17T20:27:50.611224913Z   run `npm fund` for details
-2026-07-17T20:27:50.752315857Z 
-2026-07-17T20:27:50.752332068Z 8 vulnerabilities (1 moderate, 7 high)
-2026-07-17T20:27:50.752334948Z 
-2026-07-17T20:27:50.752338478Z To address issues that do not require attention, run:
-2026-07-17T20:27:50.752341688Z   npm audit fix
-2026-07-17T20:27:50.752344089Z 
-2026-07-17T20:27:50.752346649Z To address all issues (including breaking changes), run:
-2026-07-17T20:27:50.75236283Z   npm audit fix --force
-2026-07-17T20:27:50.75236537Z 
-2026-07-17T20:27:50.75236836Z Run `npm audit` for details.
-2026-07-17T20:27:50.960523324Z 
-2026-07-17T20:27:50.960548935Z > rellouse-messenger-frontend@1.0.0 build
-2026-07-17T20:27:50.960552925Z > tsc && vite build
-2026-07-17T20:27:50.960555465Z 
-2026-07-17T20:27:54.231732798Z src/components/ui/Button.tsx(69,8): error TS2322: Type '{ children: Element; form?: string | undefined; formAction?: string | undefined; formEncType?: string | undefined; formMethod?: string | undefined; formNoValidate?: boolean | undefined; ... 270 more ...; whileTap: { ...; }; }' is not assignable to type 'Omit<HTMLMotionProps<"button">, "ref">'.
-2026-07-17T20:27:54.231758499Z   Types of property 'onAnimationStart' are incompatible.
-2026-07-17T20:27:54.231761629Z     Type 'AnimationEventHandler<HTMLButtonElement> | undefined' is not assignable to type '((definition: AnimationDefinition) => void) | undefined'.
-2026-07-17T20:27:54.23176433Z       Type 'AnimationEventHandler<HTMLButtonElement>' is not assignable to type '(definition: AnimationDefinition) => void'.
-2026-07-17T20:27:54.23176685Z         Types of parameters 'event' and 'definition' are incompatible.
-2026-07-17T20:27:54.23176942Z           Type 'AnimationDefinition' is not assignable to type 'AnimationEvent<HTMLButtonElement>'.
-2026-07-17T20:27:54.23177194Z             Type 'string' is not assignable to type 'AnimationEvent<HTMLButtonElement>'.
-2026-07-17T20:27:54.231928739Z src/components/ui/Card.tsx(37,8): error TS2322: Type '{ children: ReactNode; defaultChecked?: boolean | undefined; defaultValue?: string | number | readonly string[] | undefined; suppressContentEditableWarning?: boolean | undefined; ... 262 more ...; animate: { ...; }; }' is not assignable to type 'Omit<HTMLMotionProps<"div">, "ref">'.
-2026-07-17T20:27:54.231932999Z   Types of property 'onAnimationStart' are incompatible.
-2026-07-17T20:27:54.231935609Z     Type 'AnimationEventHandler<HTMLDivElement> | undefined' is not assignable to type '((definition: AnimationDefinition) => void) | undefined'.
-2026-07-17T20:27:54.231940529Z       Type 'AnimationEventHandler<HTMLDivElement>' is not assignable to type '(definition: AnimationDefinition) => void'.
-2026-07-17T20:27:54.23195595Z         Types of parameters 'event' and 'definition' are incompatible.
-2026-07-17T20:27:54.23195873Z           Type 'AnimationDefinition' is not assignable to type 'AnimationEvent<HTMLDivElement>'.
-2026-07-17T20:27:54.231960741Z             Type 'string' is not assignable to type 'AnimationEvent<HTMLDivElement>'.
-2026-07-17T20:27:54.231970961Z src/components/ui/Input.tsx(27,12): error TS2322: Type '{ accept?: string | undefined; alt?: string | undefined; autoComplete?: HTMLInputAutoCompleteAttribute | undefined; capture?: boolean | "user" | "environment" | undefined; ... 291 more ...; whileFocus: { ...; }; }' is not assignable to type 'Omit<HTMLMotionProps<"input">, "ref">'.
-2026-07-17T20:27:54.231973161Z   Types of property 'onAnimationStart' are incompatible.
-2026-07-17T20:27:54.231975182Z     Type 'AnimationEventHandler<HTMLInputElement> | undefined' is not assignable to type '((definition: AnimationDefinition) => void) | undefined'.
-2026-07-17T20:27:54.231977262Z       Type 'AnimationEventHandler<HTMLInputElement>' is not assignable to type '(definition: AnimationDefinition) => void'.
-2026-07-17T20:27:54.231979362Z         Types of parameters 'event' and 'definition' are incompatible.
-2026-07-17T20:27:54.231982002Z           Type 'AnimationDefinition' is not assignable to type 'AnimationEvent<HTMLInputElement>'.
-2026-07-17T20:27:54.231983912Z             Type 'string' is not assignable to type 'AnimationEvent<HTMLInputElement>'.
-2026-07-17T20:27:54.231991552Z src/pages/ChannelPage.tsx(78,9): error TS6133: 'currentUser' is declared but its value is never read.
-2026-07-17T20:27:54.232017154Z src/pages/ChannelPage.tsx(89,10): error TS6133: 'showInvite' is declared but its value is never read.
-2026-07-17T20:27:54.232029094Z src/pages/ChannelPage.tsx(89,22): error TS6133: 'setShowInvite' is declared but its value is never read.
-2026-07-17T20:27:54.232070277Z src/pages/ChannelPage.tsx(160,9): error TS6133: 'handleLeaveChannel' is declared but its value is never read.
-2026-07-17T20:27:54.232080077Z src/pages/ChannelPage.tsx(231,9): error TS6133: 'copyInviteLink' is declared but its value is never read.
-2026-07-17T20:27:54.232140541Z src/services/api.ts(3,29): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
-2026-07-17T20:27:54.232230316Z src/services/websocket.ts(10,31): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
-2026-07-17T20:27:54.308774864Z ==> Build failed 😞
-2026-07-17T20:27:54.308791405Z ==> Common ways to troubleshoot your deploy: https://render.com/docs/troubleshooting-deploys
+2026-07-17T20:47:32.860336259Z ==> Downloading cache...
+2026-07-17T20:47:32.894609203Z ==> Cloning from https://github.com/Niomero/Rellouse
+2026-07-17T20:47:33.753097282Z ==> Checking out commit 1264888004beb25585e701677d8e801b3489e20c in branch main
+2026-07-17T20:47:39.008865471Z ==> Downloaded 137MB in 3s. Extraction took 3s.
+2026-07-17T20:47:44.099352107Z ==> Running build command 'cd frontend && npm install && npm run build'...
+2026-07-17T20:47:44.192633835Z ==> Using Node.js version 24.14.1 (default)
+2026-07-17T20:47:44.192644355Z ==> Docs on specifying a Node.js version: https://render.com/docs/node-version
+2026-07-17T20:47:47.528379389Z 
+2026-07-17T20:47:47.52841723Z up to date, audited 305 packages in 3s
+2026-07-17T20:47:47.528429261Z 
+2026-07-17T20:47:47.528488852Z 67 packages are looking for funding
+2026-07-17T20:47:47.528590465Z   run `npm fund` for details
+2026-07-17T20:47:47.658032974Z 
+2026-07-17T20:47:47.658062515Z 8 vulnerabilities (1 moderate, 7 high)
+2026-07-17T20:47:47.658066915Z 
+2026-07-17T20:47:47.658071335Z To address issues that do not require attention, run:
+2026-07-17T20:47:47.658075015Z   npm audit fix
+2026-07-17T20:47:47.658078685Z 
+2026-07-17T20:47:47.658082565Z To address all issues (including breaking changes), run:
+2026-07-17T20:47:47.658087095Z   npm audit fix --force
+2026-07-17T20:47:47.658091006Z 
+2026-07-17T20:47:47.658094206Z Run `npm audit` for details.
+2026-07-17T20:47:47.865731598Z 
+2026-07-17T20:47:47.865752639Z > rellouse-messenger-frontend@1.0.0 build
+2026-07-17T20:47:47.865756919Z > tsc && vite build
+2026-07-17T20:47:47.865759889Z 
+2026-07-17T20:47:51.328116272Z src/services/api.ts(3,29): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+2026-07-17T20:47:51.328233585Z src/services/websocket.ts(10,31): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+2026-07-17T20:47:51.410176823Z ==> Build failed 😞
+2026-07-17T20:47:51.410193754Z ==> Common ways to troubleshoot your deploy: https://render.com/docs/troubleshooting-deploys

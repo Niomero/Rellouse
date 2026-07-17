@@ -114,8 +114,8 @@ def generate_invite_link() -> str:
 @router.post("/", response_model=ChannelResponse)
 async def create_channel(
     channel_data: CreateChannelRequest,
-    current_user: User = Depends(get_current_user),
-    db: AsyncSession = Depends(get_db)
+    db: AsyncSession = Depends(get_db),
+    current_user: User = Depends(get_current_user)
 ):
     """
     Create a new channel (public or private)
@@ -185,8 +185,8 @@ async def create_channel(
 @router.get("/{channel_id}", response_model=ChannelResponse)
 async def get_channel(
     channel_id: int,
-    current_user: User = Depends(get_current_user),
-    db: AsyncSession = Depends(get_db)
+    db: AsyncSession = Depends(get_db),
+    current_user: User = Depends(get_current_user)
 ):
     """
     Get channel details by ID
@@ -232,8 +232,8 @@ async def get_channel(
 @router.get("/username/{username}", response_model=ChannelResponse)
 async def get_channel_by_username(
     username: str,
-    current_user: User = Depends(get_current_user),
-    db: AsyncSession = Depends(get_db)
+    db: AsyncSession = Depends(get_db),
+    current_user: User = Depends(get_current_user)
 ):
     """
     Get channel by username (@channelname)
@@ -287,8 +287,8 @@ async def get_channel_by_username(
 async def update_channel(
     channel_id: int,
     update_data: UpdateChannelRequest,
-    current_user: User = Depends(get_current_user),
-    db: AsyncSession = Depends(get_db)
+    db: AsyncSession = Depends(get_db),
+    current_user: User = Depends(get_current_user)
 ):
     """
     Update channel information (owner or admin only)
@@ -357,8 +357,8 @@ async def update_channel(
 async def join_channel(
     channel_id: int,
     invite_code: Optional[str] = None,
-    current_user: User = Depends(get_current_user),
-    db: AsyncSession = Depends(get_db)
+    db: AsyncSession = Depends(get_db),
+    current_user: User = Depends(get_current_user)
 ):
     """
     Join a channel (public or via invite link)
@@ -419,8 +419,8 @@ async def join_channel(
 @router.post("/{channel_id}/leave")
 async def leave_channel(
     channel_id: int,
-    current_user: User = Depends(get_current_user),
-    db: AsyncSession = Depends(get_db)
+    db: AsyncSession = Depends(get_db),
+    current_user: User = Depends(get_current_user)
 ):
     """
     Leave a channel
@@ -467,8 +467,8 @@ async def get_channel_members(
     channel_id: int,
     limit: int = Query(50, ge=1, le=100),
     offset: int = Query(0, ge=0),
-    current_user: User = Depends(get_current_user),
-    db: AsyncSession = Depends(get_db)
+    db: AsyncSession = Depends(get_db),
+    current_user: User = Depends(get_current_user)
 ):
     """
     Get channel members list
@@ -512,8 +512,8 @@ async def get_channel_members(
 async def create_post(
     channel_id: int,
     post_data: CreatePostRequest,
-    current_user: User = Depends(get_current_user),
-    db: AsyncSession = Depends(get_db)
+    db: AsyncSession = Depends(get_db),
+    current_user: User = Depends(get_current_user)
 ):
     """
     Create a new post in a channel
@@ -565,8 +565,8 @@ async def get_channel_posts(
     channel_id: int,
     limit: int = Query(50, ge=1, le=100),
     offset: int = Query(0, ge=0),
-    current_user: User = Depends(get_current_user),
-    db: AsyncSession = Depends(get_db)
+    db: AsyncSession = Depends(get_db),
+    current_user: User = Depends(get_current_user)
 ):
     """
     Get posts from a channel
@@ -639,8 +639,8 @@ async def get_channel_posts(
 
 @router.get("/", response_model=List[ChannelResponse])
 async def get_my_channels(
-    current_user: User = Depends(get_current_user),
-    db: AsyncSession = Depends(get_db)
+    db: AsyncSession = Depends(get_db),
+    current_user: User = Depends(get_current_user)
 ):
     """
     Get all channels the current user is a member of

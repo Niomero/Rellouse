@@ -1,0 +1,130 @@
+
+================================================================================
+ERROR LOGGED: 2026-07-17T20:54:45.470Z
+User ID: maradot228@gmail.com
+================================================================================
+Error Name: TypeError
+Error Message: terminated
+
+Stack Trace:
+TypeError: terminated
+    at Fetch.onAborted (node:internal/deps/undici/undici:11457:53)
+    at Fetch.emit (node:events:519:28)
+    at Fetch.terminate (node:internal/deps/undici/undici:10615:14)
+    at Object.onError (node:internal/deps/undici/undici:11580:38)
+    at Request.onError (node:internal/deps/undici/undici:2240:31)
+    at Object.errorRequest (node:internal/deps/undici/undici:1734:17)
+    at TLSSocket.<anonymous> (node:internal/deps/undici/undici:6523:16)
+    at TLSSocket.emit (node:events:531:35)
+    at node:net:347:12
+    at TCP.done (node:internal/tls/wrap:748:7)
+================================================================================
+
+
+================================================================================
+ERROR LOGGED: 2026-07-17T21:05:04.949Z
+User ID: maradot228@gmail.com
+================================================================================
+Error Name: Error
+Error Message: ripgrep exited with code 2: the literal '"\n"' is not allowed in a regex
+
+Consider enabling multiline mode with the --multiline flag (or -U for short).
+When multiline mode is enabled, new line characters can be matched.
+
+
+Stack Trace:
+Error: ripgrep exited with code 2: the literal '"\n"' is not allowed in a regex
+
+Consider enabling multiline mode with the --multiline flag (or -U for short).
+When multiline mode is enabled, new line characters can be matched.
+
+    at ChildProcess.<anonymous> (file:///root/.nvm/versions/node/v22.23.1/lib/node_modules/bobshell/bundle/bob.js:2272:1451)
+    at ChildProcess.emit (node:events:519:28)
+    at maybeClose (node:internal/child_process:1101:16)
+    at Socket.<anonymous> (node:internal/child_process:456:11)
+    at Socket.emit (node:events:519:28)
+    at Pipe.<anonymous> (node:net:347:12)
+    at Pipe.callbackTrampoline (node:internal/async_hooks:130:17)
+================================================================================
+
+
+================================================================================
+ERROR LOGGED: 2026-07-17T21:05:04.954Z
+User ID: maradot228@gmail.com
+================================================================================
+Error Name: Error
+Error Message: ripgrep exited with code 2: the literal '"\n"' is not allowed in a regex
+
+Consider enabling multiline mode with the --multiline flag (or -U for short).
+When multiline mode is enabled, new line characters can be matched.
+
+
+Stack Trace:
+Error: ripgrep exited with code 2: the literal '"\n"' is not allowed in a regex
+
+Consider enabling multiline mode with the --multiline flag (or -U for short).
+When multiline mode is enabled, new line characters can be matched.
+
+    at ChildProcess.<anonymous> (file:///root/.nvm/versions/node/v22.23.1/lib/node_modules/bobshell/bundle/bob.js:2272:1451)
+    at ChildProcess.emit (node:events:519:28)
+    at maybeClose (node:internal/child_process:1101:16)
+    at Socket.<anonymous> (node:internal/child_process:456:11)
+    at Socket.emit (node:events:519:28)
+    at Pipe.<anonymous> (node:net:347:12)
+    at Pipe.callbackTrampoline (node:internal/async_hooks:130:17)
+================================================================================
+
+
+================================================================================
+ERROR LOGGED: 2026-07-17T21:05:16.010Z
+User ID: maradot228@gmail.com
+================================================================================
+Error Name: Error
+Error Message: ripgrep exited with code 2: the literal '"\n"' is not allowed in a regex
+
+Consider enabling multiline mode with the --multiline flag (or -U for short).
+When multiline mode is enabled, new line characters can be matched.
+
+
+Stack Trace:
+Error: ripgrep exited with code 2: the literal '"\n"' is not allowed in a regex
+
+Consider enabling multiline mode with the --multiline flag (or -U for short).
+When multiline mode is enabled, new line characters can be matched.
+
+    at ChildProcess.<anonymous> (file:///root/.nvm/versions/node/v22.23.1/lib/node_modules/bobshell/bundle/bob.js:2272:1451)
+    at ChildProcess.emit (node:events:519:28)
+    at maybeClose (node:internal/child_process:1101:16)
+    at Socket.<anonymous> (node:internal/child_process:456:11)
+    at Socket.emit (node:events:519:28)
+    at Pipe.<anonymous> (node:net:347:12)
+    at Pipe.callbackTrampoline (node:internal/async_hooks:130:17)
+================================================================================
+
+
+================================================================================
+ERROR LOGGED: 2026-07-17T21:05:16.016Z
+User ID: maradot228@gmail.com
+================================================================================
+Error Name: Error
+Error Message: ripgrep exited with code 2: the literal '"\n"' is not allowed in a regex
+
+Consider enabling multiline mode with the --multiline flag (or -U for short).
+When multiline mode is enabled, new line characters can be matched.
+
+
+Stack Trace:
+Error: ripgrep exited with code 2: the literal '"\n"' is not allowed in a regex
+
+Consider enabling multiline mode with the --multiline flag (or -U for short).
+When multiline mode is enabled, new line characters can be matched.
+
+    at ChildProcess.<anonymous> (file:///root/.nvm/versions/node/v22.23.1/lib/node_modules/bobshell/bundle/bob.js:2272:1451)
+    at ChildProcess.emit (node:events:519:28)
+    at maybeClose (node:internal/child_process:1101:16)
+    at Socket.<anonymous> (node:internal/child_process:456:11)
+    at Socket.emit (node:events:519:28)
+    at Pipe.<anonymous> (node:net:347:12)
+    at Pipe.callbackTrampoline (node:internal/async_hooks:130:17)
+================================================================================
+

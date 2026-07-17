@@ -88,8 +88,8 @@ def generate_thumbnail(image_path: Path, thumbnail_path: Path, size=(300, 300)):
 @router.post("/image", response_model=UploadResponse)
 async def upload_image(
     file: UploadFile = File(...),
-    current_user: User = Depends(get_current_user),
-    db: AsyncSession = Depends(get_db)
+    db: AsyncSession = Depends(get_db),
+    current_user: User = Depends(get_current_user)
 ):
     """
     Upload an image file
@@ -146,8 +146,8 @@ async def upload_image(
 @router.post("/video", response_model=UploadResponse)
 async def upload_video(
     file: UploadFile = File(...),
-    current_user: User = Depends(get_current_user),
-    db: AsyncSession = Depends(get_db)
+    db: AsyncSession = Depends(get_db),
+    current_user: User = Depends(get_current_user)
 ):
     """
     Upload a video file
@@ -185,8 +185,8 @@ async def upload_video(
 @router.post("/audio", response_model=UploadResponse)
 async def upload_audio(
     file: UploadFile = File(...),
-    current_user: User = Depends(get_current_user),
-    db: AsyncSession = Depends(get_db)
+    db: AsyncSession = Depends(get_db),
+    current_user: User = Depends(get_current_user)
 ):
     """
     Upload an audio file
@@ -224,8 +224,8 @@ async def upload_audio(
 @router.post("/file", response_model=UploadResponse)
 async def upload_file(
     file: UploadFile = File(...),
-    current_user: User = Depends(get_current_user),
-    db: AsyncSession = Depends(get_db)
+    db: AsyncSession = Depends(get_db),
+    current_user: User = Depends(get_current_user)
 ):
     """
     Upload a general file
@@ -263,8 +263,8 @@ async def upload_file(
 @router.post("/avatar", response_model=UploadResponse)
 async def upload_avatar(
     file: UploadFile = File(...),
-    current_user: User = Depends(get_current_user),
-    db: AsyncSession = Depends(get_db)
+    db: AsyncSession = Depends(get_db),
+    current_user: User = Depends(get_current_user)
 ):
     """
     Upload user avatar (optimized for profile pictures)

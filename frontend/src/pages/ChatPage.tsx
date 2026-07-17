@@ -86,7 +86,7 @@ export default function ChatPage() {
 
   const loadChatUser = async (id: number) => {
     try {
-      const response = await api.get<ChatUser>(`/users/${id}`)
+      const response = await api.get<ChatUser>(`/api/users/${id}`)
       setChatUser(response.data)
     } catch (error: any) {
       showError(error.response?.data?.detail || 'Failed to load user')
@@ -97,7 +97,7 @@ export default function ChatPage() {
   const loadMessages = async (recipientId: number) => {
     setLoading(true)
     try {
-      const response = await api.get<Message[]>('/messages', {
+      const response = await api.get<Message[]>('/api/messages', {
         params: { recipient_id: recipientId, limit: 50 }
       })
       setMessages(response.data.reverse())
@@ -116,7 +116,7 @@ export default function ChatPage() {
     setSending(true)
 
     try {
-      const response = await api.post<Message>('/messages', {
+      const response = await api.post<Message>('/api/messages', {
         recipient_id: parseInt(userId),
         content,
         message_type: 'text'
@@ -139,7 +139,7 @@ export default function ChatPage() {
     setShowImageUpload(false)
 
     try {
-      const response = await api.post<Message>('/messages', {
+      const response = await api.post<Message>('/api/messages', {
         recipient_id: parseInt(userId),
         content: imageData.fileName,
         message_type: 'image',

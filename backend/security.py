@@ -17,7 +17,8 @@ logger = logging.getLogger(__name__)
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 # Encryption cipher
-cipher_suite = Fernet(settings.ENCRYPTION_KEY.encode())
+# ENCRYPTION_KEY is already base64-encoded string, no need to encode again
+cipher_suite = Fernet(settings.ENCRYPTION_KEY)
 
 
 class PasswordHasher:

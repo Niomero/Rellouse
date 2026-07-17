@@ -5,7 +5,7 @@ import { Send } from 'lucide-react'
 const ChatPage = () => {
   const { userId } = useParams()
   const [message, setMessage] = useState('')
-  const [messages, setMessages] = useState<any[]>([])
+  const [messages] = useState<any[]>([])
 
   const handleSendMessage = (e: React.FormEvent) => {
     e.preventDefault()

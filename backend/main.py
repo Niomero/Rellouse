@@ -2,9 +2,8 @@
 Rellouse Messenger - Main Application
 FastAPI application with REST API and WebSocket support
 """
-from fastapi import FastAPI, Depends, HTTPException, status, Request, WebSocket, WebSocketDisconnect
+from fastapi import FastAPI, Depends, HTTPException, status, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from fastapi.responses import JSONResponse
 from sqlalchemy.ext.asyncio import AsyncSession
 from contextlib import asynccontextmanager
@@ -19,8 +18,16 @@ from config import settings
 from database import init_db, close_db, get_db
 from init_system import check_and_initialize
 
-# Import routers (will be created next)
-from routers import auth_router, user_router, message_router, bot_router, verification_router, websocket_router
+# Import routers
+from routers import (
+    auth_router,
+    user_router,
+    message_router,
+    bot_router,
+    verification_router,
+    websocket_router,
+    channel_router
+)
 
 # Configure logging
 logging.basicConfig(
@@ -159,12 +166,13 @@ async def root():
 
 
 # Include routers
-app.include_router(auth_router.router, prefix="/api/auth", tags=["Authentication"])
-app.include_router(user_router.router, prefix="/api/users", tags=["Users"])
-app.include_router(message_router.router, prefix="/api/messages", tags=["Messages"])
-app.include_router(bot_router.router, prefix="/api/bots", tags=["Bots"])
-app.include_router(verification_router.router, prefix="/api/verification", tags=["Verification"])
-app.include_router(websocket_router.router, prefix="/ws", tags=["WebSocket"])
+app.include_router(auth_router.router)
+app.include_router(user_router.router)
+app.include_router(message_router.router)
+app.include_router(channel_router.router)
+app.include_router(bot_router.router)
+app.include_router(verification_router.router)
+app.include_router(websocket_router.router)
 
 
 if __name__ == "__main__":

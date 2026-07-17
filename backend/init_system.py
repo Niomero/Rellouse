@@ -1,10 +1,10 @@
 """
 System Initialization
-Creates the owner account and @Verify bot on first run
+Creates the owner account and system bots on first run
 """
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
-from models import User, Bot, UserRole
+from models import User, UserRole
 from security import password_hasher
 from config import settings
 import logging
@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 
 async def initialize_system(db: AsyncSession) -> bool:
     """
-    Initialize the system with owner account and verify bot
+    Initialize the system with owner account and system bots
     Returns: True if initialization was performed, False if already initialized
     """
     try:
@@ -39,23 +39,29 @@ async def initialize_system(db: AsyncSession) -> bool:
             login=settings.OWNER_USERNAME,
             password_hash=owner_password_hash,
             username=f"@{settings.OWNER_USERNAME}",
+            display_name=settings.OWNER_USERNAME,
             additional_usernames=json.dumps([
                 f"@{username}" for username in settings.owner_additional_usernames_list
             ]),
             role=UserRole.OWNER,
             bio="Owner of Rellouse Messenger",
-            is_active=True
+            is_active=True,
+            is_bot=False
         )
         
         db.add(owner)
         
-        # Create @Verify bot
-        verify_bot = Bot(
-            id="~1",
+        # Create @Verify system bot as a User
+        verify_bot = User(
+            id=1,
+            login="verify_bot",
+            password_hash=None,  # Bots don't need passwords
             username="@Verify",
-            display_name="Verify",
-            description="Official verification bot. Submit your verification request to get the verified badge.",
-            is_active=True
+            display_name="Verify Bot",
+            bio="Official verification bot. Submit your verification request to get the verified badge.",
+            is_active=True,
+            is_bot=True,
+            role=UserRole.ADMINISTRATOR
         )
         
         db.add(verify_bot)
@@ -63,7 +69,7 @@ async def initialize_system(db: AsyncSession) -> bool:
         await db.commit()
         
         logger.info(f"✅ Owner account created: @{settings.OWNER_USERNAME} (ID: 0)")
-        logger.info(f"✅ @Verify bot created (ID: ~1)")
+        logger.info(f"✅ @Verify bot created as User (ID: 1)")
         logger.info("✅ System initialization completed successfully")
         
         return True

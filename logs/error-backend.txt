@@ -1,0 +1,50 @@
+2026-07-17T19:12:43.070945491Z   File "/opt/render/project/src/backend/init_system.py", line 35, in initialize_system
+2026-07-17T19:12:43.070950311Z     owner_password_hash = password_hasher.hash_password(settings.OWNER_PASSWORD)
+2026-07-17T19:12:43.070954991Z                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-17T19:12:43.070959541Z   File "/opt/render/project/src/backend/security.py", line 54, in hash_password
+2026-07-17T19:12:43.070964611Z     return pwd_context.hash(password_bytes.decode('utf-8', errors='ignore'))
+2026-07-17T19:12:43.070969632Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-17T19:12:43.070974222Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/passlib/context.py", line 2258, in hash
+2026-07-17T19:12:43.070994443Z     return record.hash(secret, **kwds)
+2026-07-17T19:12:43.070997653Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-17T19:12:43.071000623Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/passlib/utils/handlers.py", line 779, in hash
+2026-07-17T19:12:43.071003633Z     self.checksum = self._calc_checksum(secret)
+2026-07-17T19:12:43.071006654Z                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-17T19:12:43.071009974Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/passlib/handlers/bcrypt.py", line 591, in _calc_checksum
+2026-07-17T19:12:43.071013214Z     self._stub_requires_backend()
+2026-07-17T19:12:43.071017074Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/passlib/utils/handlers.py", line 2254, in _stub_requires_backend
+2026-07-17T19:12:43.071020564Z     cls.set_backend()
+2026-07-17T19:12:43.071023554Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/passlib/utils/handlers.py", line 2156, in set_backend
+2026-07-17T19:12:43.071026545Z     return owner.set_backend(name, dryrun=dryrun)
+2026-07-17T19:12:43.071029235Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-17T19:12:43.071032145Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/passlib/utils/handlers.py", line 2163, in set_backend
+2026-07-17T19:12:43.071035185Z     return cls.set_backend(name, dryrun=dryrun)
+2026-07-17T19:12:43.071038135Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-17T19:12:43.071041195Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/passlib/utils/handlers.py", line 2188, in set_backend
+2026-07-17T19:12:43.071044335Z     cls._set_backend(name, dryrun)
+2026-07-17T19:12:43.071047386Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/passlib/utils/handlers.py", line 2311, in _set_backend
+2026-07-17T19:12:43.071050376Z     super(SubclassBackendMixin, cls)._set_backend(name, dryrun)
+2026-07-17T19:12:43.071053226Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/passlib/utils/handlers.py", line 2224, in _set_backend
+2026-07-17T19:12:43.071056276Z     ok = loader(**kwds)
+2026-07-17T19:12:43.071059236Z          ^^^^^^^^^^^^^^
+2026-07-17T19:12:43.071062307Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/passlib/handlers/bcrypt.py", line 626, in _load_backend_mixin
+2026-07-17T19:12:43.071065407Z     return mixin_cls._finalize_backend_mixin(name, dryrun)
+2026-07-17T19:12:43.071068417Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-17T19:12:43.071071367Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/passlib/handlers/bcrypt.py", line 421, in _finalize_backend_mixin
+2026-07-17T19:12:43.071074117Z     if detect_wrap_bug(IDENT_2A):
+2026-07-17T19:12:43.071076977Z        ^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-17T19:12:43.071079737Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/passlib/handlers/bcrypt.py", line 380, in detect_wrap_bug
+2026-07-17T19:12:43.071082697Z     if verify(secret, bug_hash):
+2026-07-17T19:12:43.071085718Z        ^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-17T19:12:43.071088848Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/passlib/utils/handlers.py", line 792, in verify
+2026-07-17T19:12:43.071091848Z     return consteq(self._calc_checksum(secret), chk)
+2026-07-17T19:12:43.071094718Z                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-17T19:12:43.071097698Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/passlib/handlers/bcrypt.py", line 655, in _calc_checksum
+2026-07-17T19:12:43.071100649Z     hash = _bcrypt.hashpw(secret, config)
+2026-07-17T19:12:43.071103878Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-17T19:12:43.071111659Z ValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])
+2026-07-17T19:12:43.071114429Z 
+2026-07-17T19:12:43.071236415Z ERROR:    Application startup failed. Exiting.
+2026-07-17T19:12:45.945513486Z ==> Exited with status 3
+2026-07-17T19:12:45.951919818Z ==> Common ways to troubleshoot your deploy: https://render.com/docs/troubleshooting-deploys
+2026-07-17T19:12:50.078540629Z ==> Running 'cd backend && uvicorn main:app --host 0.0.0.0 --port $PORT'

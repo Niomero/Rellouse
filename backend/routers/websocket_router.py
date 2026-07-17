@@ -1,311 +1,127 @@
 """
 WebSocket Router
-Handles real-time messaging via WebSocket connections
+Handles WebSocket connections for real-time messaging
 """
 from fastapi import APIRouter, WebSocket, WebSocketDisconnect, Depends, Query
 from sqlalchemy.ext.asyncio import AsyncSession
-from typing import Dict, Set
-from database import get_db
-from auth import auth_service
-from message_service import message_service
-from config import settings
+from sqlalchemy import select
+from datetime import datetime
 import logging
 import json
-import asyncio
 
-logger = logging.getLogger(__name__)
+from database import get_db
+from models import User, Message
+from websocket_service import manager
+from security import token_manager
 
 router = APIRouter()
 
-
-class ConnectionManager:
-    """Manages WebSocket connections for real-time messaging"""
-    
-    def __init__(self):
-        # user_id -> Set of WebSocket connections
-        self.active_connections: Dict[int, Set[WebSocket]] = {}
-        self.lock = asyncio.Lock()
-    
-    async def connect(self, websocket: WebSocket, user_id: int):
-        """Add a new WebSocket connection for a user"""
-        await websocket.accept()
-        
-        async with self.lock:
-            if user_id not in self.active_connections:
-                self.active_connections[user_id] = set()
-            
-            # Check connection limit
-            if len(self.active_connections[user_id]) >= settings.WS_MAX_CONNECTIONS_PER_USER:
-                await websocket.close(code=1008, reason="Maximum connections reached")
-                return False
-            
-            self.active_connections[user_id].add(websocket)
-            logger.info(f"WebSocket connected: user_id={user_id}, total_connections={len(self.active_connections[user_id])}")
-            return True
-    
-    async def disconnect(self, websocket: WebSocket, user_id: int):
-        """Remove a WebSocket connection"""
-        async with self.lock:
-            if user_id in self.active_connections:
-                self.active_connections[user_id].discard(websocket)
-                
-                # Clean up empty sets
-                if not self.active_connections[user_id]:
-                    del self.active_connections[user_id]
-                
-                logger.info(f"WebSocket disconnected: user_id={user_id}")
-    
-    async def send_personal_message(self, message: dict, user_id: int):
-        """Send a message to all connections of a specific user"""
-        if user_id not in self.active_connections:
-            return
-        
-        disconnected = set()
-        for connection in self.active_connections[user_id]:
-            try:
-                await connection.send_json(message)
-            except Exception as e:
-                logger.error(f"Error sending message to user {user_id}: {str(e)}")
-                disconnected.add(connection)
-        
-        # Clean up disconnected connections
-        if disconnected:
-            async with self.lock:
-                self.active_connections[user_id] -= disconnected
-    
-    async def broadcast_to_users(self, message: dict, user_ids: list):
-        """Broadcast a message to multiple users"""
-        for user_id in user_ids:
-            await self.send_personal_message(message, user_id)
-    
-    def get_active_users(self) -> list:
-        """Get list of currently connected user IDs"""
-        return list(self.active_connections.keys())
-    
-    def is_user_online(self, user_id: int) -> bool:
-        """Check if a user has any active connections"""
-        return user_id in self.active_connections and len(self.active_connections[user_id]) > 0
+logger = logging.getLogger(__name__)
 
 
-# Global connection manager
-manager = ConnectionManager()
-
-
-async def verify_websocket_token(token: str, db: AsyncSession) -> int:
-    """Verify WebSocket authentication token and return user_id"""
+async def get_user_from_token(token: str, db: AsyncSession) -> User:
+    """Validate token and get user"""
     try:
-        user = await auth_service.get_current_user(db=db, access_token=token)
-        if user:
-            return user.id
-        return None
+        payload = token_manager.decode_token(token)
+        user_id = payload.get("sub")
+        
+        if not user_id:
+            return None
+        
+        stmt = select(User).where(User.id == int(user_id), User.is_active == True)
+        result = await db.execute(stmt)
+        user = result.scalar_one_or_none()
+        
+        return user
     except Exception as e:
-        logger.error(f"WebSocket token verification failed: {str(e)}")
+        logger.error(f"Token validation error: {e}")
         return None
 
 
-@router.websocket("/chat")
+@router.websocket("/ws")
 async def websocket_endpoint(
     websocket: WebSocket,
-    token: str = Query(..., description="Authentication token")
+    token: str = Query(...),
+    db: AsyncSession = Depends(get_db)
 ):
     """
     WebSocket endpoint for real-time messaging
-    
-    Query Parameters:
-    - token: JWT access token for authentication
-    
-    Message Format (Client -> Server):
-    {
-        "type": "message",
-        "recipient_id": 123,
-        "content": "Hello!"
-    }
-    
-    Message Format (Server -> Client):
-    {
-        "type": "message",
-        "message_id": 456,
-        "sender_id": 789,
-        "content": "Hello!",
-        "created_at": "2024-01-01T00:00:00Z"
-    }
-    
-    Heartbeat (Server -> Client):
-    {
-        "type": "heartbeat",
-        "timestamp": "2024-01-01T00:00:00Z"
-    }
+    Requires authentication token as query parameter
     """
-    db = None
-    user_id = None
+    user = await get_user_from_token(token, db)
     
-    try:
-        # Get database session
-        async for session in get_db():
-            db = session
-            break
-        
-        # Verify authentication
-        user_id = await verify_websocket_token(token, db)
-        if not user_id:
-            await websocket.close(code=1008, reason="Authentication failed")
-            return
-        
-        # Connect user
-        connected = await manager.connect(websocket, user_id)
-        if not connected:
-            return
-        
-        # Send connection confirmation
-        await websocket.send_json({
-            "type": "connected",
-            "user_id": user_id,
-            "message": "Connected successfully"
-        })
-        
-        # Start heartbeat task
-        heartbeat_task = asyncio.create_task(send_heartbeat(websocket, user_id))
-        
-        try:
-            # Message handling loop
-            while True:
-                # Receive message from client
-                data = await websocket.receive_json()
-                
-                message_type = data.get("type")
-                
-                if message_type == "message":
-                    # Handle new message
-                    recipient_id = data.get("recipient_id")
-                    content = data.get("content")
-                    
-                    if not recipient_id or not content:
-                        await websocket.send_json({
-                            "type": "error",
-                            "error": "Missing recipient_id or content"
-                        })
-                        continue
-                    
-                    # Send message via service
-                    result = await message_service.send_message(
-                        db=db,
-                        sender_id=user_id,
-                        recipient_id=recipient_id,
-                        content=content
-                    )
-                    
-                    if result["success"]:
-                        message = result["message"]
-                        
-                        # Notify sender (confirmation)
-                        await websocket.send_json({
-                            "type": "message_sent",
-                            "message_id": message.id,
-                            "recipient_id": recipient_id,
-                            "created_at": message.created_at.isoformat()
-                        })
-                        
-                        # Notify recipient (if online)
-                        await manager.send_personal_message({
-                            "type": "message",
-                            "message_id": message.id,
-                            "sender_id": user_id,
-                            "content": content,
-                            "created_at": message.created_at.isoformat()
-                        }, recipient_id)
-                    else:
-                        await websocket.send_json({
-                            "type": "error",
-                            "error": result["error"]
-                        })
-                
-                elif message_type == "typing":
-                    # Handle typing indicator
-                    recipient_id = data.get("recipient_id")
-                    if recipient_id:
-                        await manager.send_personal_message({
-                            "type": "typing",
-                            "user_id": user_id
-                        }, recipient_id)
-                
-                elif message_type == "read":
-                    # Handle read receipt
-                    message_id = data.get("message_id")
-                    if message_id:
-                        await message_service.mark_as_read(
-                            db=db,
-                            message_id=message_id,
-                            user_id=user_id
-                        )
-                
-                elif message_type == "ping":
-                    # Handle ping
-                    await websocket.send_json({
-                        "type": "pong",
-                        "timestamp": data.get("timestamp")
-                    })
-                
-                else:
-                    await websocket.send_json({
-                        "type": "error",
-                        "error": f"Unknown message type: {message_type}"
-                    })
-        
-        except WebSocketDisconnect:
-            logger.info(f"WebSocket disconnected normally: user_id={user_id}")
-        
-        finally:
-            # Cancel heartbeat task
-            heartbeat_task.cancel()
-            try:
-                await heartbeat_task
-            except asyncio.CancelledError:
-                pass
+    if not user:
+        await websocket.close(code=1008, reason="Invalid token")
+        return
     
-    except Exception as e:
-        logger.error(f"WebSocket error: {str(e)}", exc_info=True)
+    await manager.connect(websocket, user.id)
     
-    finally:
-        # Disconnect user
-        if user_id:
-            await manager.disconnect(websocket, user_id)
-        
-        # Close database session
-        if db:
-            await db.close()
-
-
-async def send_heartbeat(websocket: WebSocket, user_id: int):
-    """Send periodic heartbeat to keep connection alive"""
+    # Update user online status
+    user.is_online = True
+    user.last_seen = datetime.utcnow()
+    await db.commit()
+    
     try:
         while True:
-            await asyncio.sleep(settings.WS_HEARTBEAT_INTERVAL)
+            # Receive message from client
+            data = await websocket.receive_json()
             
-            from datetime import datetime
-            await websocket.send_json({
-                "type": "heartbeat",
-                "timestamp": datetime.utcnow().isoformat()
-            })
+            message_type = data.get("type")
+            
+            if message_type == "ping":
+                # Heartbeat - update last seen
+                user.last_seen = datetime.utcnow()
+                await db.commit()
+                await websocket.send_json({"type": "pong"})
+            
+            elif message_type == "typing":
+                # Typing indicator
+                recipient_id = data.get("recipient_id")
+                is_typing = data.get("is_typing", True)
+                
+                if recipient_id:
+                    await manager.send_typing_indicator(user.id, recipient_id, is_typing)
+            
+            elif message_type == "read":
+                # Mark message as read
+                message_id = data.get("message_id")
+                
+                if message_id:
+                    stmt = select(Message).where(
+                        Message.id == message_id,
+                        Message.recipient_id == user.id
+                    )
+                    result = await db.execute(stmt)
+                    message = result.scalar_one_or_none()
+                    
+                    if message and not message.is_read:
+                        message.is_read = True
+                        await db.commit()
+                        
+                        # Send read receipt to sender
+                        if message.sender_id:
+                            await manager.send_read_receipt(user.id, message.sender_id, message_id)
+            
+            elif message_type == "message":
+                # This is handled by message_router.py send_message endpoint
+                # WebSocket is only for receiving real-time updates
+                pass
     
-    except asyncio.CancelledError:
-        logger.debug(f"Heartbeat cancelled for user_id={user_id}")
+    except WebSocketDisconnect:
+        await manager.disconnect(websocket)
+        
+        # Update user offline status
+        user.is_online = False
+        user.last_seen = datetime.utcnow()
+        await db.commit()
+        
+        logger.info(f"User {user.id} disconnected")
+    
     except Exception as e:
-        logger.error(f"Heartbeat error for user_id={user_id}: {str(e)}")
-
-
-@router.get("/online-users")
-async def get_online_users():
-    """Get list of currently online users (for debugging/admin)"""
-    return {
-        "online_users": manager.get_active_users(),
-        "count": len(manager.get_active_users())
-    }
-
-
-@router.get("/user-status/{user_id}")
-async def check_user_status(user_id: int):
-    """Check if a specific user is online"""
-    return {
-        "user_id": user_id,
-        "is_online": manager.is_user_online(user_id)
-    }
+        logger.error(f"WebSocket error for user {user.id}: {e}")
+        await manager.disconnect(websocket)
+        
+        # Update user offline status
+        user.is_online = False
+        user.last_seen = datetime.utcnow()
+        await db.commit()

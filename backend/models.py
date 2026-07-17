@@ -2,7 +2,7 @@
 Database Models
 Defines all SQLAlchemy models for the application
 """
-from sqlalchemy import Column, Integer, String, Boolean, DateTime, ForeignKey, Text, Enum as SQLEnum
+from sqlalchemy import Column, Integer, String, Boolean, DateTime, ForeignKey, Text, Enum as SQLEnum, Table
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 from datetime import datetime
@@ -19,19 +19,47 @@ class UserRole(str, enum.Enum):
     OWNER = "owner"
 
 
+class ChannelType(str, enum.Enum):
+    """Channel type enumeration"""
+    PUBLIC = "public"
+    PRIVATE = "private"
+
+
+class ChannelMemberRole(str, enum.Enum):
+    """Channel member role enumeration"""
+    MEMBER = "member"
+    ADMIN = "admin"
+    OWNER = "owner"
+
+
+# Association table for channel members
+channel_members = Table(
+    'channel_members',
+    Base.metadata,
+    Column('channel_id', Integer, ForeignKey('channels.id'), primary_key=True),
+    Column('user_id', Integer, ForeignKey('users.id'), primary_key=True),
+    Column('role', SQLEnum(ChannelMemberRole), default=ChannelMemberRole.MEMBER, nullable=False),
+    Column('joined_at', DateTime, default=datetime.utcnow, nullable=False)
+)
+
+
 class User(Base):
-    """User model - represents regular users and admins"""
+    """User model - represents regular users, admins, and system bots"""
     __tablename__ = "users"
     
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     login = Column(String(255), unique=True, nullable=False, index=True)
-    password_hash = Column(String(255), nullable=False)
+    password_hash = Column(String(255), nullable=True)  # Nullable for system bots
     username = Column(String(17), unique=True, nullable=False, index=True)  # @username (4-16 chars + @)
+    display_name = Column(String(255), nullable=True)  # Full name for display
     additional_usernames = Column(Text, nullable=True)  # JSON array of additional usernames (max 4)
     avatar_url = Column(String(512), nullable=True)
     bio = Column(Text, nullable=True)
     role = Column(SQLEnum(UserRole), default=UserRole.USER, nullable=False)
     is_active = Column(Boolean, default=True, nullable=False)
+    is_bot = Column(Boolean, default=False, nullable=False)  # True for system bots
+    is_online = Column(Boolean, default=False, nullable=False)
+    last_seen = Column(DateTime, nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow, nullable=False)
     last_login = Column(DateTime, nullable=True)
@@ -40,13 +68,16 @@ class User(Base):
     sent_messages = relationship("Message", foreign_keys="Message.sender_id", back_populates="sender")
     received_messages = relationship("Message", foreign_keys="Message.recipient_id", back_populates="recipient")
     verification_requests = relationship("VerificationRequest", foreign_keys="VerificationRequest.user_id", back_populates="user")
+    owned_channels = relationship("Channel", back_populates="owner")
+    channels = relationship("Channel", secondary=channel_members, back_populates="members")
+    channel_posts = relationship("ChannelPost", back_populates="author")
     
     def __repr__(self):
-        return f"<User(id={self.id}, username={self.username}, role={self.role})>"
+        return f"<User(id={self.id}, username={self.username}, role={self.role}, is_bot={self.is_bot})>"
 
 
 class Bot(Base):
-    """Bot model - represents automated bot accounts"""
+    """Bot model - DEPRECATED - Use User with is_bot=True instead"""
     __tablename__ = "bots"
     
     id = Column(String(50), primary_key=True, index=True)  # ~1, ~2, ~3, etc.
@@ -62,6 +93,73 @@ class Bot(Base):
     
     def __repr__(self):
         return f"<Bot(id={self.id}, username={self.username})>"
+
+
+class Channel(Base):
+    """Channel model - represents public or private channels"""
+    __tablename__ = "channels"
+    
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
+    name = Column(String(255), nullable=False)
+    username = Column(String(17), unique=True, nullable=True, index=True)  # @channelname for public channels
+    description = Column(Text, nullable=True)
+    avatar_url = Column(String(512), nullable=True)
+    channel_type = Column(SQLEnum(ChannelType), default=ChannelType.PUBLIC, nullable=False)
+    invite_link = Column(String(255), unique=True, nullable=True)  # For private channels
+    owner_id = Column(Integer, ForeignKey("users.id"), nullable=False)
+    is_active = Column(Boolean, default=True, nullable=False)
+    member_count = Column(Integer, default=0, nullable=False)
+    created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow, nullable=False)
+    
+    # Relationships
+    owner = relationship("User", back_populates="owned_channels")
+    members = relationship("User", secondary=channel_members, back_populates="channels")
+    posts = relationship("ChannelPost", back_populates="channel")
+    
+    def __repr__(self):
+        return f"<Channel(id={self.id}, name={self.name}, type={self.channel_type})>"
+
+
+class ChannelPost(Base):
+    """Channel post model - represents posts in channels"""
+    __tablename__ = "channel_posts"
+    
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
+    channel_id = Column(Integer, ForeignKey("channels.id"), nullable=False)
+    author_id = Column(Integer, ForeignKey("users.id"), nullable=False)
+    content = Column(Text, nullable=False)
+    created_at = Column(DateTime, default=datetime.utcnow, nullable=False, index=True)
+    edited_at = Column(DateTime, nullable=True)
+    deleted_at = Column(DateTime, nullable=True)
+    
+    # Relationships
+    channel = relationship("Channel", back_populates="posts")
+    author = relationship("User", back_populates="channel_posts")
+    attachments = relationship("PostAttachment", back_populates="post")
+    
+    def __repr__(self):
+        return f"<ChannelPost(id={self.id}, channel_id={self.channel_id}, author_id={self.author_id})>"
+
+
+class PostAttachment(Base):
+    """Post attachment model - represents files attached to channel posts"""
+    __tablename__ = "post_attachments"
+    
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
+    post_id = Column(Integer, ForeignKey("channel_posts.id"), nullable=False)
+    file_url = Column(String(512), nullable=False)
+    file_name = Column(String(255), nullable=False)
+    file_size = Column(Integer, nullable=False)  # Size in bytes
+    file_type = Column(String(100), nullable=False)  # MIME type
+    thumbnail_url = Column(String(512), nullable=True)  # For images/videos
+    created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
+    
+    # Relationships
+    post = relationship("ChannelPost", back_populates="attachments")
+    
+    def __repr__(self):
+        return f"<PostAttachment(id={self.id}, post_id={self.post_id}, file_name={self.file_name})>"
 
 
 class Message(Base):
@@ -99,6 +197,7 @@ class MessageAttachment(Base):
     file_name = Column(String(255), nullable=False)
     file_size = Column(Integer, nullable=False)  # Size in bytes
     file_type = Column(String(100), nullable=False)  # MIME type
+    thumbnail_url = Column(String(512), nullable=True)  # For images/videos
     encrypted = Column(Boolean, default=True, nullable=False)
     created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
     

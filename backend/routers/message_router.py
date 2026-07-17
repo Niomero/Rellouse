@@ -52,6 +52,7 @@ class ConversationResponse(BaseModel):
     unread_count: int
 
 
+@router.post("/", response_model=MessageResponse)
 @router.post("/send", response_model=MessageResponse)
 async def send_message(
     request: SendMessageRequest,
@@ -134,6 +135,60 @@ async def send_message(
     )
 
 
+@router.get("/", response_model=List[MessageResponse])
+async def get_messages(
+    recipient_id: int,
+    limit: int = 50,
+    offset: int = 0,
+    db: AsyncSession = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
+    """
+    Get conversation history with another user (query param version)
+    """
+    stmt = select(Message).where(
+        or_(
+            and_(Message.sender_id == current_user.id, Message.recipient_id == recipient_id),
+            and_(Message.sender_id == recipient_id, Message.recipient_id == current_user.id)
+        ),
+        Message.deleted_at.is_(None)
+    ).order_by(Message.created_at.desc()).limit(limit).offset(offset)
+    
+    result = await db.execute(stmt)
+    messages = result.scalars().all()
+    
+    # Decrypt messages and format response
+    response = []
+    for msg in reversed(messages):  # Reverse to show oldest first
+        try:
+            decrypted_content = encryption_manager.decrypt(msg.encrypted_content)
+        except:
+            decrypted_content = "[Encrypted message]"
+        
+        # Get attachments
+        attachments = []
+        for att in msg.attachments:
+            attachments.append({
+                "file_url": att.file_url,
+                "file_name": att.file_name,
+                "file_type": att.file_type,
+                "thumbnail_url": att.thumbnail_url
+            })
+        
+        response.append(MessageResponse(
+            id=msg.id,
+            sender_id=msg.sender_id,
+            recipient_id=msg.recipient_id,
+            content=decrypted_content,
+            is_read=msg.is_read,
+            created_at=msg.created_at,
+            edited_at=msg.edited_at,
+            attachments=attachments
+        ))
+    
+    return response
+
+
 @router.get("/conversation/{user_id}", response_model=List[MessageResponse])
 async def get_conversation(
     user_id: int,
@@ -143,7 +198,7 @@ async def get_conversation(
     current_user: User = Depends(get_current_user)
 ):
     """
-    Get conversation history with another user
+    Get conversation history with another user (path param version)
     """
     stmt = select(Message).where(
         or_(

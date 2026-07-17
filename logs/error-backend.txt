@@ -1,52 +1,50 @@
-2026-07-17T21:41:29.151632377Z ==> Running 'cd backend && uvicorn main:app --host 0.0.0.0 --port $PORT'
-2026-07-17T21:41:40.243144399Z Invalid ENCRYPTION_KEY in settings: Fernet key must be 32 url-safe base64-encoded bytes.. Generating a new one.
-2026-07-17T21:41:41.547541088Z INFO:     Started server process [57]
-2026-07-17T21:41:41.54756587Z INFO:     Waiting for application startup.
-2026-07-17T21:41:41.547821453Z 2026-07-17 21:41:41,547 - main - INFO - 🚀 Starting Rellouse Messenger...
-2026-07-17T21:41:45.829444043Z 2026-07-17 21:41:45,829 - database - INFO - Dropped all existing tables
-2026-07-17T21:41:51.054383609Z 2026-07-17 21:41:51,054 - database - INFO - Database initialized successfully
-2026-07-17T21:41:51.054463903Z 2026-07-17 21:41:51,054 - main - INFO - ✅ Database initialized
-2026-07-17T21:41:52.631258741Z 2026-07-17 21:41:52,631 - init_system - INFO - Initializing system for first time...
-2026-07-17T21:41:54.499505161Z 2026-07-17 21:41:54,499 - init_system - ERROR - ❌ System initialization failed: Textual SQL expression "SELECT setval('users_id_s..." should be explicitly declared as text("SELECT setval('users_id_s...")
-2026-07-17T21:41:54.499536282Z 2026-07-17 21:41:54,499 - init_system - ERROR - Failed to initialize system: Textual SQL expression "SELECT setval('users_id_s..." should be explicitly declared as text("SELECT setval('users_id_s...")
-2026-07-17T21:41:54.499625027Z 2026-07-17 21:41:54,499 - main - ERROR - ❌ Startup failed: Textual SQL expression "SELECT setval('users_id_s..." should be explicitly declared as text("SELECT setval('users_id_s...")
-2026-07-17T21:41:54.502659666Z ERROR:    Traceback (most recent call last):
-2026-07-17T21:41:54.502672277Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/starlette/routing.py", line 738, in lifespan
-2026-07-17T21:41:54.502676747Z     async with self.lifespan_context(app) as maybe_state:
-2026-07-17T21:41:54.502680017Z   File "/opt/render/project/python/Python-3.11.0/lib/python3.11/contextlib.py", line 204, in __aenter__
-2026-07-17T21:41:54.502683697Z     return await anext(self.gen)
-2026-07-17T21:41:54.502686938Z            ^^^^^^^^^^^^^^^^^^^^^
-2026-07-17T21:41:54.502693098Z   File "/opt/render/project/src/backend/main.py", line 62, in lifespan
-2026-07-17T21:41:54.502696318Z     await check_and_initialize(db)
-2026-07-17T21:41:54.502700958Z   File "/opt/render/project/src/backend/init_system.py", line 92, in check_and_initialize
-2026-07-17T21:41:54.502706439Z     await initialize_system(db)
-2026-07-17T21:41:54.502711549Z   File "/opt/render/project/src/backend/init_system.py", line 73, in initialize_system
-2026-07-17T21:41:54.502716169Z     await db.execute("SELECT setval('users_id_seq', 2, false)")
-2026-07-17T21:41:54.50272187Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/session.py", line 455, in execute
-2026-07-17T21:41:54.50272687Z     result = await greenlet_spawn(
-2026-07-17T21:41:54.50273115Z              ^^^^^^^^^^^^^^^^^^^^^
-2026-07-17T21:41:54.50273475Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/sqlalchemy/util/_concurrency_py3k.py", line 189, in greenlet_spawn
-2026-07-17T21:41:54.50273786Z     result = context.switch(*args, **kwargs)
-2026-07-17T21:41:54.50274092Z              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2026-07-17T21:41:54.502744011Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2308, in execute
-2026-07-17T21:41:54.502747101Z     return self._execute_internal(
-2026-07-17T21:41:54.502750161Z            ^^^^^^^^^^^^^^^^^^^^^^^
-2026-07-17T21:41:54.502753301Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2088, in _execute_internal
-2026-07-17T21:41:54.502769202Z     statement = coercions.expect(roles.StatementRole, statement)
-2026-07-17T21:41:54.502771332Z                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2026-07-17T21:41:54.502773352Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/sqlalchemy/sql/coercions.py", line 413, in expect
-2026-07-17T21:41:54.502775322Z     resolved = impl._literal_coercion(
-2026-07-17T21:41:54.502777273Z                ^^^^^^^^^^^^^^^^^^^^^^^
-2026-07-17T21:41:54.502779253Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/sqlalchemy/sql/coercions.py", line 638, in _literal_coercion
-2026-07-17T21:41:54.502781263Z     return self._text_coercion(element, argname, **kw)
-2026-07-17T21:41:54.502783213Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2026-07-17T21:41:54.502785123Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/sqlalchemy/sql/coercions.py", line 631, in _text_coercion
-2026-07-17T21:41:54.502787113Z     return _no_text_coercion(element, argname)
-2026-07-17T21:41:54.502789073Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2026-07-17T21:41:54.502790993Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/sqlalchemy/sql/coercions.py", line 601, in _no_text_coercion
-2026-07-17T21:41:54.502793923Z     raise exc_cls(
-2026-07-17T21:41:54.502797294Z sqlalchemy.exc.ArgumentError: Textual SQL expression "SELECT setval('users_id_s..." should be explicitly declared as text("SELECT setval('users_id_s...")
-2026-07-17T21:41:54.502799303Z 
-2026-07-17T21:41:54.502882498Z ERROR:    Application startup failed. Exiting.
-2026-07-17T21:41:57.379242867Z ==> Exited with status 3
-2026-07-17T21:41:57.381239298Z ==> Common ways to troubleshoot your deploy: https://render.com/docs/troubleshooting-deploys
+2026-07-17T21:52:58.655855995Z ==> Setting WEB_CONCURRENCY=1 by default, based on available CPUs in the instance
+2026-07-17T21:53:13.297277111Z ==> Running 'cd backend && uvicorn main:app --host 0.0.0.0 --port $PORT'
+2026-07-17T21:53:27.186146091Z Invalid ENCRYPTION_KEY in settings: Fernet key must be 32 url-safe base64-encoded bytes.. Generating a new one.
+2026-07-17T21:53:28.284759913Z INFO:     Started server process [58]
+2026-07-17T21:53:28.284788964Z INFO:     Waiting for application startup.
+2026-07-17T21:53:28.285082831Z 2026-07-17 21:53:28,284 - main - INFO - 🚀 Starting Rellouse Messenger...
+2026-07-17T21:53:32.253905727Z 2026-07-17 21:53:32,253 - database - INFO - Dropped all existing tables
+2026-07-17T21:53:37.197250651Z 2026-07-17 21:53:37,196 - database - INFO - Database initialized successfully
+2026-07-17T21:53:37.197334013Z 2026-07-17 21:53:37,197 - main - INFO - ✅ Database initialized
+2026-07-17T21:53:38.404252289Z 2026-07-17 21:53:38,403 - init_system - INFO - Initializing system for first time...
+2026-07-17T21:53:41.155034991Z 2026-07-17 21:53:41,153 - init_system - INFO - ✅ Owner account created: @Rellouse (ID: 0)
+2026-07-17T21:53:41.155047261Z INFO:     Application startup complete.
+2026-07-17T21:53:41.155058971Z 2026-07-17 21:53:41,153 - init_system - INFO - ✅ @Verify bot created as User (ID: 1)
+2026-07-17T21:53:41.155063092Z 2026-07-17 21:53:41,153 - init_system - INFO - ✅ Auto-increment sequence reset to start from ID: 2
+2026-07-17T21:53:41.155072702Z 2026-07-17 21:53:41,154 - init_system - INFO - ✅ System initialization completed successfully
+2026-07-17T21:53:41.155076142Z 2026-07-17 21:53:41,154 - main - INFO - ✅ System initialization complete
+2026-07-17T21:53:41.155078952Z 2026-07-17 21:53:41,154 - main - INFO - 🌐 Server running on Rellouse Messenger v1.0.0
+2026-07-17T21:53:41.158299769Z INFO:     Uvicorn running on http://0.0.0.0:10000 (Press CTRL+C to quit)
+2026-07-17T21:53:41.38292878Z 2026-07-17 21:53:41,382 - main - INFO - 📥 HEAD / - 127.0.0.1
+2026-07-17T21:53:41.38460846Z 2026-07-17 21:53:41,384 - main - INFO - 📤 HEAD / - Status: 405
+2026-07-17T21:53:41.387397967Z INFO:     127.0.0.1:33712 - "HEAD / HTTP/1.1" 405 Method Not Allowed
+2026-07-17T21:53:49.236532691Z INFO:     Shutting down
+2026-07-17T21:53:49.337091135Z INFO:     Waiting for application shutdown.
+2026-07-17T21:53:49.337189737Z 2026-07-17 21:53:49,337 - main - INFO - 🛑 Shutting down Rellouse Messenger...
+2026-07-17T21:53:49.337572864Z 2026-07-17 21:53:49,337 - database - INFO - Database connection closed
+2026-07-17T21:53:49.337616595Z 2026-07-17 21:53:49,337 - main - INFO - ✅ Shutdown complete
+2026-07-17T21:53:49.337758057Z INFO:     Application shutdown complete.
+2026-07-17T21:53:49.337810098Z INFO:     Finished server process [57]
+2026-07-17T21:53:49.655448801Z ==> Your service is live 🎉
+2026-07-17T21:53:49.699700199Z 2026-07-17 21:53:49,699 - main - INFO - 📥 GET / - 34.83.77.94
+2026-07-17T21:53:49.700801026Z 2026-07-17 21:53:49,700 - main - INFO - 📤 GET / - Status: 200
+2026-07-17T21:53:49.701037741Z INFO:     34.83.77.94:0 - "GET / HTTP/1.1" 200 OK
+2026-07-17T21:53:49.830050317Z ==> 
+2026-07-17T21:53:49.833233183Z ==> ///////////////////////////////////////////////////////////
+2026-07-17T21:53:49.836571219Z ==> 
+2026-07-17T21:53:49.839836291Z ==> Available at your primary URL https://rellouse.onrender.com
+2026-07-17T21:53:49.84352168Z ==> 
+2026-07-17T21:53:49.847159945Z ==> ///////////////////////////////////////////////////////////
+2026-07-17T21:54:09.099591322Z 2026-07-17 21:54:09,098 - main - INFO - 📥 OPTIONS /api/auth/login - 89.169.53.104
+2026-07-17T21:54:09.099866859Z 2026-07-17 21:54:09,099 - main - INFO - 📤 OPTIONS /api/auth/login - Status: 200
+2026-07-17T21:54:09.100048783Z INFO:     89.169.53.104:0 - "OPTIONS /api/auth/login HTTP/1.1" 200 OK
+2026-07-17T21:54:09.483105464Z 2026-07-17 21:54:09,482 - main - INFO - 📥 POST /api/auth/login - 89.169.53.104
+2026-07-17T21:54:12.488092734Z 2026-07-17 21:54:12,487 - main - INFO - 📤 POST /api/auth/login - Status: 401
+2026-07-17T21:54:12.488288389Z INFO:     89.169.53.104:0 - "POST /api/auth/login HTTP/1.1" 401 Unauthorized
+2026-07-17T21:54:14.580594318Z 2026-07-17 21:54:14,580 - main - INFO - 📥 POST /api/auth/login - 89.169.53.104
+2026-07-17T21:54:17.488367786Z 2026-07-17 21:54:17,488 - main - INFO - 📤 POST /api/auth/login - Status: 401
+2026-07-17T21:54:17.488563091Z INFO:     89.169.53.104:0 - "POST /api/auth/login HTTP/1.1" 401 Unauthorized
+2026-07-17T21:54:28.275794268Z 2026-07-17 21:54:28,275 - main - INFO - 📥 POST /api/auth/login - 89.169.53.104
+2026-07-17T21:54:28.27881002Z 2026-07-17 21:54:28,278 - main - INFO - 📤 POST /api/auth/login - Status: 422
+2026-07-17T21:54:28.27918916Z INFO:     89.169.53.104:0 - "POST /api/auth/login HTTP/1.1" 422 Unprocessable Entity

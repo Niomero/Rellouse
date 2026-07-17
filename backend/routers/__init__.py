@@ -1,7 +1,7 @@
 """
 API Routers
 """
-from . import auth_router, user_router, message_router, bot_router, verification_router, websocket_router, channel_router, upload_router
+from . import auth_router, user_router, message_router, bot_router, verification_router, websocket_router, channel_router, upload_router, admin_router
 
 __all__ = [
     "auth_router",
@@ -11,5 +11,6 @@ __all__ = [
     "verification_router",
     "websocket_router",
     "channel_router",
-    "upload_router"
+    "upload_router",
+    "admin_router"
 ]

@@ -28,7 +28,8 @@ from routers import (
     verification_router,
     websocket_router,
     channel_router,
-    upload_router
+    upload_router,
+    admin_router
 )
 
 # Configure logging
@@ -165,6 +166,18 @@ async def root():
         "message": "Welcome to Rellouse Messenger API",
         "docs": "/api/docs" if settings.DEBUG else "Documentation disabled in production"
     }
+
+
+# Register routers
+app.include_router(auth_router.router)
+app.include_router(user_router.router)
+app.include_router(message_router.router)
+app.include_router(bot_router.router)
+app.include_router(verification_router.router)
+app.include_router(websocket_router.router)
+app.include_router(channel_router.router)
+app.include_router(upload_router.router)
+app.include_router(admin_router.router)
 
 
 # Mount static files for uploads

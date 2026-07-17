@@ -20,7 +20,8 @@ class Settings(BaseSettings):
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
     REFRESH_TOKEN_EXPIRE_DAYS: int = 7
-    ENCRYPTION_KEY: str = base64.urlsafe_b64encode(secrets.token_bytes(32)).decode()
+    # Default encryption key for development - MUST be set in production via environment variable
+    ENCRYPTION_KEY: str = "xQzJ3vK8mN2pR5tY7wA9cE1fH4jL6nP0qS8uV3xZ5bD="
     
     # S3 Storage (Optional)
     S3_ENDPOINT_URL: str | None = None

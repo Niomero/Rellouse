@@ -14,8 +14,13 @@ import base64
 
 logger = logging.getLogger(__name__)
 
-# Password hashing context
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+# Password hashing context - configure bcrypt to avoid 72-byte check during initialization
+pwd_context = CryptContext(
+    schemes=["bcrypt"],
+    deprecated="auto",
+    bcrypt__ident="2b",  # Use 2b variant to avoid wrap bug detection
+    bcrypt__truncate_error=False  # Don't error on truncation
+)
 
 # Encryption cipher - validate and fix key if needed
 def _get_valid_fernet_key() -> bytes:

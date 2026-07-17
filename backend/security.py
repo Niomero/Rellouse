@@ -2,7 +2,6 @@
 Security Utilities
 Handles password hashing, JWT tokens, encryption, and security validations
 """
-from passlib.context import CryptContext
 from jose import JWTError, jwt
 from datetime import datetime, timedelta
 from cryptography.fernet import Fernet
@@ -11,16 +10,9 @@ from typing import Optional, Dict, Any
 import secrets
 import logging
 import base64
+import bcrypt
 
 logger = logging.getLogger(__name__)
-
-# Password hashing context - configure bcrypt to avoid 72-byte check during initialization
-pwd_context = CryptContext(
-    schemes=["bcrypt"],
-    deprecated="auto",
-    bcrypt__ident="2b",  # Use 2b variant to avoid wrap bug detection
-    bcrypt__truncate_error=False  # Don't error on truncation
-)
 
 # Encryption cipher - validate and fix key if needed
 def _get_valid_fernet_key() -> bytes:
@@ -51,12 +43,17 @@ class PasswordHasher:
         """Hash a password with bcrypt (truncate to 72 bytes for bcrypt compatibility)"""
         # Bcrypt has a 72 byte limit, truncate if necessary
         password_bytes = password.encode('utf-8')[:72]
-        return pwd_context.hash(password_bytes.decode('utf-8', errors='ignore'))
+        # Use bcrypt directly to avoid passlib's wrap bug detection
+        salt = bcrypt.gensalt()
+        hashed = bcrypt.hashpw(password_bytes, salt)
+        return hashed.decode('utf-8')
     
     @staticmethod
     def verify_password(plain_password: str, hashed_password: str) -> bool:
         """Verify a password against its hash"""
-        return pwd_context.verify(plain_password, hashed_password)
+        password_bytes = plain_password.encode('utf-8')[:72]
+        hashed_bytes = hashed_password.encode('utf-8')
+        return bcrypt.checkpw(password_bytes, hashed_bytes)
 
 
 class TokenManager:

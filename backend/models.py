@@ -39,7 +39,7 @@ class User(Base):
     # Relationships
     sent_messages = relationship("Message", foreign_keys="Message.sender_id", back_populates="sender")
     received_messages = relationship("Message", foreign_keys="Message.recipient_id", back_populates="recipient")
-    verification_requests = relationship("VerificationRequest", back_populates="user")
+    verification_requests = relationship("VerificationRequest", foreign_keys="VerificationRequest.user_id", back_populates="user")
     
     def __repr__(self):
         return f"<User(id={self.id}, username={self.username}, role={self.role})>"

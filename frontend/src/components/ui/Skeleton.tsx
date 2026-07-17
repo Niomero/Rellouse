@@ -1,74 +1,141 @@
-import { HTMLAttributes } from 'react';
-import { motion } from 'framer-motion';
-import { clsx } from 'clsx';
+import { motion } from 'framer-motion'
+import { cn } from '../../utils/cn'
 
-interface SkeletonProps extends HTMLAttributes<HTMLDivElement> {
-  variant?: 'text' | 'circular' | 'rectangular';
-  width?: string | number;
-  height?: string | number;
+interface SkeletonProps {
+  className?: string
+  variant?: 'text' | 'circular' | 'rectangular' | 'rounded'
+  width?: string | number
+  height?: string | number
+  animate?: boolean
 }
 
-export const Skeleton = ({
+export function Skeleton({
+  className,
   variant = 'rectangular',
   width,
   height,
-  className,
-  ...props
-}: SkeletonProps) => {
-  const variants = {
-    text: 'h-4 rounded',
+  animate = true,
+}: SkeletonProps) {
+  const baseClasses = 'liquid-skeleton bg-neutral-200 dark:bg-neutral-700'
+  
+  const variantClasses = {
+    text: 'rounded h-4',
     circular: 'rounded-full',
-    rectangular: 'rounded-xl',
-  };
+    rectangular: 'rounded-lg',
+    rounded: 'rounded-2xl',
+  }
+
+  const style: React.CSSProperties = {}
+  if (width) style.width = typeof width === 'number' ? `${width}px` : width
+  if (height) style.height = typeof height === 'number' ? `${height}px` : height
+
+  const Component = animate ? motion.div : 'div'
+  const animationProps = animate
+    ? {
+        animate: {
+          opacity: [0.5, 1, 0.5],
+        },
+        transition: {
+          duration: 1.5,
+          repeat: Infinity,
+          ease: 'easeInOut',
+        },
+      }
+    : {}
 
   return (
-    <motion.div
-      className={clsx(
-        'bg-gradient-to-r from-gray-200 via-gray-300 to-gray-200',
-        'dark:from-gray-700 dark:via-gray-600 dark:to-gray-700',
-        'animate-pulse',
-        variants[variant],
-        className
-      )}
-      style={{ width, height }}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      {...props}
+    <Component
+      className={cn(baseClasses, variantClasses[variant], className)}
+      style={style}
+      {...animationProps}
     />
-  );
-};
+  )
+}
 
-export const SkeletonText = ({ lines = 3 }: { lines?: number }) => (
-  <div className="space-y-3">
-    {Array.from({ length: lines }).map((_, i) => (
-      <Skeleton
-        key={i}
-        variant="text"
-        width={i === lines - 1 ? '60%' : '100%'}
-      />
-    ))}
-  </div>
-);
-
-export const SkeletonAvatar = ({ size = 'md' }: { size?: 'sm' | 'md' | 'lg' }) => {
-  const sizes = {
-    sm: 'w-8 h-8',
-    md: 'w-10 h-10',
-    lg: 'w-12 h-12',
-  };
-
-  return <Skeleton variant="circular" className={sizes[size]} />;
-};
-
-export const SkeletonCard = () => (
-  <div className="glass p-4 rounded-xl space-y-4">
-    <div className="flex items-center gap-3">
-      <SkeletonAvatar />
+export function MessageSkeleton() {
+  return (
+    <div className="flex gap-3 p-4">
+      <Skeleton variant="circular" width={40} height={40} />
       <div className="flex-1 space-y-2">
-        <Skeleton variant="text" width="40%" />
-        <Skeleton variant="text" width="60%" />
+        <Skeleton variant="text" width="30%" />
+        <Skeleton variant="rounded" width="80%" height={60} />
       </div>
     </div>
-    <SkeletonText lines={2} />
-  </div>
-);
+  )
+}
+
+export function ChatListSkeleton() {
+  return (
+    <div className="space-y-2 p-4">
+      {[...Array(8)].map((_, i) => (
+        <div key={i} className="flex gap-3 p-3">
+          <Skeleton variant="circular" width={48} height={48} />
+          <div className="flex-1 space-y-2">
+            <div className="flex justify-between">
+              <Skeleton variant="text" width="40%" />
+              <Skeleton variant="text" width="15%" />
+            </div>
+            <Skeleton variant="text" width="70%" />
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+export function ProfileSkeleton() {
+  return (
+    <div className="space-y-6 p-6">
+      <div className="flex flex-col items-center gap-4">
+        <Skeleton variant="circular" width={120} height={120} />
+        <Skeleton variant="text" width="40%" height={24} />
+        <Skeleton variant="text" width="30%" height={16} />
+      </div>
+      
+      <div className="space-y-3">
+        <Skeleton variant="rounded" height={80} />
+        <Skeleton variant="rounded" height={60} />
+        <Skeleton variant="rounded" height={60} />
+      </div>
+    </div>
+  )
+}
+
+export function ChannelSkeleton() {
+  return (
+    <div className="space-y-4 p-4">
+      <div className="flex gap-3">
+        <Skeleton variant="circular" width={60} height={60} />
+        <div className="flex-1 space-y-2">
+          <Skeleton variant="text" width="50%" height={24} />
+          <Skeleton variant="text" width="70%" />
+          <Skeleton variant="text" width="30%" />
+        </div>
+      </div>
+      
+      <Skeleton variant="rounded" height={100} />
+      
+      <div className="space-y-3">
+        {[...Array(5)].map((_, i) => (
+          <Skeleton key={i} variant="rounded" height={120} />
+        ))}
+      </div>
+    </div>
+  )
+}
+
+export function SearchSkeleton() {
+  return (
+    <div className="space-y-2 p-4">
+      {[...Array(6)].map((_, i) => (
+        <div key={i} className="flex gap-3 p-3">
+          <Skeleton variant="circular" width={48} height={48} />
+          <div className="flex-1 space-y-2">
+            <Skeleton variant="text" width="40%" />
+            <Skeleton variant="text" width="60%" />
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+}

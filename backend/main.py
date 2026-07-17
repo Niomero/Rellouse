@@ -5,6 +5,7 @@ FastAPI application with REST API and WebSocket support
 from fastapi import FastAPI, Depends, HTTPException, status, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+from fastapi.staticfiles import StaticFiles
 from sqlalchemy.ext.asyncio import AsyncSession
 from contextlib import asynccontextmanager
 from slowapi import Limiter, _rate_limit_exceeded_handler
@@ -26,7 +27,8 @@ from routers import (
     bot_router,
     verification_router,
     websocket_router,
-    channel_router
+    channel_router,
+    upload_router
 )
 
 # Configure logging
@@ -165,6 +167,12 @@ async def root():
     }
 
 
+# Mount static files for uploads
+import os
+uploads_dir = os.path.join(os.path.dirname(__file__), "uploads")
+os.makedirs(uploads_dir, exist_ok=True)
+app.mount("/uploads", StaticFiles(directory=uploads_dir), name="uploads")
+
 # Include routers
 app.include_router(auth_router.router)
 app.include_router(user_router.router)
@@ -173,6 +181,7 @@ app.include_router(channel_router.router)
 app.include_router(bot_router.router)
 app.include_router(verification_router.router)
 app.include_router(websocket_router.router)
+app.include_router(upload_router.router)
 
 
 if __name__ == "__main__":

@@ -75,7 +75,6 @@ interface ChannelMember {
 export default function ChannelPage() {
   const { channelId } = useParams<{ channelId: string }>()
   const navigate = useNavigate()
-  const { user: currentUser } = useAuthStore()
   const { error: showError, success: showSuccess } = useToast()
 
   const [channel, setChannel] = useState<Channel | null>(null)
@@ -86,7 +85,6 @@ export default function ChannelPage() {
   const [postText, setPostText] = useState('')
   const [showImageUpload, setShowImageUpload] = useState(false)
   const [showMembers, setShowMembers] = useState(false)
-  const [showInvite, setShowInvite] = useState(false)
 
   const postsEndRef = useRef<HTMLDivElement>(null)
   const postInputRef = useRef<HTMLTextAreaElement>(null)
@@ -157,18 +155,6 @@ export default function ChannelPage() {
     }
   }
 
-  const handleLeaveChannel = async () => {
-    if (!channelId) return
-
-    try {
-      await api.post(`/channels/${channelId}/leave`)
-      showSuccess('Left channel successfully')
-      navigate('/chat')
-    } catch (error: any) {
-      showError(error.response?.data?.detail || 'Failed to leave channel')
-    }
-  }
-
   const createPost = async () => {
     if (!postText.trim() || !channelId || posting) return
 
@@ -226,14 +212,6 @@ export default function ChannelPage() {
   const handleEmojiSelect = (emoji: string) => {
     setPostText(prev => prev + emoji)
     postInputRef.current?.focus()
-  }
-
-  const copyInviteLink = () => {
-    if (channel?.invite_link) {
-      const fullLink = `${window.location.origin}/channels/join/${channel.invite_link}`
-      navigator.clipboard.writeText(fullLink)
-      showSuccess('Invite link copied')
-    }
   }
 
   const canPost = channel?.is_member && (channel?.member_role === 'owner' || channel?.member_role === 'admin')

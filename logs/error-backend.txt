@@ -1,50 +1,50 @@
-2026-07-17T20:22:29.341976977Z          ^^^^^^^^^^^^^^^^
-2026-07-17T20:22:29.341980577Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/click/core.py", line 1353, in invoke
-2026-07-17T20:22:29.34218905Z     return ctx.invoke(self.callback, **ctx.params)
-2026-07-17T20:22:29.342203561Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2026-07-17T20:22:29.342206851Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/click/core.py", line 907, in invoke
-2026-07-17T20:22:29.342376461Z     return callback(*args, **kwargs)
-2026-07-17T20:22:29.342390152Z            ^^^^^^^^^^^^^^^^^^^^^^^^^
-2026-07-17T20:22:29.342393822Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/uvicorn/main.py", line 418, in main
-2026-07-17T20:22:29.342560072Z     run(
-2026-07-17T20:22:29.342565342Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/uvicorn/main.py", line 587, in run
-2026-07-17T20:22:29.34268931Z     server.run()
-2026-07-17T20:22:29.342705401Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/uvicorn/server.py", line 62, in run
-2026-07-17T20:22:29.342810357Z     return asyncio.run(self.serve(sockets=sockets))
-2026-07-17T20:22:29.342825518Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2026-07-17T20:22:29.342829969Z   File "/opt/render/project/python/Python-3.11.0/lib/python3.11/asyncio/runners.py", line 190, in run
-2026-07-17T20:22:29.342941465Z     return runner.run(main)
-2026-07-17T20:22:29.342946126Z            ^^^^^^^^^^^^^^^^
-2026-07-17T20:22:29.342948816Z   File "/opt/render/project/python/Python-3.11.0/lib/python3.11/asyncio/runners.py", line 118, in run
-2026-07-17T20:22:29.343037111Z     return self._loop.run_until_complete(task)
-2026-07-17T20:22:29.343048602Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2026-07-17T20:22:29.343052902Z   File "uvloop/loop.pyx", line 1518, in uvloop.loop.Loop.run_until_complete
-2026-07-17T20:22:29.343231303Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/uvicorn/server.py", line 69, in serve
-2026-07-17T20:22:29.343296567Z     config.load()
-2026-07-17T20:22:29.343300107Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/uvicorn/config.py", line 458, in load
-2026-07-17T20:22:29.343431255Z     self.loaded_app = import_from_string(self.app)
-2026-07-17T20:22:29.343438175Z                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2026-07-17T20:22:29.343441606Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/uvicorn/importer.py", line 21, in import_from_string
-2026-07-17T20:22:29.343527951Z     module = importlib.import_module(module_str)
-2026-07-17T20:22:29.343571624Z              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2026-07-17T20:22:29.343575304Z   File "/opt/render/project/python/Python-3.11.0/lib/python3.11/importlib/__init__.py", line 126, in import_module
-2026-07-17T20:22:29.343659119Z     return _bootstrap._gcd_import(name[level:], package, level)
-2026-07-17T20:22:29.343718803Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2026-07-17T20:22:29.343728223Z   File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
-2026-07-17T20:22:29.343731963Z   File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
-2026-07-17T20:22:29.343734973Z   File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
-2026-07-17T20:22:29.343737984Z   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
-2026-07-17T20:22:29.343746374Z   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
-2026-07-17T20:22:29.343749544Z   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
-2026-07-17T20:22:29.343752834Z   File "/opt/render/project/src/backend/main.py", line 23, in <module>
-2026-07-17T20:22:29.343826939Z     from routers import (
-2026-07-17T20:22:29.343832819Z   File "/opt/render/project/src/backend/routers/__init__.py", line 4, in <module>
-2026-07-17T20:22:29.343905514Z     from . import auth_router, user_router, message_router, bot_router, verification_router, websocket_router, channel_router, upload_router
-2026-07-17T20:22:29.343938166Z   File "/opt/render/project/src/backend/routers/auth_router.py", line 10, in <module>
-2026-07-17T20:22:29.34400746Z     from auth import auth_service
-2026-07-17T20:22:29.34401266Z   File "/opt/render/project/src/backend/auth.py", line 7, in <module>
-2026-07-17T20:22:29.344062503Z     from models import User, Bot, Session, SecurityLog, UserRole
-2026-07-17T20:22:29.344066794Z ImportError: cannot import name 'Bot' from 'models' (/opt/render/project/src/backend/models.py)
-2026-07-17T20:22:31.695402821Z ==> Exited with status 1
-2026-07-17T20:22:31.698472706Z ==> Common ways to troubleshoot your deploy: https://render.com/docs/troubleshooting-deploys
-2026-07-17T20:22:35.440528927Z ==> Running 'cd backend && uvicorn main:app --host 0.0.0.0 --port $PORT'
+2026-07-17T20:28:29.319744399Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/click/core.py", line 1490, in main
+2026-07-17T20:28:29.319966104Z     rv = self.invoke(ctx)
+2026-07-17T20:28:29.319971594Z          ^^^^^^^^^^^^^^^^
+2026-07-17T20:28:29.319973934Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/click/core.py", line 1353, in invoke
+2026-07-17T20:28:29.320184158Z     return ctx.invoke(self.callback, **ctx.params)
+2026-07-17T20:28:29.32020702Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-17T20:28:29.3202128Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/click/core.py", line 907, in invoke
+2026-07-17T20:28:29.320393222Z     return callback(*args, **kwargs)
+2026-07-17T20:28:29.320398432Z            ^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-17T20:28:29.320412253Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/uvicorn/main.py", line 418, in main
+2026-07-17T20:28:29.320553563Z     run(
+2026-07-17T20:28:29.320559103Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/uvicorn/main.py", line 587, in run
+2026-07-17T20:28:29.320676061Z     server.run()
+2026-07-17T20:28:29.320682351Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/uvicorn/server.py", line 62, in run
+2026-07-17T20:28:29.320783328Z     return asyncio.run(self.serve(sockets=sockets))
+2026-07-17T20:28:29.320787608Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-17T20:28:29.320791528Z   File "/opt/render/project/python/Python-3.11.0/lib/python3.11/asyncio/runners.py", line 190, in run
+2026-07-17T20:28:29.320893225Z     return runner.run(main)
+2026-07-17T20:28:29.320897735Z            ^^^^^^^^^^^^^^^^
+2026-07-17T20:28:29.320901176Z   File "/opt/render/project/python/Python-3.11.0/lib/python3.11/asyncio/runners.py", line 118, in run
+2026-07-17T20:28:29.321003973Z     return self._loop.run_until_complete(task)
+2026-07-17T20:28:29.321008513Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-17T20:28:29.321012233Z   File "uvloop/loop.pyx", line 1518, in uvloop.loop.Loop.run_until_complete
+2026-07-17T20:28:29.321181674Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/uvicorn/server.py", line 69, in serve
+2026-07-17T20:28:29.321250719Z     config.load()
+2026-07-17T20:28:29.321255329Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/uvicorn/config.py", line 458, in load
+2026-07-17T20:28:29.321407649Z     self.loaded_app = import_from_string(self.app)
+2026-07-17T20:28:29.321412109Z                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-17T20:28:29.32141608Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/uvicorn/importer.py", line 21, in import_from_string
+2026-07-17T20:28:29.321496745Z     module = importlib.import_module(module_str)
+2026-07-17T20:28:29.321500706Z              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-17T20:28:29.321503906Z   File "/opt/render/project/python/Python-3.11.0/lib/python3.11/importlib/__init__.py", line 126, in import_module
+2026-07-17T20:28:29.321612803Z     return _bootstrap._gcd_import(name[level:], package, level)
+2026-07-17T20:28:29.321619163Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-17T20:28:29.321621754Z   File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+2026-07-17T20:28:29.321623804Z   File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+2026-07-17T20:28:29.321628084Z   File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+2026-07-17T20:28:29.321630114Z   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+2026-07-17T20:28:29.321632004Z   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+2026-07-17T20:28:29.321636135Z   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+2026-07-17T20:28:29.321638484Z   File "/opt/render/project/src/backend/main.py", line 23, in <module>
+2026-07-17T20:28:29.321753232Z     from routers import (
+2026-07-17T20:28:29.321758303Z   File "/opt/render/project/src/backend/routers/__init__.py", line 4, in <module>
+2026-07-17T20:28:29.321818776Z     from . import auth_router, user_router, message_router, bot_router, verification_router, websocket_router, channel_router, upload_router
+2026-07-17T20:28:29.321823277Z   File "/opt/render/project/src/backend/routers/user_router.py", line 15, in <module>
+2026-07-17T20:28:29.321915703Z     from auth import get_current_user
+2026-07-17T20:28:29.321919873Z ImportError: cannot import name 'get_current_user' from 'auth' (/opt/render/project/src/backend/auth.py)
+2026-07-17T20:28:33.023877422Z ==> Exited with status 1
+2026-07-17T20:28:33.029057859Z ==> Common ways to troubleshoot your deploy: https://render.com/docs/troubleshooting-deploys
+2026-07-17T20:28:36.911901359Z ==> Running 'cd backend && uvicorn main:app --host 0.0.0.0 --port $PORT'

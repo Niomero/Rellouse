@@ -335,3 +335,10 @@ class AuthService:
 
 # Export service instance
 auth_service = AuthService()
+
+
+
+# Helper function for dependency injection
+async def get_current_user(db: AsyncSession, token: str) -> Optional[User]:
+    """Helper function to get current user from token"""
+    return await auth_service.get_current_user(db, token)

@@ -40,7 +40,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
               className
             )}
             whileFocus={{ scale: 1.01 }}
-            {...props}
+            {...(props as any)}
           />
           {rightIcon && (
             <div className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">

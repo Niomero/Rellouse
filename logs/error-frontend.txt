@@ -1,50 +1,50 @@
-2026-07-17T20:21:47.616820662Z 
-2026-07-17T20:21:47.616823853Z Run `npm audit` for details.
-2026-07-17T20:21:47.823783209Z 
-2026-07-17T20:21:47.823820822Z > rellouse-messenger-frontend@1.0.0 build
-2026-07-17T20:21:47.823824652Z > tsc && vite build
-2026-07-17T20:21:47.823827452Z 
-2026-07-17T20:21:51.27924877Z src/components/ImageUpload.tsx(7,8): error TS2613: Module '"/opt/render/project/src/frontend/src/services/api"' has no default export. Did you mean to use 'import { api } from "/opt/render/project/src/frontend/src/services/api"' instead?
-2026-07-17T20:21:51.279385799Z src/components/ui/Button.tsx(69,8): error TS2322: Type '{ children: Element; form?: string | undefined; formAction?: string | undefined; formEncType?: string | undefined; formMethod?: string | undefined; formNoValidate?: boolean | undefined; ... 270 more ...; whileTap: { ...; }; }' is not assignable to type 'Omit<HTMLMotionProps<"button">, "ref">'.
-2026-07-17T20:21:51.27939456Z   Types of property 'onAnimationStart' are incompatible.
-2026-07-17T20:21:51.27939751Z     Type 'AnimationEventHandler<HTMLButtonElement> | undefined' is not assignable to type '((definition: AnimationDefinition) => void) | undefined'.
-2026-07-17T20:21:51.27940023Z       Type 'AnimationEventHandler<HTMLButtonElement>' is not assignable to type '(definition: AnimationDefinition) => void'.
-2026-07-17T20:21:51.279405151Z         Types of parameters 'event' and 'definition' are incompatible.
-2026-07-17T20:21:51.279407841Z           Type 'AnimationDefinition' is not assignable to type 'AnimationEvent<HTMLButtonElement>'.
-2026-07-17T20:21:51.279410411Z             Type 'string' is not assignable to type 'AnimationEvent<HTMLButtonElement>'.
-2026-07-17T20:21:51.279417031Z src/components/ui/Card.tsx(37,8): error TS2322: Type '{ children: ReactNode; defaultChecked?: boolean | undefined; defaultValue?: string | number | readonly string[] | undefined; suppressContentEditableWarning?: boolean | undefined; ... 262 more ...; animate: { ...; }; }' is not assignable to type 'Omit<HTMLMotionProps<"div">, "ref">'.
-2026-07-17T20:21:51.279419182Z   Types of property 'onAnimationStart' are incompatible.
-2026-07-17T20:21:51.279439583Z     Type 'AnimationEventHandler<HTMLDivElement> | undefined' is not assignable to type '((definition: AnimationDefinition) => void) | undefined'.
-2026-07-17T20:21:51.279443323Z       Type 'AnimationEventHandler<HTMLDivElement>' is not assignable to type '(definition: AnimationDefinition) => void'.
-2026-07-17T20:21:51.279446673Z         Types of parameters 'event' and 'definition' are incompatible.
-2026-07-17T20:21:51.279450024Z           Type 'AnimationDefinition' is not assignable to type 'AnimationEvent<HTMLDivElement>'.
-2026-07-17T20:21:51.279453134Z             Type 'string' is not assignable to type 'AnimationEvent<HTMLDivElement>'.
-2026-07-17T20:21:51.279456484Z src/components/ui/Input.tsx(27,12): error TS2322: Type '{ accept?: string | undefined; alt?: string | undefined; autoComplete?: HTMLInputAutoCompleteAttribute | undefined; capture?: boolean | "user" | "environment" | undefined; ... 291 more ...; whileFocus: { ...; }; }' is not assignable to type 'Omit<HTMLMotionProps<"input">, "ref">'.
-2026-07-17T20:21:51.279459054Z   Types of property 'onAnimationStart' are incompatible.
-2026-07-17T20:21:51.279461185Z     Type 'AnimationEventHandler<HTMLInputElement> | undefined' is not assignable to type '((definition: AnimationDefinition) => void) | undefined'.
-2026-07-17T20:21:51.279463215Z       Type 'AnimationEventHandler<HTMLInputElement>' is not assignable to type '(definition: AnimationDefinition) => void'.
-2026-07-17T20:21:51.279465215Z         Types of parameters 'event' and 'definition' are incompatible.
-2026-07-17T20:21:51.279467255Z           Type 'AnimationDefinition' is not assignable to type 'AnimationEvent<HTMLInputElement>'.
-2026-07-17T20:21:51.279469185Z             Type 'string' is not assignable to type 'AnimationEvent<HTMLInputElement>'.
-2026-07-17T20:21:51.279478196Z src/pages/ChannelPage.tsx(8,3): error TS6133: 'Settings' is declared but its value is never read.
-2026-07-17T20:21:51.279486156Z src/pages/ChannelPage.tsx(13,3): error TS6133: 'Copy' is declared but its value is never read.
-2026-07-17T20:21:51.279488647Z src/pages/ChannelPage.tsx(14,3): error TS6133: 'CheckCircle' is declared but its value is never read.
-2026-07-17T20:21:51.279497197Z src/pages/ChannelPage.tsx(23,8): error TS2613: Module '"/opt/render/project/src/frontend/src/services/api"' has no default export. Did you mean to use 'import { api } from "/opt/render/project/src/frontend/src/services/api"' instead?
-2026-07-17T20:21:51.27953686Z src/pages/ChannelPage.tsx(81,9): error TS6133: 'currentUser' is declared but its value is never read.
-2026-07-17T20:21:51.279592874Z src/pages/ChannelPage.tsx(92,10): error TS6133: 'showInvite' is declared but its value is never read.
-2026-07-17T20:21:51.279599914Z src/pages/ChannelPage.tsx(92,22): error TS6133: 'setShowInvite' is declared but its value is never read.
-2026-07-17T20:21:51.279612125Z src/pages/ChannelPage.tsx(163,9): error TS6133: 'handleLeaveChannel' is declared but its value is never read.
-2026-07-17T20:21:51.279632866Z src/pages/ChannelPage.tsx(234,9): error TS6133: 'copyInviteLink' is declared but its value is never read.
-2026-07-17T20:21:51.279636127Z src/pages/ChatPage.tsx(8,3): error TS6133: 'Paperclip' is declared but its value is never read.
-2026-07-17T20:21:51.279662619Z src/pages/ChatPage.tsx(21,8): error TS2613: Module '"/opt/render/project/src/frontend/src/services/api"' has no default export. Did you mean to use 'import { api } from "/opt/render/project/src/frontend/src/services/api"' instead?
-2026-07-17T20:21:51.279665559Z src/pages/CreateChannelPage.tsx(7,8): error TS2613: Module '"/opt/render/project/src/frontend/src/services/api"' has no default export. Did you mean to use 'import { api } from "/opt/render/project/src/frontend/src/services/api"' instead?
-2026-07-17T20:21:51.27967951Z src/pages/ProfilePage.tsx(14,3): error TS6133: 'Loader2' is declared but its value is never read.
-2026-07-17T20:21:51.27968182Z src/pages/ProfilePage.tsx(20,8): error TS2613: Module '"/opt/render/project/src/frontend/src/services/api"' has no default export. Did you mean to use 'import { api } from "/opt/render/project/src/frontend/src/services/api"' instead?
-2026-07-17T20:21:51.279759365Z src/pages/SearchPage.tsx(3,57): error TS6133: 'Loader2' is declared but its value is never read.
-2026-07-17T20:21:51.279764216Z src/pages/SearchPage.tsx(5,1): error TS6133: 'cn' is declared but its value is never read.
-2026-07-17T20:21:51.279767136Z src/pages/SearchPage.tsx(8,8): error TS2613: Module '"/opt/render/project/src/frontend/src/services/api"' has no default export. Did you mean to use 'import { api } from "/opt/render/project/src/frontend/src/services/api"' instead?
-2026-07-17T20:21:51.279772906Z src/services/api.ts(2,1): error TS6133: 'showToast' is declared but its value is never read.
-2026-07-17T20:21:51.279843581Z src/services/api.ts(4,29): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
-2026-07-17T20:21:51.279855102Z src/services/websocket.ts(10,31): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
-2026-07-17T20:21:51.358807639Z ==> Build failed 😞
-2026-07-17T20:21:51.358827521Z ==> Common ways to troubleshoot your deploy: https://render.com/docs/troubleshooting-deploys
+2026-07-17T20:27:47.561673048Z ==> Docs on specifying a Node.js version: https://render.com/docs/node-version
+2026-07-17T20:27:50.610982429Z 
+2026-07-17T20:27:50.611013401Z up to date, audited 305 packages in 3s
+2026-07-17T20:27:50.611025661Z 
+2026-07-17T20:27:50.611146958Z 67 packages are looking for funding
+2026-07-17T20:27:50.611224913Z   run `npm fund` for details
+2026-07-17T20:27:50.752315857Z 
+2026-07-17T20:27:50.752332068Z 8 vulnerabilities (1 moderate, 7 high)
+2026-07-17T20:27:50.752334948Z 
+2026-07-17T20:27:50.752338478Z To address issues that do not require attention, run:
+2026-07-17T20:27:50.752341688Z   npm audit fix
+2026-07-17T20:27:50.752344089Z 
+2026-07-17T20:27:50.752346649Z To address all issues (including breaking changes), run:
+2026-07-17T20:27:50.75236283Z   npm audit fix --force
+2026-07-17T20:27:50.75236537Z 
+2026-07-17T20:27:50.75236836Z Run `npm audit` for details.
+2026-07-17T20:27:50.960523324Z 
+2026-07-17T20:27:50.960548935Z > rellouse-messenger-frontend@1.0.0 build
+2026-07-17T20:27:50.960552925Z > tsc && vite build
+2026-07-17T20:27:50.960555465Z 
+2026-07-17T20:27:54.231732798Z src/components/ui/Button.tsx(69,8): error TS2322: Type '{ children: Element; form?: string | undefined; formAction?: string | undefined; formEncType?: string | undefined; formMethod?: string | undefined; formNoValidate?: boolean | undefined; ... 270 more ...; whileTap: { ...; }; }' is not assignable to type 'Omit<HTMLMotionProps<"button">, "ref">'.
+2026-07-17T20:27:54.231758499Z   Types of property 'onAnimationStart' are incompatible.
+2026-07-17T20:27:54.231761629Z     Type 'AnimationEventHandler<HTMLButtonElement> | undefined' is not assignable to type '((definition: AnimationDefinition) => void) | undefined'.
+2026-07-17T20:27:54.23176433Z       Type 'AnimationEventHandler<HTMLButtonElement>' is not assignable to type '(definition: AnimationDefinition) => void'.
+2026-07-17T20:27:54.23176685Z         Types of parameters 'event' and 'definition' are incompatible.
+2026-07-17T20:27:54.23176942Z           Type 'AnimationDefinition' is not assignable to type 'AnimationEvent<HTMLButtonElement>'.
+2026-07-17T20:27:54.23177194Z             Type 'string' is not assignable to type 'AnimationEvent<HTMLButtonElement>'.
+2026-07-17T20:27:54.231928739Z src/components/ui/Card.tsx(37,8): error TS2322: Type '{ children: ReactNode; defaultChecked?: boolean | undefined; defaultValue?: string | number | readonly string[] | undefined; suppressContentEditableWarning?: boolean | undefined; ... 262 more ...; animate: { ...; }; }' is not assignable to type 'Omit<HTMLMotionProps<"div">, "ref">'.
+2026-07-17T20:27:54.231932999Z   Types of property 'onAnimationStart' are incompatible.
+2026-07-17T20:27:54.231935609Z     Type 'AnimationEventHandler<HTMLDivElement> | undefined' is not assignable to type '((definition: AnimationDefinition) => void) | undefined'.
+2026-07-17T20:27:54.231940529Z       Type 'AnimationEventHandler<HTMLDivElement>' is not assignable to type '(definition: AnimationDefinition) => void'.
+2026-07-17T20:27:54.23195595Z         Types of parameters 'event' and 'definition' are incompatible.
+2026-07-17T20:27:54.23195873Z           Type 'AnimationDefinition' is not assignable to type 'AnimationEvent<HTMLDivElement>'.
+2026-07-17T20:27:54.231960741Z             Type 'string' is not assignable to type 'AnimationEvent<HTMLDivElement>'.
+2026-07-17T20:27:54.231970961Z src/components/ui/Input.tsx(27,12): error TS2322: Type '{ accept?: string | undefined; alt?: string | undefined; autoComplete?: HTMLInputAutoCompleteAttribute | undefined; capture?: boolean | "user" | "environment" | undefined; ... 291 more ...; whileFocus: { ...; }; }' is not assignable to type 'Omit<HTMLMotionProps<"input">, "ref">'.
+2026-07-17T20:27:54.231973161Z   Types of property 'onAnimationStart' are incompatible.
+2026-07-17T20:27:54.231975182Z     Type 'AnimationEventHandler<HTMLInputElement> | undefined' is not assignable to type '((definition: AnimationDefinition) => void) | undefined'.
+2026-07-17T20:27:54.231977262Z       Type 'AnimationEventHandler<HTMLInputElement>' is not assignable to type '(definition: AnimationDefinition) => void'.
+2026-07-17T20:27:54.231979362Z         Types of parameters 'event' and 'definition' are incompatible.
+2026-07-17T20:27:54.231982002Z           Type 'AnimationDefinition' is not assignable to type 'AnimationEvent<HTMLInputElement>'.
+2026-07-17T20:27:54.231983912Z             Type 'string' is not assignable to type 'AnimationEvent<HTMLInputElement>'.
+2026-07-17T20:27:54.231991552Z src/pages/ChannelPage.tsx(78,9): error TS6133: 'currentUser' is declared but its value is never read.
+2026-07-17T20:27:54.232017154Z src/pages/ChannelPage.tsx(89,10): error TS6133: 'showInvite' is declared but its value is never read.
+2026-07-17T20:27:54.232029094Z src/pages/ChannelPage.tsx(89,22): error TS6133: 'setShowInvite' is declared but its value is never read.
+2026-07-17T20:27:54.232070277Z src/pages/ChannelPage.tsx(160,9): error TS6133: 'handleLeaveChannel' is declared but its value is never read.
+2026-07-17T20:27:54.232080077Z src/pages/ChannelPage.tsx(231,9): error TS6133: 'copyInviteLink' is declared but its value is never read.
+2026-07-17T20:27:54.232140541Z src/services/api.ts(3,29): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+2026-07-17T20:27:54.232230316Z src/services/websocket.ts(10,31): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+2026-07-17T20:27:54.308774864Z ==> Build failed 😞
+2026-07-17T20:27:54.308791405Z ==> Common ways to troubleshoot your deploy: https://render.com/docs/troubleshooting-deploys

@@ -50,7 +50,8 @@ class MessageService:
             message = Message(
                 sender_id=sender_id,
                 recipient_id=recipient_id,
-                encrypted_content=encrypted_content,
+                content=encrypted_content,
+                is_encrypted=True,
                 encryption_key_id=key_id
             )
             
@@ -94,7 +95,7 @@ class MessageService:
             
             # Decrypt message
             try:
-                decrypted_content = message_encryption.decrypt_message(message.encrypted_content)
+                decrypted_content = message_encryption.decrypt_message(message.content)
             except Exception as e:
                 logger.error(f"Failed to decrypt message {message_id}: {str(e)}")
                 decrypted_content = "[Decryption failed]"
@@ -146,7 +147,7 @@ class MessageService:
             decrypted_messages = []
             for message in messages:
                 try:
-                    decrypted_content = message_encryption.decrypt_message(message.encrypted_content)
+                    decrypted_content = message_encryption.decrypt_message(message.content)
                 except Exception as e:
                     logger.error(f"Failed to decrypt message {message.id}: {str(e)}")
                     decrypted_content = "[Decryption failed]"
@@ -199,7 +200,7 @@ class MessageService:
                 
                 if partner_id not in conversations:
                     try:
-                        decrypted_content = message_encryption.decrypt_message(message.encrypted_content)
+                        decrypted_content = message_encryption.decrypt_message(message.content)
                     except:
                         decrypted_content = "[Decryption failed]"
                     

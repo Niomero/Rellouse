@@ -146,7 +146,8 @@ class BotService:
             message = Message(
                 bot_sender_id=bot_id,
                 recipient_id=recipient_id,
-                encrypted_content=encrypted_content,
+                content=encrypted_content,
+                is_encrypted=True,
                 encryption_key_id=key_id
             )
             

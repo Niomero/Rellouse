@@ -162,7 +162,7 @@ async def get_messages(
     response = []
     for msg in reversed(messages):  # Reverse to show oldest first
         try:
-            decrypted_content = encryption_manager.decrypt(msg.encrypted_content)
+            decrypted_content = encryption_manager.decrypt(msg.content)
         except:
             decrypted_content = "[Encrypted message]"
         
@@ -216,7 +216,7 @@ async def get_conversation(
     response = []
     for msg in reversed(messages):  # Reverse to show oldest first
         try:
-            decrypted_content = encryption_manager.decrypt(msg.encrypted_content)
+            decrypted_content = encryption_manager.decrypt(msg.content)
         except:
             decrypted_content = "[Encrypted message]"
         

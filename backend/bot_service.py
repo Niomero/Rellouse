@@ -4,7 +4,7 @@ Handles bot account management and bot-related operations
 """
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
-from models import Bot, Message, User
+from models import Message, User
 from security import message_encryption
 from typing import Optional, List, Dict, Any
 import logging
@@ -39,25 +39,27 @@ class BotService:
             
             # Check if bot already exists
             existing = await db.execute(
-                select(Bot).where(Bot.id == bot_id)
+                select(User).where(User.login == bot_id)
             )
             if existing.scalar_one_or_none():
                 return {"success": False, "error": "Bot ID already exists"}
             
             # Check if username is taken
             username_check = await db.execute(
-                select(Bot).where(Bot.username == username)
+                select(User).where(User.username == username)
             )
             if username_check.scalar_one_or_none():
                 return {"success": False, "error": "Username already taken"}
             
-            # Create bot
-            bot = Bot(
-                id=bot_id,
+            # Create bot as a User with is_bot=True
+            bot = User(
+                login=bot_id,
                 username=username,
                 display_name=display_name,
-                description=description,
-                avatar_url=avatar_url
+                bio=description,
+                avatar_url=avatar_url,
+                is_bot=True,
+                password_hash=None  # Bots don't need passwords
             )
             
             db.add(bot)
@@ -73,11 +75,11 @@ class BotService:
             return {"success": False, "error": "Failed to create bot"}
     
     @staticmethod
-    async def get_bot_by_id(db: AsyncSession, bot_id: str) -> Optional[Bot]:
+    async def get_bot_by_id(db: AsyncSession, bot_id: str) -> Optional[User]:
         """Get bot by ID"""
         try:
             result = await db.execute(
-                select(Bot).where(Bot.id == bot_id, Bot.is_active == True)
+                select(User).where(User.login == bot_id, User.is_bot == True, User.is_bot == True, User.is_active == True)
             )
             return result.scalar_one_or_none()
         except Exception as e:
@@ -85,7 +87,7 @@ class BotService:
             return None
     
     @staticmethod
-    async def get_bot_by_username(db: AsyncSession, username: str) -> Optional[Bot]:
+    async def get_bot_by_username(db: AsyncSession, username: str) -> Optional[User]:
         """Get bot by username"""
         try:
             # Normalize username
@@ -93,7 +95,7 @@ class BotService:
                 username = "@" + username
             
             result = await db.execute(
-                select(Bot).where(Bot.username == username, Bot.is_active == True)
+                select(User).where(User.username == username, User.is_bot == True, User.is_active == True)
             )
             return result.scalar_one_or_none()
         except Exception as e:
@@ -101,11 +103,11 @@ class BotService:
             return None
     
     @staticmethod
-    async def get_all_bots(db: AsyncSession) -> List[Bot]:
+    async def get_all_bots(db: AsyncSession) -> List[User]:
         """Get all active bots"""
         try:
             result = await db.execute(
-                select(Bot).where(Bot.is_active == True).order_by(Bot.id)
+                select(User).where(User.is_bot == True, User.is_active == True).order_by(User.login)
             )
             return result.scalars().all()
         except Exception as e:
@@ -131,7 +133,7 @@ class BotService:
             
             # Verify recipient exists
             recipient_result = await db.execute(
-                select(User).where(User.id == recipient_id, User.is_active == True)
+                select(User).where(User.id == recipient_id, User.is_bot == True, User.is_active == True)
             )
             recipient = recipient_result.scalar_one_or_none()
             if not recipient:

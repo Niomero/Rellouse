@@ -1,100 +1,100 @@
-2026-07-17T22:10:15.261112656Z 2026-07-17 22:10:15,260 - main - INFO - 📥 HEAD / - 127.0.0.1
-2026-07-17T22:10:15.262383235Z 2026-07-17 22:10:15,262 - main - INFO - 📤 HEAD / - Status: 405
-2026-07-17T22:10:15.262611317Z INFO:     127.0.0.1:58670 - "HEAD / HTTP/1.1" 405 Method Not Allowed
-2026-07-17T22:10:20.866208089Z INFO:     Shutting down
-2026-07-17T22:10:20.966679235Z INFO:     Waiting for application shutdown.
-2026-07-17T22:10:20.966760337Z 2026-07-17 22:10:20,966 - main - INFO - 🛑 Shutting down Rellouse Messenger...
-2026-07-17T22:10:20.967138716Z 2026-07-17 22:10:20,967 - database - INFO - Database connection closed
-2026-07-17T22:10:20.967223308Z 2026-07-17 22:10:20,967 - main - INFO - ✅ Shutdown complete
-2026-07-17T22:10:20.967382652Z INFO:     Application shutdown complete.
-2026-07-17T22:10:20.967456033Z INFO:     Finished server process [57]
-2026-07-17T22:10:21.339127571Z ==> Your service is live 🎉
-2026-07-17T22:10:21.402043239Z 2026-07-17 22:10:21,401 - main - INFO - 📥 GET / - 35.227.183.65
-2026-07-17T22:10:21.40299367Z 2026-07-17 22:10:21,402 - main - INFO - 📤 GET / - Status: 200
-2026-07-17T22:10:21.403213292Z INFO:     35.227.183.65:0 - "GET / HTTP/1.1" 200 OK
-2026-07-17T22:10:21.494385756Z ==> 
-2026-07-17T22:10:21.49658646Z ==> ///////////////////////////////////////////////////////////
-2026-07-17T22:10:21.498423648Z ==> 
-2026-07-17T22:10:21.500296547Z ==> Available at your primary URL https://rellouse.onrender.com
-2026-07-17T22:10:21.502282857Z ==> 
-2026-07-17T22:10:21.504175115Z ==> ///////////////////////////////////////////////////////////
-2026-07-17T22:11:14.037751651Z 2026-07-17 22:11:14,037 - main - INFO - 📥 GET /api/auth/me - 89.169.53.104
-2026-07-17T22:11:14.039358698Z 2026-07-17 22:11:14,039 - main - INFO - 📤 GET /api/auth/me - Status: 401
-2026-07-17T22:11:14.0395884Z INFO:     89.169.53.104:0 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
-2026-07-17T22:11:25.720843401Z 2026-07-17 22:11:25,720 - main - INFO - 📥 OPTIONS /api/auth/login - 89.169.53.104
-2026-07-17T22:11:25.721626444Z 2026-07-17 22:11:25,721 - main - INFO - 📤 OPTIONS /api/auth/login - Status: 200
-2026-07-17T22:11:25.721837395Z INFO:     89.169.53.104:0 - "OPTIONS /api/auth/login HTTP/1.1" 200 OK
-2026-07-17T22:11:26.280415803Z 2026-07-17 22:11:26,280 - main - INFO - 📥 POST /api/auth/login - 89.169.53.104
-2026-07-17T22:11:29.3691264Z 2026-07-17 22:11:29,368 - main - INFO - 📤 POST /api/auth/login - Status: 401
-2026-07-17T22:11:29.369381644Z INFO:     89.169.53.104:0 - "POST /api/auth/login HTTP/1.1" 401 Unauthorized
-2026-07-17T22:12:00.658926977Z 2026-07-17 22:12:00,658 - main - INFO - 📥 OPTIONS /api/auth/register - 89.169.53.104
-2026-07-17T22:12:00.659775442Z 2026-07-17 22:12:00,659 - main - INFO - 📤 OPTIONS /api/auth/register - Status: 200
-2026-07-17T22:12:00.659989354Z INFO:     89.169.53.104:0 - "OPTIONS /api/auth/register HTTP/1.1" 200 OK
-2026-07-17T22:12:00.996596801Z 2026-07-17 22:12:00,994 - main - INFO - 📥 POST /api/auth/register - 89.169.53.104
-2026-07-17T22:12:05.634841339Z 2026-07-17 22:12:05,634 - auth - INFO - User registered successfully: @gandon (ID: 2)
-2026-07-17T22:12:09.567012391Z 2026-07-17 22:12:09,566 - auth - INFO - User logged in successfully: @gandon (ID: 2)
-2026-07-17T22:12:09.568489651Z 2026-07-17 22:12:09,568 - main - INFO - 📤 POST /api/auth/register - Status: 201
-2026-07-17T22:12:09.568505811Z INFO:     89.169.53.104:0 - "POST /api/auth/register HTTP/1.1" 201 Created
-2026-07-17T22:12:16.362594146Z 2026-07-17 22:12:16,362 - main - INFO - 📥 OPTIONS /api/users/search - 89.169.53.104
-2026-07-17T22:12:16.363345907Z 2026-07-17 22:12:16,363 - main - INFO - 📤 OPTIONS /api/users/search - Status: 200
-2026-07-17T22:12:16.363576119Z INFO:     89.169.53.104:0 - "OPTIONS /api/users/search?query=Rellouse&limit=20 HTTP/1.1" 200 OK
-2026-07-17T22:12:16.764831178Z 2026-07-17 22:12:16,764 - main - INFO - 📥 GET /api/users/search - 89.169.53.104
-2026-07-17T22:12:18.295726545Z 2026-07-17 22:12:18,295 - main - INFO - 📤 GET /api/users/search - Status: 200
-2026-07-17T22:12:18.295950627Z INFO:     89.169.53.104:0 - "GET /api/users/search?query=Rellouse&limit=20 HTTP/1.1" 200 OK
-2026-07-17T22:12:19.621195504Z 2026-07-17 22:12:19,621 - main - INFO - 📥 OPTIONS /api/users/0 - 89.169.53.104
-2026-07-17T22:12:19.621974156Z 2026-07-17 22:12:19,621 - main - INFO - 📤 OPTIONS /api/users/0 - Status: 200
-2026-07-17T22:12:19.622163286Z INFO:     89.169.53.104:0 - "OPTIONS /api/users/0 HTTP/1.1" 200 OK
-2026-07-17T22:12:19.635318747Z 2026-07-17 22:12:19,635 - main - INFO - 📥 OPTIONS /api/messages - 89.169.53.104
-2026-07-17T22:12:19.635898028Z 2026-07-17 22:12:19,635 - main - INFO - 📤 OPTIONS /api/messages - Status: 200
-2026-07-17T22:12:19.636067087Z INFO:     89.169.53.104:0 - "OPTIONS /api/messages?recipient_id=0&limit=50 HTTP/1.1" 200 OK
-2026-07-17T22:12:19.893756959Z 2026-07-17 22:12:19,893 - main - INFO - 📥 GET /api/users/0 - 89.169.53.104
-2026-07-17T22:12:19.979691152Z 2026-07-17 22:12:19,979 - main - INFO - 📥 GET /api/messages - 89.169.53.104
-2026-07-17T22:12:19.981064066Z 2026-07-17 22:12:19,980 - main - INFO - 📤 GET /api/messages - Status: 404
-2026-07-17T22:12:19.981266717Z INFO:     89.169.53.104:0 - "GET /api/messages?recipient_id=0&limit=50 HTTP/1.1" 404 Not Found
-2026-07-17T22:12:21.468503243Z 2026-07-17 22:12:21,468 - main - INFO - 📤 GET /api/users/0 - Status: 200
-2026-07-17T22:12:21.468744286Z INFO:     89.169.53.104:0 - "GET /api/users/0 HTTP/1.1" 200 OK
-2026-07-17T22:12:29.117911834Z 2026-07-17 22:12:29,117 - main - INFO - 📥 OPTIONS /api/messages - 89.169.53.104
-2026-07-17T22:12:29.118666815Z 2026-07-17 22:12:29,118 - main - INFO - 📤 OPTIONS /api/messages - Status: 200
-2026-07-17T22:12:29.118865566Z INFO:     89.169.53.104:0 - "OPTIONS /api/messages HTTP/1.1" 200 OK
-2026-07-17T22:12:29.372289626Z 2026-07-17 22:12:29,372 - main - INFO - 📥 POST /api/messages - 89.169.53.104
-2026-07-17T22:12:29.373674631Z 2026-07-17 22:12:29,373 - main - INFO - 📤 POST /api/messages - Status: 404
-2026-07-17T22:12:29.373776896Z INFO:     89.169.53.104:0 - "POST /api/messages HTTP/1.1" 404 Not Found
-2026-07-17T22:12:32.478982261Z 2026-07-17 22:12:32,478 - main - INFO - 📥 POST /api/messages - 89.169.53.104
-2026-07-17T22:12:32.480152315Z 2026-07-17 22:12:32,480 - main - INFO - 📤 POST /api/messages - Status: 404
-2026-07-17T22:12:32.480345495Z INFO:     89.169.53.104:0 - "POST /api/messages HTTP/1.1" 404 Not Found
-2026-07-17T22:12:37.350849965Z 2026-07-17 22:12:37,350 - main - INFO - 📥 POST /api/messages - 89.169.53.104
-2026-07-17T22:12:37.351978256Z 2026-07-17 22:12:37,351 - main - INFO - 📤 POST /api/messages - Status: 404
-2026-07-17T22:12:37.352183507Z INFO:     89.169.53.104:0 - "POST /api/messages HTTP/1.1" 404 Not Found
-2026-07-17T22:12:50.446951433Z 2026-07-17 22:12:50,446 - main - INFO - 📥 OPTIONS /api/users/search - 89.169.53.104
-2026-07-17T22:12:50.447708764Z 2026-07-17 22:12:50,447 - main - INFO - 📤 OPTIONS /api/users/search - Status: 200
-2026-07-17T22:12:50.448138377Z INFO:     89.169.53.104:0 - "OPTIONS /api/users/search?query=Verify&limit=20 HTTP/1.1" 200 OK
-2026-07-17T22:12:50.715957723Z 2026-07-17 22:12:50,715 - main - INFO - 📥 GET /api/users/search - 89.169.53.104
-2026-07-17T22:12:52.421697615Z 2026-07-17 22:12:52,421 - main - INFO - 📤 GET /api/users/search - Status: 200
-2026-07-17T22:12:52.421908226Z INFO:     89.169.53.104:0 - "GET /api/users/search?query=Verify&limit=20 HTTP/1.1" 200 OK
-2026-07-17T22:12:53.463863245Z 2026-07-17 22:12:53,463 - main - INFO - 📥 OPTIONS /api/messages - 89.169.53.104
-2026-07-17T22:12:53.464643998Z 2026-07-17 22:12:53,464 - main - INFO - 📤 OPTIONS /api/messages - Status: 200
-2026-07-17T22:12:53.464859319Z INFO:     89.169.53.104:0 - "OPTIONS /api/messages?recipient_id=1&limit=50 HTTP/1.1" 200 OK
-2026-07-17T22:12:53.47228329Z 2026-07-17 22:12:53,472 - main - INFO - 📥 OPTIONS /api/users/1 - 89.169.53.104
-2026-07-17T22:12:53.472891803Z 2026-07-17 22:12:53,472 - main - INFO - 📤 OPTIONS /api/users/1 - Status: 200
-2026-07-17T22:12:53.473104184Z INFO:     89.169.53.104:0 - "OPTIONS /api/users/1 HTTP/1.1" 200 OK
-2026-07-17T22:12:53.751602837Z 2026-07-17 22:12:53,751 - main - INFO - 📥 GET /api/messages - 89.169.53.104
-2026-07-17T22:12:53.752924148Z 2026-07-17 22:12:53,752 - main - INFO - 📥 GET /api/users/1 - 89.169.53.104
-2026-07-17T22:12:53.753395214Z 2026-07-17 22:12:53,753 - main - INFO - 📤 GET /api/messages - Status: 404
-2026-07-17T22:12:53.755064324Z INFO:     89.169.53.104:0 - "GET /api/messages?recipient_id=1&limit=50 HTTP/1.1" 404 Not Found
-2026-07-17T22:12:55.102256449Z 2026-07-17 22:12:55,102 - main - INFO - 📤 GET /api/users/1 - Status: 200
-2026-07-17T22:12:55.10246444Z INFO:     89.169.53.104:0 - "GET /api/users/1 HTTP/1.1" 200 OK
-2026-07-17T22:13:00.464423614Z 2026-07-17 22:13:00,464 - main - INFO - 📥 POST /api/messages - 89.169.53.104
-2026-07-17T22:13:00.465806599Z 2026-07-17 22:13:00,465 - main - INFO - 📤 POST /api/messages - Status: 404
-2026-07-17T22:13:00.466005219Z INFO:     89.169.53.104:0 - "POST /api/messages HTTP/1.1" 404 Not Found
-2026-07-17T22:13:02.02758165Z 2026-07-17 22:13:02,026 - main - INFO - 📥 POST /api/messages - 89.169.53.104
-2026-07-17T22:13:02.028576713Z 2026-07-17 22:13:02,028 - main - INFO - 📤 POST /api/messages - Status: 404
-2026-07-17T22:13:02.029645601Z INFO:     89.169.53.104:0 - "POST /api/messages HTTP/1.1" 404 Not Found
-2026-07-17T22:13:02.471057021Z 2026-07-17 22:13:02,470 - main - INFO - 📥 POST /api/messages - 89.169.53.104
-2026-07-17T22:13:02.472081397Z 2026-07-17 22:13:02,471 - main - INFO - 📤 POST /api/messages - Status: 404
-2026-07-17T22:13:02.472247716Z INFO:     89.169.53.104:0 - "POST /api/messages HTTP/1.1" 404 Not Found
-2026-07-17T22:13:02.84597279Z 2026-07-17 22:13:02,845 - main - INFO - 📥 POST /api/messages - 89.169.53.104
-2026-07-17T22:13:02.846915011Z 2026-07-17 22:13:02,846 - main - INFO - 📤 POST /api/messages - Status: 404
-2026-07-17T22:13:02.84709086Z INFO:     89.169.53.104:0 - "POST /api/messages HTTP/1.1" 404 Not Found
-2026-07-17T22:13:03.217684956Z 2026-07-17 22:13:03,217 - main - INFO - 📥 POST /api/messages - 89.169.53.104
-2026-07-17T22:13:03.218751534Z 2026-07-17 22:13:03,218 - main - INFO - 📤 POST /api/messages - Status: 404
-2026-07-17T22:13:03.21886217Z INFO:     89.169.53.104:0 - "POST /api/messages HTTP/1.1" 404 Not Found
+2026-07-17T22:19:03.423299384Z     |                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-17T22:19:03.423301384Z     |   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/fastapi/routing.py", line 191, in run_endpoint_function
+2026-07-17T22:19:03.423303294Z     |     return await dependant.call(**values)
+2026-07-17T22:19:03.423305184Z     |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-17T22:19:03.423307174Z     |   File "/opt/render/project/src/backend/routers/message_router.py", line 74, in send_message
+2026-07-17T22:19:03.423309174Z     |     encrypted_content = encryption_manager.encrypt(request.content)
+2026-07-17T22:19:03.423311214Z     |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-17T22:19:03.423313164Z     | AttributeError: 'MessageEncryption' object has no attribute 'encrypt'
+2026-07-17T22:19:03.423315034Z     +------------------------------------
+2026-07-17T22:19:03.423316864Z 
+2026-07-17T22:19:03.423318854Z During handling of the above exception, another exception occurred:
+2026-07-17T22:19:03.423320664Z 
+2026-07-17T22:19:03.423322594Z Traceback (most recent call last):
+2026-07-17T22:19:03.423324524Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/uvicorn/protocols/http/httptools_impl.py", line 419, in run_asgi
+2026-07-17T22:19:03.423326444Z     result = await app(  # type: ignore[func-returns-value]
+2026-07-17T22:19:03.423328295Z              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-17T22:19:03.423336195Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/uvicorn/middleware/proxy_headers.py", line 84, in __call__
+2026-07-17T22:19:03.423338245Z     return await self.app(scope, receive, send)
+2026-07-17T22:19:03.423340175Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-17T22:19:03.423342495Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/fastapi/applications.py", line 1054, in __call__
+2026-07-17T22:19:03.423345715Z     await super().__call__(scope, receive, send)
+2026-07-17T22:19:03.423348895Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/starlette/applications.py", line 123, in __call__
+2026-07-17T22:19:03.423352145Z     await self.middleware_stack(scope, receive, send)
+2026-07-17T22:19:03.423355365Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/starlette/middleware/errors.py", line 186, in __call__
+2026-07-17T22:19:03.423358615Z     raise exc
+2026-07-17T22:19:03.423361935Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/starlette/middleware/errors.py", line 164, in __call__
+2026-07-17T22:19:03.423365145Z     await self.app(scope, receive, _send)
+2026-07-17T22:19:03.423368485Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 189, in __call__
+2026-07-17T22:19:03.423372555Z     with collapse_excgroups():
+2026-07-17T22:19:03.423374625Z   File "/opt/render/project/python/Python-3.11.0/lib/python3.11/contextlib.py", line 155, in __exit__
+2026-07-17T22:19:03.423376505Z     self.gen.throw(typ, value, traceback)
+2026-07-17T22:19:03.423378465Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/starlette/_utils.py", line 91, in collapse_excgroups
+2026-07-17T22:19:03.423380356Z     raise exc
+2026-07-17T22:19:03.423382285Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 191, in __call__
+2026-07-17T22:19:03.423384886Z     response = await self.dispatch_func(request, call_next)
+2026-07-17T22:19:03.423396526Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-17T22:19:03.423399666Z   File "/opt/render/project/src/backend/main.py", line 127, in log_requests
+2026-07-17T22:19:03.423402616Z     response = await call_next(request)
+2026-07-17T22:19:03.423405376Z                ^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-17T22:19:03.423408226Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 165, in call_next
+2026-07-17T22:19:03.423411346Z     raise app_exc
+2026-07-17T22:19:03.423414286Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 151, in coro
+2026-07-17T22:19:03.423417036Z     await self.app(scope, receive_or_disconnect, send_no_error)
+2026-07-17T22:19:03.423419846Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 189, in __call__
+2026-07-17T22:19:03.423422446Z     with collapse_excgroups():
+2026-07-17T22:19:03.423425297Z   File "/opt/render/project/python/Python-3.11.0/lib/python3.11/contextlib.py", line 155, in __exit__
+2026-07-17T22:19:03.423428206Z     self.gen.throw(typ, value, traceback)
+2026-07-17T22:19:03.423431446Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/starlette/_utils.py", line 91, in collapse_excgroups
+2026-07-17T22:19:03.423434637Z     raise exc
+2026-07-17T22:19:03.423437927Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 191, in __call__
+2026-07-17T22:19:03.423441047Z     response = await self.dispatch_func(request, call_next)
+2026-07-17T22:19:03.423444447Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-17T22:19:03.423447767Z   File "/opt/render/project/src/backend/main.py", line 108, in add_security_headers
+2026-07-17T22:19:03.423450957Z     response = await call_next(request)
+2026-07-17T22:19:03.423454087Z                ^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-17T22:19:03.423457217Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 165, in call_next
+2026-07-17T22:19:03.423460477Z     raise app_exc
+2026-07-17T22:19:03.423463857Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 151, in coro
+2026-07-17T22:19:03.423465787Z     await self.app(scope, receive_or_disconnect, send_no_error)
+2026-07-17T22:19:03.423467747Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/starlette/middleware/cors.py", line 91, in __call__
+2026-07-17T22:19:03.423469697Z     await self.simple_response(scope, receive, send, request_headers=headers)
+2026-07-17T22:19:03.423471617Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/starlette/middleware/cors.py", line 146, in simple_response
+2026-07-17T22:19:03.423473467Z     await self.app(scope, receive, send)
+2026-07-17T22:19:03.423475327Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+2026-07-17T22:19:03.423477278Z     await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+2026-07-17T22:19:03.423479158Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/starlette/_exception_handler.py", line 64, in wrapped_app
+2026-07-17T22:19:03.423481067Z     raise exc
+2026-07-17T22:19:03.423482978Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+2026-07-17T22:19:03.423484858Z     await app(scope, receive, sender)
+2026-07-17T22:19:03.423496478Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/starlette/routing.py", line 762, in __call__
+2026-07-17T22:19:03.423506558Z     await self.middleware_stack(scope, receive, send)
+2026-07-17T22:19:03.423508578Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/starlette/routing.py", line 782, in app
+2026-07-17T22:19:03.423510448Z     await route.handle(scope, receive, send)
+2026-07-17T22:19:03.423512328Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/starlette/routing.py", line 297, in handle
+2026-07-17T22:19:03.423514248Z     await self.app(scope, receive, send)
+2026-07-17T22:19:03.423516248Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/starlette/routing.py", line 77, in app
+2026-07-17T22:19:03.423518128Z     await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+2026-07-17T22:19:03.423520068Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/starlette/_exception_handler.py", line 64, in wrapped_app
+2026-07-17T22:19:03.423522488Z     raise exc
+2026-07-17T22:19:03.423525668Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+2026-07-17T22:19:03.423528799Z     await app(scope, receive, sender)
+2026-07-17T22:19:03.423532029Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/starlette/routing.py", line 72, in app
+2026-07-17T22:19:03.423535259Z     response = await func(request)
+2026-07-17T22:19:03.423538299Z                ^^^^^^^^^^^^^^^^^^^
+2026-07-17T22:19:03.423541219Z   File "/opt/render/project/python/Python-3.11.0/lib/python3.11/contextlib.py", line 222, in __aexit__
+2026-07-17T22:19:03.423544219Z     await self.gen.athrow(typ, value, traceback)
+2026-07-17T22:19:03.423547189Z   File "/opt/render/project/src/backend/database.py", line 43, in get_db
+2026-07-17T22:19:03.423550219Z     yield session
+2026-07-17T22:19:03.423553469Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/fastapi/routing.py", line 299, in app
+2026-07-17T22:19:03.423557349Z     raise e
+2026-07-17T22:19:03.423559419Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/fastapi/routing.py", line 294, in app
+2026-07-17T22:19:03.423561339Z     raw_response = await run_endpoint_function(
+2026-07-17T22:19:03.423563259Z                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-17T22:19:03.423565189Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/fastapi/routing.py", line 191, in run_endpoint_function
+2026-07-17T22:19:03.423567129Z     return await dependant.call(**values)
+2026-07-17T22:19:03.423569049Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-17T22:19:03.423571009Z   File "/opt/render/project/src/backend/routers/message_router.py", line 74, in send_message
+2026-07-17T22:19:03.423572949Z     encrypted_content = encryption_manager.encrypt(request.content)
+2026-07-17T22:19:03.423574909Z                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-17T22:19:03.42357694Z AttributeError: 'MessageEncryption' object has no attribute 'encrypt'

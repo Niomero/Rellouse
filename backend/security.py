@@ -136,6 +136,16 @@ class MessageEncryption:
             raise
     
     @staticmethod
+    def encrypt(message: str) -> str:
+        """Encrypt a message (simplified version returning only encrypted content)"""
+        try:
+            encrypted = cipher_suite.encrypt(message.encode())
+            return encrypted.decode()
+        except Exception as e:
+            logger.error(f"Message encryption failed: {str(e)}")
+            raise
+    
+    @staticmethod
     def decrypt_message(encrypted_message: str) -> str:
         """Decrypt an encrypted message"""
         try:
@@ -144,6 +154,11 @@ class MessageEncryption:
         except Exception as e:
             logger.error(f"Message decryption failed: {str(e)}")
             raise
+    
+    @staticmethod
+    def decrypt(encrypted_message: str) -> str:
+        """Decrypt an encrypted message (alias for decrypt_message)"""
+        return MessageEncryption.decrypt_message(encrypted_message)
 
 
 class UsernameValidator:

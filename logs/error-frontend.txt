@@ -1,30 +1,30 @@
-2026-07-17T20:47:32.860336259Z ==> Downloading cache...
-2026-07-17T20:47:32.894609203Z ==> Cloning from https://github.com/Niomero/Rellouse
-2026-07-17T20:47:33.753097282Z ==> Checking out commit 1264888004beb25585e701677d8e801b3489e20c in branch main
-2026-07-17T20:47:39.008865471Z ==> Downloaded 137MB in 3s. Extraction took 3s.
-2026-07-17T20:47:44.099352107Z ==> Running build command 'cd frontend && npm install && npm run build'...
-2026-07-17T20:47:44.192633835Z ==> Using Node.js version 24.14.1 (default)
-2026-07-17T20:47:44.192644355Z ==> Docs on specifying a Node.js version: https://render.com/docs/node-version
-2026-07-17T20:47:47.528379389Z 
-2026-07-17T20:47:47.52841723Z up to date, audited 305 packages in 3s
-2026-07-17T20:47:47.528429261Z 
-2026-07-17T20:47:47.528488852Z 67 packages are looking for funding
-2026-07-17T20:47:47.528590465Z   run `npm fund` for details
-2026-07-17T20:47:47.658032974Z 
-2026-07-17T20:47:47.658062515Z 8 vulnerabilities (1 moderate, 7 high)
-2026-07-17T20:47:47.658066915Z 
-2026-07-17T20:47:47.658071335Z To address issues that do not require attention, run:
-2026-07-17T20:47:47.658075015Z   npm audit fix
-2026-07-17T20:47:47.658078685Z 
-2026-07-17T20:47:47.658082565Z To address all issues (including breaking changes), run:
-2026-07-17T20:47:47.658087095Z   npm audit fix --force
-2026-07-17T20:47:47.658091006Z 
-2026-07-17T20:47:47.658094206Z Run `npm audit` for details.
-2026-07-17T20:47:47.865731598Z 
-2026-07-17T20:47:47.865752639Z > rellouse-messenger-frontend@1.0.0 build
-2026-07-17T20:47:47.865756919Z > tsc && vite build
-2026-07-17T20:47:47.865759889Z 
-2026-07-17T20:47:51.328116272Z src/services/api.ts(3,29): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
-2026-07-17T20:47:51.328233585Z src/services/websocket.ts(10,31): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
-2026-07-17T20:47:51.410176823Z ==> Build failed 😞
-2026-07-17T20:47:51.410193754Z ==> Common ways to troubleshoot your deploy: https://render.com/docs/troubleshooting-deploys
+2026-07-17T21:12:22.274351401Z ==> Downloading cache...
+2026-07-17T21:12:22.310978801Z ==> Cloning from https://github.com/Niomero/Rellouse
+2026-07-17T21:12:22.868561638Z ==> Checking out commit 94ef77951c30f968c2e8602a77f78a396b85e5d8 in branch main
+2026-07-17T21:12:29.591134724Z ==> Downloaded 137MB in 4s. Extraction took 3s.
+2026-07-17T21:12:34.525045348Z ==> Running build command 'cd frontend && npm install && npm run build'...
+2026-07-17T21:12:34.623556137Z ==> Using Node.js version 24.14.1 (default)
+2026-07-17T21:12:34.623569948Z ==> Docs on specifying a Node.js version: https://render.com/docs/node-version
+2026-07-17T21:12:37.70948019Z 
+2026-07-17T21:12:37.709504322Z up to date, audited 305 packages in 3s
+2026-07-17T21:12:37.709537224Z 
+2026-07-17T21:12:37.709661233Z 67 packages are looking for funding
+2026-07-17T21:12:37.709735398Z   run `npm fund` for details
+2026-07-17T21:12:37.855171605Z 
+2026-07-17T21:12:37.855200787Z 8 vulnerabilities (1 moderate, 7 high)
+2026-07-17T21:12:37.855204588Z 
+2026-07-17T21:12:37.855208948Z To address issues that do not require attention, run:
+2026-07-17T21:12:37.855212028Z   npm audit fix
+2026-07-17T21:12:37.855214688Z 
+2026-07-17T21:12:37.855217528Z To address all issues (including breaking changes), run:
+2026-07-17T21:12:37.855221429Z   npm audit fix --force
+2026-07-17T21:12:37.855224299Z 
+2026-07-17T21:12:37.855228429Z Run `npm audit` for details.
+2026-07-17T21:12:38.07252095Z 
+2026-07-17T21:12:38.072546172Z > rellouse-messenger-frontend@1.0.0 build
+2026-07-17T21:12:38.072550822Z > tsc && vite build
+2026-07-17T21:12:38.072553862Z 
+2026-07-17T21:12:41.476821133Z src/services/api.ts(3,29): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+2026-07-17T21:12:41.476955252Z src/services/websocket.ts(10,31): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+2026-07-17T21:12:41.556524493Z ==> Build failed 😞
+2026-07-17T21:12:41.556541354Z ==> Common ways to troubleshoot your deploy: https://render.com/docs/troubleshooting-deploys

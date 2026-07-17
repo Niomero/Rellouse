@@ -1,50 +1,107 @@
-2026-07-17T20:48:43.761307561Z     self.loaded_app = import_from_string(self.app)
-2026-07-17T20:48:43.761316061Z                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2026-07-17T20:48:43.761320381Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/uvicorn/importer.py", line 21, in import_from_string
-2026-07-17T20:48:43.761389502Z     module = importlib.import_module(module_str)
-2026-07-17T20:48:43.761415743Z              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2026-07-17T20:48:43.761422093Z   File "/opt/render/project/python/Python-3.11.0/lib/python3.11/importlib/__init__.py", line 126, in import_module
-2026-07-17T20:48:43.761500575Z     return _bootstrap._gcd_import(name[level:], package, level)
-2026-07-17T20:48:43.761537086Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2026-07-17T20:48:43.761542596Z   File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
-2026-07-17T20:48:43.761544656Z   File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
-2026-07-17T20:48:43.761546616Z   File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
-2026-07-17T20:48:43.761548486Z   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
-2026-07-17T20:48:43.761550446Z   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
-2026-07-17T20:48:43.761552556Z   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
-2026-07-17T20:48:43.761554586Z   File "/opt/render/project/src/backend/main.py", line 23, in <module>
-2026-07-17T20:48:43.761634988Z     from routers import (
-2026-07-17T20:48:43.761638998Z   File "/opt/render/project/src/backend/routers/__init__.py", line 4, in <module>
-2026-07-17T20:48:43.76171541Z     from . import auth_router, user_router, message_router, bot_router, verification_router, websocket_router, channel_router, upload_router
-2026-07-17T20:48:43.76172186Z   File "/opt/render/project/src/backend/routers/user_router.py", line 60, in <module>
-2026-07-17T20:48:43.761790601Z     @router.get("/search", response_model=List[UserSearchResponse])
-2026-07-17T20:48:43.761802422Z      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2026-07-17T20:48:43.761806102Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/fastapi/routing.py", line 956, in decorator
-2026-07-17T20:48:43.762036197Z     self.add_api_route(
-2026-07-17T20:48:43.762045137Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/fastapi/routing.py", line 895, in add_api_route
-2026-07-17T20:48:43.762247072Z     route = route_class(
-2026-07-17T20:48:43.762251901Z             ^^^^^^^^^^^^
-2026-07-17T20:48:43.762255272Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/fastapi/routing.py", line 525, in __init__
-2026-07-17T20:48:43.762399175Z     self.dependant = get_dependant(path=self.path_format, call=self.endpoint)
-2026-07-17T20:48:43.762408695Z                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2026-07-17T20:48:43.762412095Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/fastapi/dependencies/utils.py", line 268, in get_dependant
-2026-07-17T20:48:43.762531658Z     sub_dependant = get_param_sub_dependant(
-2026-07-17T20:48:43.762537208Z                     ^^^^^^^^^^^^^^^^^^^^^^^^
-2026-07-17T20:48:43.762542228Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/fastapi/dependencies/utils.py", line 111, in get_param_sub_dependant
-2026-07-17T20:48:43.762607379Z     return get_sub_dependant(
-2026-07-17T20:48:43.76261158Z            ^^^^^^^^^^^^^^^^^^
-2026-07-17T20:48:43.76261546Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/fastapi/dependencies/utils.py", line 147, in get_sub_dependant
-2026-07-17T20:48:43.762691621Z     sub_dependant = get_dependant(
-2026-07-17T20:48:43.762696561Z                     ^^^^^^^^^^^^^^
-2026-07-17T20:48:43.762700271Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/fastapi/dependencies/utils.py", line 261, in get_dependant
-2026-07-17T20:48:43.762791544Z     type_annotation, depends, param_field = analyze_param(
-2026-07-17T20:48:43.762795953Z                                             ^^^^^^^^^^^^^^
-2026-07-17T20:48:43.762799564Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/fastapi/dependencies/utils.py", line 442, in analyze_param
-2026-07-17T20:48:43.762929287Z     field = create_response_field(
-2026-07-17T20:48:43.762933867Z             ^^^^^^^^^^^^^^^^^^^^^^
-2026-07-17T20:48:43.762937597Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/fastapi/utils.py", line 101, in create_response_field
-2026-07-17T20:48:43.763016458Z     raise fastapi.exceptions.FastAPIError(
-2026-07-17T20:48:43.763028009Z fastapi.exceptions.FastAPIError: Invalid args for response field! Hint: check that <class 'sqlalchemy.ext.asyncio.session.AsyncSession'> is a valid Pydantic field type. If you are using a return type annotation that is not a valid Pydantic field (e.g. Union[Response, dict, None]) you can disable generating the response model from the type annotation with the path operation decorator parameter response_model=None. Read more: https://fastapi.tiangolo.com/tutorial/response-model/
-2026-07-17T20:49:02.494619487Z ==> Running 'cd backend && uvicorn main:app --host 0.0.0.0 --port $PORT'
-2026-07-17T20:49:08.419435463Z ==> No open ports detected, continuing to scan...
-2026-07-17T20:49:08.531312811Z ==> Docs on specifying a port: https://render.com/docs/web-services#port-binding
+2026-07-17T21:13:36.907300208Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/click/core.py", line 1490, in main
+2026-07-17T21:13:36.907490669Z     rv = self.invoke(ctx)
+2026-07-17T21:13:36.907494349Z          ^^^^^^^^^^^^^^^^
+2026-07-17T21:13:36.907497129Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/click/core.py", line 1353, in invoke
+2026-07-17T21:13:36.907671078Z     return ctx.invoke(self.callback, **ctx.params)
+2026-07-17T21:13:36.907677959Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-17T21:13:36.907680729Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/click/core.py", line 907, in invoke
+2026-07-17T21:13:36.907864679Z     return callback(*args, **kwargs)
+2026-07-17T21:13:36.90787822Z            ^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-17T21:13:36.90788104Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/uvicorn/main.py", line 418, in main
+2026-07-17T21:13:36.907996406Z     run(
+2026-07-17T21:13:36.908003066Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/uvicorn/main.py", line 587, in run
+2026-07-17T21:13:36.908110692Z     server.run()
+2026-07-17T21:13:36.908114312Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/uvicorn/server.py", line 62, in run
+2026-07-17T21:13:36.908199607Z     return asyncio.run(self.serve(sockets=sockets))
+2026-07-17T21:13:36.908206637Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-17T21:13:36.908209397Z   File "/opt/render/project/python/Python-3.11.0/lib/python3.11/asyncio/runners.py", line 190, in run
+2026-07-17T21:13:36.908352135Z     return runner.run(main)
+2026-07-17T21:13:36.908359446Z            ^^^^^^^^^^^^^^^^
+2026-07-17T21:13:36.908361966Z   File "/opt/render/project/python/Python-3.11.0/lib/python3.11/asyncio/runners.py", line 118, in run
+2026-07-17T21:13:36.908471412Z     return self._loop.run_until_complete(task)
+2026-07-17T21:13:36.908474542Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-17T21:13:36.908477112Z   File "uvloop/loop.pyx", line 1518, in uvloop.loop.Loop.run_until_complete
+2026-07-17T21:13:36.908640551Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/uvicorn/server.py", line 69, in serve
+2026-07-17T21:13:36.908706864Z     config.load()
+2026-07-17T21:13:36.908712505Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/uvicorn/config.py", line 458, in load
+2026-07-17T21:13:36.908872313Z     self.loaded_app = import_from_string(self.app)
+2026-07-17T21:13:36.908879604Z                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-17T21:13:36.908883014Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/uvicorn/importer.py", line 21, in import_from_string
+2026-07-17T21:13:36.908962868Z     module = importlib.import_module(module_str)
+2026-07-17T21:13:36.908966238Z              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-17T21:13:36.908968959Z   File "/opt/render/project/python/Python-3.11.0/lib/python3.11/importlib/__init__.py", line 126, in import_module
+2026-07-17T21:13:36.909073084Z     return _bootstrap._gcd_import(name[level:], package, level)
+2026-07-17T21:13:36.909080575Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-17T21:13:36.909082835Z   File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+2026-07-17T21:13:36.909085105Z   File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+2026-07-17T21:13:36.909087005Z   File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+2026-07-17T21:13:36.909089005Z   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+2026-07-17T21:13:36.909093345Z   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+2026-07-17T21:13:36.909095365Z   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+2026-07-17T21:13:36.909103736Z   File "/opt/render/project/src/backend/main.py", line 23, in <module>
+2026-07-17T21:13:36.909242224Z     from routers import (
+2026-07-17T21:13:36.909248324Z   File "/opt/render/project/src/backend/routers/__init__.py", line 4, in <module>
+2026-07-17T21:13:36.909372131Z     from . import auth_router, user_router, message_router, bot_router, verification_router, websocket_router, channel_router, upload_router
+2026-07-17T21:13:36.909378911Z   File "/opt/render/project/src/backend/routers/message_router.py", line 16, in <module>
+2026-07-17T21:13:36.909493817Z     from security import encryption_manager
+2026-07-17T21:13:36.909498378Z ImportError: cannot import name 'encryption_manager' from 'security' (/opt/render/project/src/backend/security.py)
+2026-07-17T21:13:40.802479562Z ==> Exited with status 1
+2026-07-17T21:13:40.804746807Z ==> Common ways to troubleshoot your deploy: https://render.com/docs/troubleshooting-deploys
+2026-07-17T21:13:45.204847895Z ==> Running 'cd backend && uvicorn main:app --host 0.0.0.0 --port $PORT'
+2026-07-17T21:14:03.79270359Z ==> No open ports detected, continuing to scan...
+2026-07-17T21:14:03.919048212Z ==> Docs on specifying a port: https://render.com/docs/web-services#port-binding
+2026-07-17T21:14:00.806587524Z Invalid ENCRYPTION_KEY in settings: Fernet key must be 32 url-safe base64-encoded bytes.. Generating a new one.
+2026-07-17T21:14:01.007257986Z Traceback (most recent call last):
+2026-07-17T21:14:01.007282548Z   File "/opt/render/project/src/.venv/bin/uvicorn", line 8, in <module>
+2026-07-17T21:14:01.007386793Z     sys.exit(main())
+2026-07-17T21:14:01.007436536Z              ^^^^^^
+2026-07-17T21:14:01.007442186Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/click/core.py", line 1569, in __call__
+2026-07-17T21:14:01.007715081Z     return self.main(*args, **kwargs)
+2026-07-17T21:14:01.007784845Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-17T21:14:01.007794085Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/click/core.py", line 1490, in main
+2026-07-17T21:14:01.093795189Z     rv = self.invoke(ctx)
+2026-07-17T21:14:01.0938167Z          ^^^^^^^^^^^^^^^^
+2026-07-17T21:14:01.09382213Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/click/core.py", line 1353, in invoke
+2026-07-17T21:14:01.09400701Z     return ctx.invoke(self.callback, **ctx.params)
+2026-07-17T21:14:01.094057433Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-17T21:14:01.094065974Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/click/core.py", line 907, in invoke
+2026-07-17T21:14:01.094227312Z     return callback(*args, **kwargs)
+2026-07-17T21:14:01.094239853Z            ^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-17T21:14:01.094244583Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/uvicorn/main.py", line 418, in main
+2026-07-17T21:14:01.09437791Z     run(
+2026-07-17T21:14:01.094389531Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/uvicorn/main.py", line 587, in run
+2026-07-17T21:14:01.094577751Z     server.run()
+2026-07-17T21:14:01.094587912Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/uvicorn/server.py", line 62, in run
+2026-07-17T21:14:01.094670896Z     return asyncio.run(self.serve(sockets=sockets))
+2026-07-17T21:14:01.094685877Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-17T21:14:01.094691687Z   File "/opt/render/project/python/Python-3.11.0/lib/python3.11/asyncio/runners.py", line 190, in run
+2026-07-17T21:14:01.094902069Z     return runner.run(main)
+2026-07-17T21:14:01.0949137Z            ^^^^^^^^^^^^^^^^
+2026-07-17T21:14:01.09491916Z   File "/opt/render/project/python/Python-3.11.0/lib/python3.11/asyncio/runners.py", line 118, in run
+2026-07-17T21:14:01.095024726Z     return self._loop.run_until_complete(task)
+2026-07-17T21:14:01.095032876Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-17T21:14:01.095038476Z   File "uvloop/loop.pyx", line 1518, in uvloop.loop.Loop.run_until_complete
+2026-07-17T21:14:01.095196365Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/uvicorn/server.py", line 69, in serve
+2026-07-17T21:14:01.09529031Z     config.load()
+2026-07-17T21:14:01.09529891Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/uvicorn/config.py", line 458, in load
+2026-07-17T21:14:01.09547929Z     self.loaded_app = import_from_string(self.app)
+2026-07-17T21:14:01.095502992Z                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-17T21:14:01.095509052Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/uvicorn/importer.py", line 21, in import_from_string
+2026-07-17T21:14:01.095582566Z     module = importlib.import_module(module_str)
+2026-07-17T21:14:01.095590176Z              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-17T21:14:01.095593756Z   File "/opt/render/project/python/Python-3.11.0/lib/python3.11/importlib/__init__.py", line 126, in import_module
+2026-07-17T21:14:01.095700532Z     return _bootstrap._gcd_import(name[level:], package, level)
+2026-07-17T21:14:01.095711163Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-17T21:14:01.095714033Z   File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+2026-07-17T21:14:01.095721073Z   File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+2026-07-17T21:14:01.095723333Z   File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+2026-07-17T21:14:01.095755205Z   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+2026-07-17T21:14:01.095771176Z   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+2026-07-17T21:14:01.095774946Z   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+2026-07-17T21:14:01.095778367Z   File "/opt/render/project/src/backend/main.py", line 23, in <module>
+2026-07-17T21:14:01.095895763Z     from routers import (
+2026-07-17T21:14:01.095902893Z   File "/opt/render/project/src/backend/routers/__init__.py", line 4, in <module>
+2026-07-17T21:14:01.095975307Z     from . import auth_router, user_router, message_router, bot_router, verification_router, websocket_router, channel_router, upload_router
+2026-07-17T21:14:01.095986698Z   File "/opt/render/project/src/backend/routers/message_router.py", line 16, in <module>
+2026-07-17T21:14:01.096091233Z     from security import encryption_manager
+2026-07-17T21:14:01.096096034Z ImportError: cannot import name 'encryption_manager' from 'security' (/opt/render/project/src/backend/security.py)

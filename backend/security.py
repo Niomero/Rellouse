@@ -244,3 +244,6 @@ token_manager = TokenManager()
 message_encryption = MessageEncryption()
 username_validator = UsernameValidator()
 security_validator = SecurityValidator()
+
+
+encryption_manager = message_encryption  # Alias for backward compatibility

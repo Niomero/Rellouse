@@ -110,7 +110,7 @@ export const useAuthStore = create<AuthState>()(
       },
 
       checkAuth: async () => {
-        const { accessToken } = get()
+        const { accessToken, refreshToken } = get()
         
         if (!accessToken) {
           set({ isAuthenticated: false })
@@ -125,8 +125,15 @@ export const useAuthStore = create<AuthState>()(
             isAuthenticated: true,
           })
         } catch (error) {
-          // Token invalid, try to refresh
-          await get().refreshAccessToken()
+          // Token invalid, clear auth state
+          set({
+            user: null,
+            accessToken: null,
+            refreshToken: null,
+            isAuthenticated: false,
+          })
+          localStorage.removeItem('access_token')
+          localStorage.removeItem('refresh_token')
         }
       },
 

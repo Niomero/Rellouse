@@ -44,7 +44,7 @@ export default function SearchPage() {
     setSearched(true)
     
     try {
-      const response = await api.get<SearchUser[]>('/users/search', {
+      const response = await api.get<SearchUser[]>('/api/users/search', {
         params: { query: searchQuery, limit: 20 }
       })
       setResults(response.data)

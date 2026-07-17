@@ -46,7 +46,7 @@ export default function CreateChannelPage() {
       const formData = new FormData()
       formData.append('file', file)
 
-      const response = await api.post('/upload/avatar', formData, {
+      const response = await api.post('/api/upload/avatar', formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
       })
 
@@ -74,7 +74,7 @@ export default function CreateChannelPage() {
 
     setLoading(true)
     try {
-      const response = await api.post('/channels', {
+      const response = await api.post('/api/channels', {
         name: form.name.trim(),
         description: form.description.trim() || null,
         avatar_url: form.avatar_url || null,

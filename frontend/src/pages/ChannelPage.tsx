@@ -147,7 +147,7 @@ export default function ChannelPage() {
     if (!channelId) return
 
     try {
-      await api.post(`/channels/${channelId}/join`)
+      await api.post(`/api/channels/${channelId}/join`)
       showSuccess('Joined channel successfully')
       loadChannel(parseInt(channelId))
     } catch (error: any) {

@@ -51,7 +51,7 @@ export default function ProfilePage() {
   const loadProfile = async (id: number) => {
     setLoading(true)
     try {
-      const response = await api.get<UserProfile>(`/users/${id}`)
+      const response = await api.get<UserProfile>(`/api/users/${id}`)
       setProfile(response.data)
     } catch (error: any) {
       showError(error.response?.data?.detail || 'Failed to load profile')

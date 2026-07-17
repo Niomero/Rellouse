@@ -68,8 +68,14 @@ async def initialize_system(db: AsyncSession) -> bool:
         
         await db.commit()
         
+        # Reset the auto-increment sequence to start from 2
+        # This prevents conflicts with manually assigned IDs (0 and 1)
+        await db.execute("SELECT setval('users_id_seq', 2, false)")
+        await db.commit()
+        
         logger.info(f"✅ Owner account created: @{settings.OWNER_USERNAME} (ID: 0)")
         logger.info(f"✅ @Verify bot created as User (ID: 1)")
+        logger.info("✅ Auto-increment sequence reset to start from ID: 2")
         logger.info("✅ System initialization completed successfully")
         
         return True

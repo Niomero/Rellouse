@@ -29,7 +29,8 @@ from routers import (
     websocket_router,
     channel_router,
     upload_router,
-    admin_router
+    admin_router,
+    debug_router
 )
 
 # Configure logging
@@ -178,6 +179,7 @@ app.include_router(websocket_router.router)
 app.include_router(channel_router.router)
 app.include_router(upload_router.router)
 app.include_router(admin_router.router)
+app.include_router(debug_router.router)
 
 
 # Mount static files for uploads

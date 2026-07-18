@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
-import { Search, User, Bot, CheckCircle, MessageCircle } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Search, User, Bot, CheckCircle, MessageCircle, Loader2, Users } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import { useToast } from '../hooks/useToast'
-import { SearchSkeleton } from '../components/ui/Skeleton'
 import api from '../services/api'
 
 interface SearchUser {
@@ -57,143 +56,157 @@ export default function SearchPage() {
   }
 
   const handleUserClick = (userId: number) => {
-    navigate(`/profile/${userId}`)
-  }
-
-  const handleMessageClick = (userId: number, e: React.MouseEvent) => {
-    e.stopPropagation()
     navigate(`/chat/${userId}`)
   }
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full bg-gray-900">
       {/* Search Header */}
-      <div className="glass border-b border-neutral-200 dark:border-neutral-700 p-4">
-        <div className="max-w-2xl mx-auto">
+      <motion.div
+        initial={{ y: -20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        className="glass-card border-b border-gray-700/50 p-6"
+      >
+        <div className="max-w-3xl mx-auto">
+          <h1 className="text-2xl font-bold gradient-text mb-4">Search Users</h1>
           <div className="relative">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-500" />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
             <input
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search by username, @username, or name..."
-              className="liquid-input pl-12 pr-4 py-3 text-base"
+              placeholder="Search by username or @username..."
+              className="w-full pl-12 pr-4 py-3.5 bg-gray-800/50 border border-gray-700/50 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-transparent transition-all text-base"
               autoFocus
             />
           </div>
         </div>
-      </div>
+      </motion.div>
 
       {/* Results */}
-      <div className="flex-1 overflow-y-auto liquid-scrollbar">
-        <div className="max-w-2xl mx-auto p-4">
-          {loading ? (
-            <SearchSkeleton />
-          ) : searched && results.length === 0 ? (
+      <div className="flex-1 overflow-y-auto p-6">
+        <div className="max-w-3xl mx-auto">
+          {!searched && !loading && (
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-center py-12"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="text-center py-20"
             >
-              <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-neutral-200 to-neutral-300 dark:from-neutral-700 dark:to-neutral-800 flex items-center justify-center">
-                <Search className="w-10 h-10 text-neutral-500" />
+              <div className="w-24 h-24 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-indigo-600 to-purple-600 flex items-center justify-center shadow-2xl shadow-indigo-500/30">
+                <Users className="w-12 h-12 text-white" />
               </div>
-              <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100 mb-2">
-                No users found
-              </h3>
-              <p className="text-sm text-neutral-600 dark:text-neutral-400">
-                Try searching with a different username or name
+              <h2 className="text-2xl font-bold text-white mb-2">Find People</h2>
+              <p className="text-gray-400 max-w-md mx-auto">
+                Search for users by their username or @username to start chatting
               </p>
             </motion.div>
-          ) : !searched ? (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-center py-12"
-            >
-              <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center">
-                <Search className="w-10 h-10 text-white" />
-              </div>
-              <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100 mb-2">
-                Search for users
-              </h3>
-              <p className="text-sm text-neutral-600 dark:text-neutral-400">
-                Enter a username, @username, or name to find people
-              </p>
-            </motion.div>
-          ) : (
-            <div className="space-y-2">
-              {results.map((user, index) => (
-                <motion.div
-                  key={user.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.05 }}
-                  onClick={() => handleUserClick(user.id)}
-                  className="glass liquid-hover liquid-press rounded-2xl p-4 cursor-pointer"
-                >
+          )}
+
+          {loading && (
+            <div className="space-y-3">
+              {[1, 2, 3, 4, 5].map((i) => (
+                <div key={i} className="glass-card p-4 animate-pulse">
                   <div className="flex items-center gap-4">
-                    {/* Avatar */}
-                    <div className="relative flex-shrink-0">
-                      <div className="liquid-avatar w-14 h-14">
-                        {user.avatar_url ? (
-                          <img
-                            src={user.avatar_url}
-                            alt={user.display_name || user.username}
-                            className="w-full h-full object-cover"
-                          />
-                        ) : (
-                          <div className="w-full h-full bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center">
-                            {user.is_bot ? (
-                              <Bot className="w-7 h-7 text-white" />
-                            ) : (
-                              <User className="w-7 h-7 text-white" />
-                            )}
-                          </div>
-                        )}
-                      </div>
-                      {user.is_online && !user.is_bot && (
-                        <div className="absolute bottom-0 right-0 w-4 h-4 bg-green-500 border-2 border-white dark:border-neutral-900 rounded-full" />
-                      )}
+                    <div className="w-14 h-14 rounded-xl bg-gray-700/50"></div>
+                    <div className="flex-1 space-y-2">
+                      <div className="h-4 bg-gray-700/50 rounded w-1/3"></div>
+                      <div className="h-3 bg-gray-700/50 rounded w-1/2"></div>
                     </div>
-
-                    {/* User Info */}
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2">
-                        <h3 className="font-semibold text-neutral-900 dark:text-neutral-100 truncate">
-                          {user.display_name || user.username}
-                        </h3>
-                        {user.is_verified && (
-                          <CheckCircle className="w-4 h-4 text-primary-500 flex-shrink-0" />
-                        )}
-                        {user.is_bot && (
-                          <span className="liquid-badge liquid-badge-primary text-xs px-2 py-0.5">
-                            BOT
-                          </span>
-                        )}
-                      </div>
-                      <p className="text-sm text-neutral-600 dark:text-neutral-400 truncate">
-                        {user.username}
-                      </p>
-                      {user.bio && (
-                        <p className="text-sm text-neutral-500 dark:text-neutral-500 truncate mt-1">
-                          {user.bio}
-                        </p>
-                      )}
-                    </div>
-
-                    {/* Message Button */}
-                    <button
-                      onClick={(e) => handleMessageClick(user.id, e)}
-                      className="liquid-btn-primary p-3 rounded-xl flex-shrink-0"
-                      aria-label="Send message"
-                    >
-                      <MessageCircle className="w-5 h-5" />
-                    </button>
                   </div>
-                </motion.div>
+                </div>
               ))}
             </div>
+          )}
+
+          {searched && !loading && results.length === 0 && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-center py-20"
+            >
+              <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gray-800/50 flex items-center justify-center">
+                <Search className="w-10 h-10 text-gray-600" />
+              </div>
+              <h3 className="text-xl font-semibold text-white mb-2">No users found</h3>
+              <p className="text-gray-400">Try searching with a different username</p>
+            </motion.div>
+          )}
+
+          {searched && !loading && results.length > 0 && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="space-y-3"
+            >
+              <p className="text-sm text-gray-400 mb-4">
+                Found {results.length} {results.length === 1 ? 'user' : 'users'}
+              </p>
+              
+              <AnimatePresence>
+                {results.map((user, index) => (
+                  <motion.div
+                    key={user.id}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: 20 }}
+                    transition={{ delay: index * 0.05 }}
+                    onClick={() => handleUserClick(user.id)}
+                    className="glass-card p-4 hover:bg-gray-800/60 transition-all cursor-pointer group"
+                  >
+                    <div className="flex items-center gap-4">
+                      {/* Avatar */}
+                      <div className="relative flex-shrink-0">
+                        <div className="w-14 h-14 rounded-xl overflow-hidden"
+                             style={{ background: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)' }}>
+                          {user.avatar_url ? (
+                            <img src={user.avatar_url} alt={user.username} className="w-full h-full object-cover" />
+                          ) : (
+                            <div className="w-full h-full flex items-center justify-center text-white font-bold text-xl">
+                              {user.username.charAt(1).toUpperCase()}
+                            </div>
+                          )}
+                        </div>
+                        {user.is_online && (
+                          <div className="absolute bottom-0 right-0 w-4 h-4 bg-green-500 rounded-full border-2 border-gray-900"></div>
+                        )}
+                      </div>
+
+                      {/* User Info */}
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 mb-1">
+                          <h3 className="text-base font-semibold text-white truncate">
+                            {user.display_name || user.username}
+                          </h3>
+                          {user.is_verified && (
+                            <CheckCircle className="w-4 h-4 text-indigo-400 flex-shrink-0" />
+                          )}
+                          {user.is_bot && (
+                            <span className="px-2 py-0.5 text-xs font-semibold bg-purple-500/20 text-purple-400 rounded-full flex-shrink-0">
+                              BOT
+                            </span>
+                          )}
+                        </div>
+                        <p className="text-sm text-gray-400 truncate">{user.username}</p>
+                        {user.bio && (
+                          <p className="text-sm text-gray-500 mt-1 line-clamp-1">{user.bio}</p>
+                        )}
+                      </div>
+
+                      {/* Action Button */}
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          handleUserClick(user.id)
+                        }}
+                        className="p-3 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 text-white hover:from-indigo-500 hover:to-purple-500 transition-all shadow-lg shadow-indigo-500/30 opacity-0 group-hover:opacity-100"
+                      >
+                        <MessageCircle className="w-5 h-5" />
+                      </button>
+                    </div>
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+            </motion.div>
           )}
         </div>
       </div>

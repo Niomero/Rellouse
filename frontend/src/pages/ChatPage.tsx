@@ -5,18 +5,18 @@ import {
   ArrowLeft,
   Send,
   Image as ImageIcon,
-  User,
-  Bot,
-  CheckCircle,
-  Loader2,
-  X,
+  Smile,
+  Paperclip,
+  MoreVertical,
+  Phone,
+  Video,
+  Search,
+  CheckCheck,
+  Check,
+  Clock,
 } from 'lucide-react'
-import { cn } from '../utils/cn'
 import { useToast } from '../hooks/useToast'
 import { useAuthStore } from '../store/authStore'
-import { EmojiPicker } from '../components/EmojiPicker'
-import { ImageUpload, ImagePreview } from '../components/ImageUpload'
-import { MessageSkeleton } from '../components/ui/Skeleton'
 import api from '../services/api'
 import { format, isToday, isYesterday } from 'date-fns'
 
@@ -64,7 +64,6 @@ export default function ChatPage() {
   const [messageText, setMessageText] = useState('')
   const [loading, setLoading] = useState(true)
   const [sending, setSending] = useState(false)
-  const [showImageUpload, setShowImageUpload] = useState(false)
   
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const messageInputRef = useRef<HTMLTextAreaElement>(null)
@@ -123,42 +122,10 @@ export default function ChatPage() {
       })
 
       setMessages(prev => [...prev, response.data])
-      showSuccess('Message sent')
+      scrollToBottom()
     } catch (error: any) {
       showError(error.response?.data?.detail || 'Failed to send message')
       setMessageText(content)
-    } finally {
-      setSending(false)
-    }
-  }
-
-  const handleImageUpload = async (imageUrl: string, imageData: any) => {
-    if (!userId || sending) return
-
-    setSending(true)
-    setShowImageUpload(false)
-
-    try {
-      const response = await api.post<Message>('/api/messages', {
-        recipient_id: parseInt(userId),
-        content: imageData.fileName,
-        message_type: 'image',
-        attachment: {
-          file_url: imageUrl,
-          file_name: imageData.fileName,
-          file_size: imageData.fileSize,
-          file_type: imageData.fileType,
-          attachment_type: 'image',
-          thumbnail_url: imageData.thumbnailUrl,
-          width: imageData.width,
-          height: imageData.height,
-        }
-      })
-
-      setMessages(prev => [...prev, response.data])
-      showSuccess('Image sent')
-    } catch (error: any) {
-      showError(error.response?.data?.detail || 'Failed to send image')
     } finally {
       setSending(false)
     }
@@ -171,44 +138,55 @@ export default function ChatPage() {
     }
   }
 
-  const handleEmojiSelect = (emoji: string) => {
-    setMessageText(prev => prev + emoji)
-    messageInputRef.current?.focus()
-  }
-
   const formatMessageTime = (dateString: string) => {
     const date = new Date(dateString)
-    if (isToday(date)) return format(date, 'HH:mm')
-    if (isYesterday(date)) return `Yesterday ${format(date, 'HH:mm')}`
-    return format(date, 'MMM d, HH:mm')
+    if (isToday(date)) {
+      return format(date, 'HH:mm')
+    } else if (isYesterday(date)) {
+      return `Yesterday ${format(date, 'HH:mm')}`
+    } else {
+      return format(date, 'MMM dd, HH:mm')
+    }
   }
 
   const groupMessagesByDate = (messages: Message[]) => {
     const groups: { [key: string]: Message[] } = {}
     
-    messages.forEach(message => {
-      const date = new Date(message.created_at)
-      let key: string
+    messages.forEach(msg => {
+      const date = new Date(msg.created_at)
+      let dateKey: string
       
       if (isToday(date)) {
-        key = 'Today'
+        dateKey = 'Today'
       } else if (isYesterday(date)) {
-        key = 'Yesterday'
+        dateKey = 'Yesterday'
       } else {
-        key = format(date, 'MMMM d, yyyy')
+        dateKey = format(date, 'MMMM dd, yyyy')
       }
       
-      if (!groups[key]) groups[key] = []
-      groups[key].push(message)
+      if (!groups[dateKey]) {
+        groups[dateKey] = []
+      }
+      groups[dateKey].push(msg)
     })
     
     return groups
   }
 
-  if (!chatUser) {
+  if (!userId) {
     return (
-      <div className="flex items-center justify-center h-full">
-        <Loader2 className="w-8 h-8 text-primary-500 animate-spin" />
+      <div className="h-full flex items-center justify-center">
+        <div className="text-center">
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            className="w-24 h-24 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-indigo-600 to-purple-600 flex items-center justify-center"
+          >
+            <Search className="w-12 h-12 text-white" />
+          </motion.div>
+          <h2 className="text-2xl font-bold text-white mb-2">Select a chat</h2>
+          <p className="text-gray-400">Choose a conversation to start messaging</p>
+        </div>
       </div>
     )
   }
@@ -216,230 +194,196 @@ export default function ChatPage() {
   const messageGroups = groupMessagesByDate(messages)
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="h-full flex flex-col bg-gray-900">
       {/* Chat Header */}
-      <div className="glass border-b border-neutral-200 dark:border-neutral-700 p-4">
-        <div className="flex items-center gap-3">
-          <button
-            onClick={() => navigate('/chat')}
-            className="liquid-btn liquid-hover liquid-press p-2 rounded-xl"
-          >
-            <ArrowLeft className="w-5 h-5" />
-          </button>
-
-          <div
-            onClick={() => navigate(`/profile/${chatUser.id}`)}
-            className="flex items-center gap-3 flex-1 cursor-pointer liquid-hover rounded-xl p-2 -m-2"
-          >
-            <div className="relative flex-shrink-0">
-              <div className="liquid-avatar w-10 h-10">
+      {chatUser && (
+        <motion.div
+          initial={{ y: -20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          className="glass-card border-b border-gray-700/50 px-6 py-4 flex items-center justify-between"
+        >
+          <div className="flex items-center space-x-4">
+            <button
+              onClick={() => navigate('/chat')}
+              className="p-2 rounded-xl text-gray-400 hover:text-white hover:bg-gray-800/50 transition-all lg:hidden"
+            >
+              <ArrowLeft className="w-5 h-5" />
+            </button>
+            
+            <div className="relative">
+              <div className="w-12 h-12 rounded-xl overflow-hidden"
+                   style={{ background: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)' }}>
                 {chatUser.avatar_url ? (
-                  <img
-                    src={chatUser.avatar_url}
-                    alt={chatUser.display_name || chatUser.username}
-                    className="w-full h-full object-cover"
-                  />
+                  <img src={chatUser.avatar_url} alt={chatUser.username} className="w-full h-full object-cover" />
                 ) : (
-                  <div className="w-full h-full bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center">
-                    {chatUser.is_bot ? (
-                      <Bot className="w-5 h-5 text-white" />
-                    ) : (
-                      <User className="w-5 h-5 text-white" />
-                    )}
+                  <div className="w-full h-full flex items-center justify-center text-white font-bold text-lg">
+                    {chatUser.username.charAt(1).toUpperCase()}
                   </div>
                 )}
               </div>
-              {chatUser.is_online && !chatUser.is_bot && (
-                <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-white dark:border-neutral-900 rounded-full" />
+              {chatUser.is_online && (
+                <div className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-green-500 rounded-full border-2 border-gray-900"></div>
               )}
             </div>
 
-            <div className="flex-1 min-w-0">
-              <div className="flex items-center gap-1.5">
-                <h2 className="font-semibold text-neutral-900 dark:text-neutral-100 truncate">
-                  {chatUser.display_name || chatUser.username}
-                </h2>
+            <div>
+              <h2 className="text-lg font-semibold text-white flex items-center gap-2">
+                {chatUser.display_name || chatUser.username}
                 {chatUser.is_verified && (
-                  <CheckCircle className="w-4 h-4 text-primary-500 flex-shrink-0" />
+                  <CheckCheck className="w-4 h-4 text-indigo-400" />
                 )}
-              </div>
-              <p className="text-sm text-neutral-600 dark:text-neutral-400">
+              </h2>
+              <p className="text-sm text-gray-400">
                 {chatUser.is_online ? 'Online' : 'Offline'}
               </p>
             </div>
           </div>
-        </div>
-      </div>
 
-      {/* Messages */}
-      <div className="flex-1 overflow-y-auto liquid-scrollbar p-4 space-y-6">
+          <div className="flex items-center space-x-2">
+            <button className="p-2.5 rounded-xl text-gray-400 hover:text-white hover:bg-gray-800/50 transition-all">
+              <Phone className="w-5 h-5" />
+            </button>
+            <button className="p-2.5 rounded-xl text-gray-400 hover:text-white hover:bg-gray-800/50 transition-all">
+              <Video className="w-5 h-5" />
+            </button>
+            <button className="p-2.5 rounded-xl text-gray-400 hover:text-white hover:bg-gray-800/50 transition-all">
+              <Search className="w-5 h-5" />
+            </button>
+            <button className="p-2.5 rounded-xl text-gray-400 hover:text-white hover:bg-gray-800/50 transition-all">
+              <MoreVertical className="w-5 h-5" />
+            </button>
+          </div>
+        </motion.div>
+      )}
+
+      {/* Messages Area */}
+      <div className="flex-1 overflow-y-auto px-6 py-4 space-y-6">
         {loading ? (
-          <MessageSkeleton />
+          <div className="flex items-center justify-center h-full">
+            <div className="animate-spin rounded-full h-12 w-12 border-4 border-indigo-500 border-t-transparent"></div>
+          </div>
         ) : messages.length === 0 ? (
-          <div className="flex flex-col items-center justify-center h-full text-center">
-            <div className="w-20 h-20 mb-4 rounded-full bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center">
-              <Send className="w-10 h-10 text-white" />
+          <div className="flex items-center justify-center h-full">
+            <div className="text-center">
+              <div className="w-20 h-20 mx-auto mb-4 rounded-2xl bg-gray-800/50 flex items-center justify-center">
+                <Send className="w-10 h-10 text-gray-600" />
+              </div>
+              <p className="text-gray-400">No messages yet</p>
+              <p className="text-sm text-gray-500 mt-1">Start the conversation!</p>
             </div>
-            <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100 mb-2">
-              No messages yet
-            </h3>
-            <p className="text-sm text-neutral-600 dark:text-neutral-400">
-              Start the conversation by sending a message
-            </p>
           </div>
         ) : (
           Object.entries(messageGroups).map(([date, msgs]) => (
-            <div key={date} className="space-y-3">
-              {/* Date Separator */}
-              <div className="flex items-center justify-center">
-                <div className="liquid-badge px-3 py-1 text-xs font-medium">
-                  {date}
+            <div key={date}>
+              {/* Date Divider */}
+              <div className="flex items-center justify-center my-6">
+                <div className="px-4 py-1.5 rounded-full bg-gray-800/50 border border-gray-700/50">
+                  <span className="text-xs font-medium text-gray-400">{date}</span>
                 </div>
               </div>
 
               {/* Messages */}
-              {msgs.map((message, index) => {
-                const isSent = message.sender_id === currentUser?.id
-                const showAvatar = index === 0 || msgs[index - 1].sender_id !== message.sender_id
+              <div className="space-y-3">
+                {msgs.map((message, index) => {
+                  const isSent = message.sender_id === currentUser?.id
+                  const showAvatar = index === 0 || msgs[index - 1].sender_id !== message.sender_id
 
-                return (
-                  <motion.div
-                    key={message.id}
-                    initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    transition={{ duration: 0.2 }}
-                    className={cn('flex gap-2', isSent ? 'justify-end' : 'justify-start')}
-                  >
-                    {!isSent && showAvatar && (
-                      <div className="liquid-avatar w-8 h-8 flex-shrink-0">
-                        {chatUser.avatar_url ? (
-                          <img
-                            src={chatUser.avatar_url}
-                            alt={chatUser.display_name || chatUser.username}
-                            className="w-full h-full object-cover"
-                          />
-                        ) : (
-                          <div className="w-full h-full bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center">
-                            {chatUser.is_bot ? (
-                              <Bot className="w-4 h-4 text-white" />
+                  return (
+                    <motion.div
+                      key={message.id}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className={`flex items-end gap-2 ${isSent ? 'flex-row-reverse' : 'flex-row'}`}
+                    >
+                      {!isSent && showAvatar && (
+                        <div className="w-8 h-8 rounded-lg overflow-hidden flex-shrink-0"
+                             style={{ background: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)' }}>
+                          {chatUser?.avatar_url ? (
+                            <img src={chatUser.avatar_url} alt="" className="w-full h-full object-cover" />
+                          ) : (
+                            <div className="w-full h-full flex items-center justify-center text-white text-xs font-bold">
+                              {chatUser?.username.charAt(1).toUpperCase()}
+                            </div>
+                          )}
+                        </div>
+                      )}
+                      {!isSent && !showAvatar && <div className="w-8" />}
+
+                      <div className={`flex flex-col ${isSent ? 'items-end' : 'items-start'} max-w-[70%]`}>
+                        <div
+                          className={`px-4 py-2.5 rounded-2xl ${
+                            isSent
+                              ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white'
+                              : 'glass-card text-white'
+                          } ${isSent ? 'rounded-br-sm' : 'rounded-bl-sm'}`}
+                        >
+                          <p className="text-sm leading-relaxed break-words">{message.content}</p>
+                        </div>
+                        
+                        <div className="flex items-center gap-1.5 mt-1 px-1">
+                          <span className="text-xs text-gray-500">
+                            {formatMessageTime(message.created_at)}
+                          </span>
+                          {isSent && (
+                            message.is_read ? (
+                              <CheckCheck className="w-3.5 h-3.5 text-indigo-400" />
                             ) : (
-                              <User className="w-4 h-4 text-white" />
-                            )}
-                          </div>
-                        )}
+                              <Check className="w-3.5 h-3.5 text-gray-500" />
+                            )
+                          )}
+                        </div>
                       </div>
-                    )}
-                    {!isSent && !showAvatar && <div className="w-8" />}
-
-                    <div className={cn('max-w-[70%] space-y-1', isSent && 'items-end')}>
-                      <div
-                        className={cn(
-                          'liquid-message',
-                          isSent ? 'liquid-message-sent' : 'liquid-message-received'
-                        )}
-                      >
-                        {message.message_type === 'image' && message.attachments?.[0] && (
-                          <ImagePreview
-                            src={message.attachments[0].file_url}
-                            alt={message.attachments[0].file_name}
-                            className="mb-2 max-w-sm rounded-xl"
-                          />
-                        )}
-                        <p className="text-sm whitespace-pre-wrap break-words">
-                          {message.content}
-                        </p>
-                      </div>
-                      <span className="text-xs text-neutral-500 px-2">
-                        {formatMessageTime(message.created_at)}
-                      </span>
-                    </div>
-                  </motion.div>
-                )
-              })}
+                    </motion.div>
+                  )
+                })}
+              </div>
             </div>
           ))
         )}
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Image Upload Modal */}
-      <AnimatePresence>
-        {showImageUpload && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="liquid-modal-backdrop fixed inset-0 flex items-center justify-center p-4 z-50"
-            onClick={() => setShowImageUpload(false)}
-          >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              onClick={(e) => e.stopPropagation()}
-              className="liquid-modal p-6"
-            >
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100">
-                  Send Image
-                </h3>
-                <button
-                  onClick={() => setShowImageUpload(false)}
-                  className="liquid-btn p-2 rounded-xl"
-                >
-                  <X className="w-5 h-5" />
-                </button>
-              </div>
-              <ImageUpload
-                onUpload={handleImageUpload}
-                onCancel={() => setShowImageUpload(false)}
-              />
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
       {/* Message Input */}
-      <div className="glass border-t border-neutral-200 dark:border-neutral-700 p-4">
-        <div className="flex items-end gap-2">
-          <button
-            onClick={() => setShowImageUpload(true)}
-            className="liquid-btn liquid-hover liquid-press p-3 rounded-xl flex-shrink-0"
-            disabled={sending}
-          >
-            <ImageIcon className="w-5 h-5 text-neutral-600 dark:text-neutral-400" />
+      <motion.div
+        initial={{ y: 20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        className="glass-card border-t border-gray-700/50 px-6 py-4"
+      >
+        <div className="flex items-end gap-3">
+          <button className="p-2.5 rounded-xl text-gray-400 hover:text-white hover:bg-gray-800/50 transition-all">
+            <Paperclip className="w-5 h-5" />
+          </button>
+          
+          <button className="p-2.5 rounded-xl text-gray-400 hover:text-white hover:bg-gray-800/50 transition-all">
+            <ImageIcon className="w-5 h-5" />
           </button>
 
-          <div className="flex-1 glass rounded-2xl p-3 flex items-end gap-2">
+          <div className="flex-1 relative">
             <textarea
               ref={messageInputRef}
               value={messageText}
               onChange={(e) => setMessageText(e.target.value)}
               onKeyPress={handleKeyPress}
               placeholder="Type a message..."
-              className="flex-1 bg-transparent outline-none resize-none max-h-32 text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-500"
               rows={1}
-              disabled={sending}
+              className="w-full px-4 py-3 bg-gray-800/50 border border-gray-700/50 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-transparent resize-none transition-all"
+              style={{ minHeight: '44px', maxHeight: '120px' }}
             />
-            <EmojiPicker onEmojiSelect={handleEmojiSelect} />
           </div>
+
+          <button className="p-2.5 rounded-xl text-gray-400 hover:text-white hover:bg-gray-800/50 transition-all">
+            <Smile className="w-5 h-5" />
+          </button>
 
           <button
             onClick={sendMessage}
             disabled={!messageText.trim() || sending}
-            className={cn(
-              'liquid-btn-primary p-3 rounded-xl flex-shrink-0 transition-all',
-              (!messageText.trim() || sending) && 'opacity-50 cursor-not-allowed'
-            )}
+            className="p-3 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 text-white hover:from-indigo-500 hover:to-purple-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-lg shadow-indigo-500/30"
           >
-            {sending ? (
-              <Loader2 className="w-5 h-5 animate-spin" />
-            ) : (
-              <Send className="w-5 h-5" />
-            )}
+            <Send className="w-5 h-5" />
           </button>
         </div>
-      </div>
+      </motion.div>
     </div>
   )
 }

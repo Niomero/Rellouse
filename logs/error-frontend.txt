@@ -1,1 +1,45 @@
-фроньед заработал, можешь не смотреть логи его
+2026-07-17T23:58:16.152677959Z ==> Downloading cache...
+2026-07-17T23:58:16.193798625Z ==> Cloning from https://github.com/Niomero/Rellouse
+2026-07-17T23:58:16.731536316Z ==> Checking out commit 3e68dd52f952911d73ba5ee3a459b4a4e89a0bb7 in branch main
+2026-07-17T23:58:22.278454079Z ==> Downloaded 137MB in 3s. Extraction took 3s.
+2026-07-17T23:58:27.272994046Z ==> Running build command 'cd frontend && npm install && npm run build'...
+2026-07-17T23:58:27.367838679Z ==> Using Node.js version 24.14.1 (default)
+2026-07-17T23:58:27.367852669Z ==> Docs on specifying a Node.js version: https://render.com/docs/node-version
+2026-07-17T23:58:30.445658376Z 
+2026-07-17T23:58:30.445688506Z up to date, audited 305 packages in 3s
+2026-07-17T23:58:30.445697677Z 
+2026-07-17T23:58:30.445792299Z 67 packages are looking for funding
+2026-07-17T23:58:30.445863731Z   run `npm fund` for details
+2026-07-17T23:58:30.574205355Z 
+2026-07-17T23:58:30.574249176Z 8 vulnerabilities (1 moderate, 7 high)
+2026-07-17T23:58:30.574256856Z 
+2026-07-17T23:58:30.574261186Z To address issues that do not require attention, run:
+2026-07-17T23:58:30.574264356Z   npm audit fix
+2026-07-17T23:58:30.574267357Z 
+2026-07-17T23:58:30.574270446Z To address all issues (including breaking changes), run:
+2026-07-17T23:58:30.574274477Z   npm audit fix --force
+2026-07-17T23:58:30.574277197Z 
+2026-07-17T23:58:30.574280977Z Run `npm audit` for details.
+2026-07-17T23:58:30.788971424Z 
+2026-07-17T23:58:30.788992445Z > rellouse-messenger-frontend@1.0.0 build
+2026-07-17T23:58:30.788996915Z > tsc && vite build
+2026-07-17T23:58:30.789000055Z 
+2026-07-17T23:58:34.617740179Z vite v5.4.21 building for production...
+2026-07-17T23:58:34.664467117Z transforming...
+2026-07-17T23:58:34.989016401Z ✓ 4 modules transformed.
+2026-07-17T23:58:34.989398681Z x Build failed in 350ms
+2026-07-17T23:58:34.989439392Z error during build:
+2026-07-17T23:58:34.989443752Z [vite:css] [postcss] postcss-import: /opt/render/project/src/frontend/src/styles/liquid-glass.css:132:3: Unknown word justify-center
+2026-07-17T23:58:34.989448182Z file: /opt/render/project/src/frontend/src/index.css:132:2
+2026-07-17T23:58:34.989452422Z     at Input.error (/opt/render/project/src/frontend/node_modules/postcss/lib/input.js:135:16)
+2026-07-17T23:58:34.989456123Z     at Parser.unknownWord (/opt/render/project/src/frontend/node_modules/postcss/lib/parser.js:602:22)
+2026-07-17T23:58:34.989459513Z     at Parser.other (/opt/render/project/src/frontend/node_modules/postcss/lib/parser.js:444:12)
+2026-07-17T23:58:34.989462663Z     at Parser.parse (/opt/render/project/src/frontend/node_modules/postcss/lib/parser.js:479:16)
+2026-07-17T23:58:34.989465543Z     at parse (/opt/render/project/src/frontend/node_modules/postcss/lib/parse.js:11:12)
+2026-07-17T23:58:34.989468843Z     at get root (/opt/render/project/src/frontend/node_modules/postcss/lib/no-work-result.js:43:14)
+2026-07-17T23:58:34.989471293Z     at Result.get [as root] (/opt/render/project/src/frontend/node_modules/postcss/lib/no-work-result.js:76:21)
+2026-07-17T23:58:34.989473983Z     at loadImportContent (file:///opt/render/project/src/frontend/node_modules/vite/dist/node/chunks/dep-BB45zftN.js:867:33)
+2026-07-17T23:58:34.989476713Z     at async Promise.all (index 0)
+2026-07-17T23:58:34.989478743Z     at async resolveImportId (file:///opt/render/project/src/frontend/node_modules/vite/dist/node/chunks/dep-BB45zftN.js:800:27)
+2026-07-17T23:58:35.04657309Z ==> Build failed 😞
+2026-07-17T23:58:35.04658785Z ==> Common ways to troubleshoot your deploy: https://render.com/docs/troubleshooting-deploys

@@ -11,11 +11,12 @@ import {
   Clock,
   Shield,
   Crown,
+  Zap,
+  Mail,
+  AtSign,
 } from 'lucide-react'
-import { cn } from '../utils/cn'
 import { useToast } from '../hooks/useToast'
 import { useAuthStore } from '../store/authStore'
-import { ProfileSkeleton } from '../components/ui/Skeleton'
 import api from '../services/api'
 import { format } from 'date-fns'
 
@@ -70,26 +71,23 @@ export default function ProfilePage() {
   const getRoleBadge = (role: string) => {
     switch (role) {
       case 'owner':
-        return (
-          <div className="flex items-center gap-1 px-3 py-1 rounded-full bg-gradient-to-r from-yellow-500 to-orange-500 text-white text-xs font-medium">
-            <Crown className="w-3 h-3" />
-            <span>Owner</span>
-          </div>
-        )
+        return {
+          icon: <Crown className="w-4 h-4" />,
+          label: 'Owner',
+          gradient: 'from-yellow-500 to-orange-500'
+        }
       case 'administrator':
-        return (
-          <div className="flex items-center gap-1 px-3 py-1 rounded-full bg-gradient-to-r from-red-500 to-pink-500 text-white text-xs font-medium">
-            <Shield className="w-3 h-3" />
-            <span>Admin</span>
-          </div>
-        )
+        return {
+          icon: <Shield className="w-4 h-4" />,
+          label: 'Admin',
+          gradient: 'from-red-500 to-pink-500'
+        }
       case 'verified':
-        return (
-          <div className="flex items-center gap-1 px-3 py-1 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 text-white text-xs font-medium">
-            <CheckCircle className="w-3 h-3" />
-            <span>Verified</span>
-          </div>
-        )
+        return {
+          icon: <Zap className="w-4 h-4" />,
+          label: 'Verified',
+          gradient: 'from-indigo-500 to-purple-500'
+        }
       default:
         return null
     }
@@ -97,202 +95,166 @@ export default function ProfilePage() {
 
   const getStatusText = () => {
     if (!profile) return ''
-    
-    if (profile.is_bot) return 'System Bot'
     if (profile.is_online) return 'Online'
     if (profile.last_seen) {
-      const lastSeen = new Date(profile.last_seen)
-      const now = new Date()
-      const diffMinutes = Math.floor((now.getTime() - lastSeen.getTime()) / 60000)
-      
-      if (diffMinutes < 1) return 'Just now'
-      if (diffMinutes < 60) return `${diffMinutes}m ago`
-      if (diffMinutes < 1440) return `${Math.floor(diffMinutes / 60)}h ago`
-      return format(lastSeen, 'MMM d, yyyy')
+      return `Last seen ${format(new Date(profile.last_seen), 'MMM dd, HH:mm')}`
     }
     return 'Offline'
   }
 
   if (loading) {
     return (
-      <div className="flex flex-col h-full">
-        <div className="glass border-b border-neutral-200 dark:border-neutral-700 p-4">
-          <button
-            onClick={() => navigate(-1)}
-            className="liquid-btn liquid-hover liquid-press p-2 rounded-xl"
-          >
-            <ArrowLeft className="w-5 h-5" />
-          </button>
-        </div>
-        <ProfileSkeleton />
+      <div className="h-full flex items-center justify-center bg-gray-900">
+        <div className="animate-spin rounded-full h-16 w-16 border-4 border-indigo-500 border-t-transparent"></div>
       </div>
     )
   }
 
-  if (!profile) return null
+  if (!profile) {
+    return (
+      <div className="h-full flex items-center justify-center bg-gray-900">
+        <div className="text-center">
+          <User className="w-16 h-16 text-gray-600 mx-auto mb-4" />
+          <p className="text-gray-400">Profile not found</p>
+        </div>
+      </div>
+    )
+  }
 
+  const roleBadge = getRoleBadge(profile.role)
   const isOwnProfile = currentUser?.id === profile.id
 
   return (
-    <div className="flex flex-col h-full">
-      {/* Header */}
-      <div className="glass border-b border-neutral-200 dark:border-neutral-700 p-4">
-        <div className="flex items-center justify-between">
+    <div className="h-full overflow-y-auto bg-gray-900">
+      <div className="max-w-4xl mx-auto">
+        {/* Header */}
+        <motion.div
+          initial={{ y: -20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          className="glass-card border-b border-gray-700/50 p-6"
+        >
           <button
             onClick={() => navigate(-1)}
-            className="liquid-btn liquid-hover liquid-press p-2 rounded-xl"
+            className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-4"
           >
             <ArrowLeft className="w-5 h-5" />
+            <span>Back</span>
           </button>
-          <h1 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100">
-            Profile
-          </h1>
-          <div className="w-10" />
-        </div>
-      </div>
+        </motion.div>
 
-      {/* Profile Content */}
-      <div className="flex-1 overflow-y-auto liquid-scrollbar">
-        <div className="max-w-2xl mx-auto p-6 space-y-6">
-          {/* Avatar and Basic Info */}
+        {/* Profile Content */}
+        <div className="p-6 space-y-6">
+          {/* Profile Card */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="glass rounded-3xl p-8"
+            transition={{ delay: 0.1 }}
+            className="glass-card p-8"
           >
-            <div className="flex flex-col items-center text-center space-y-4">
+            <div className="flex flex-col md:flex-row gap-8">
               {/* Avatar */}
-              <div className="relative">
-                <div className="liquid-avatar w-32 h-32">
-                  {profile.avatar_url ? (
-                    <img
-                      src={profile.avatar_url}
-                      alt={profile.display_name || profile.username}
-                      className="w-full h-full object-cover"
-                    />
-                  ) : (
-                    <div className="w-full h-full bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center">
-                      {profile.is_bot ? (
-                        <Bot className="w-16 h-16 text-white" />
-                      ) : (
-                        <User className="w-16 h-16 text-white" />
-                      )}
+              <div className="flex-shrink-0">
+                <div className="relative">
+                  <div className="w-32 h-32 rounded-2xl overflow-hidden shadow-2xl"
+                       style={{ background: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)' }}>
+                    {profile.avatar_url ? (
+                      <img src={profile.avatar_url} alt={profile.username} className="w-full h-full object-cover" />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center text-white font-bold text-5xl">
+                        {profile.username.charAt(1).toUpperCase()}
+                      </div>
+                    )}
+                  </div>
+                  {profile.is_online && (
+                    <div className="absolute bottom-2 right-2 w-6 h-6 bg-green-500 rounded-full border-4 border-gray-900"></div>
+                  )}
+                </div>
+              </div>
+
+              {/* Info */}
+              <div className="flex-1 space-y-4">
+                <div>
+                  <div className="flex items-center gap-3 mb-2">
+                    <h1 className="text-3xl font-bold text-white">
+                      {profile.display_name || profile.username}
+                    </h1>
+                    {profile.is_verified && (
+                      <CheckCircle className="w-6 h-6 text-indigo-400" />
+                    )}
+                    {profile.is_bot && (
+                      <span className="px-3 py-1 text-sm font-semibold bg-purple-500/20 text-purple-400 rounded-full">
+                        BOT
+                      </span>
+                    )}
+                  </div>
+                  
+                  <div className="flex items-center gap-2 text-gray-400 mb-3">
+                    <AtSign className="w-4 h-4" />
+                    <span>{profile.username}</span>
+                  </div>
+
+                  {roleBadge && (
+                    <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r ${roleBadge.gradient} text-white font-semibold shadow-lg`}>
+                      {roleBadge.icon}
+                      <span>{roleBadge.label}</span>
                     </div>
                   )}
                 </div>
-                {profile.is_online && !profile.is_bot && (
-                  <div className="absolute bottom-2 right-2 w-6 h-6 bg-green-500 border-4 border-white dark:border-neutral-900 rounded-full" />
+
+                {profile.bio && (
+                  <p className="text-gray-300 leading-relaxed">{profile.bio}</p>
+                )}
+
+                <div className="flex items-center gap-2 text-sm">
+                  <Clock className="w-4 h-4 text-gray-500" />
+                  <span className={profile.is_online ? 'text-green-400' : 'text-gray-400'}>
+                    {getStatusText()}
+                  </span>
+                </div>
+
+                {!isOwnProfile && (
+                  <button
+                    onClick={handleMessage}
+                    className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-semibold rounded-xl shadow-lg shadow-indigo-500/30 transition-all"
+                  >
+                    <MessageCircle className="w-5 h-5" />
+                    Send Message
+                  </button>
                 )}
               </div>
-
-              {/* Name and Username */}
-              <div className="space-y-2">
-                <div className="flex items-center justify-center gap-2">
-                  <h2 className="text-2xl font-bold text-neutral-900 dark:text-neutral-100">
-                    {profile.display_name || profile.username}
-                  </h2>
-                  {profile.is_verified && (
-                    <CheckCircle className="w-6 h-6 text-primary-500" />
-                  )}
-                </div>
-                <p className="text-base text-neutral-600 dark:text-neutral-400">
-                  {profile.username}
-                </p>
-              </div>
-
-              {/* Role Badge */}
-              {getRoleBadge(profile.role)}
-
-              {/* Status */}
-              <div className="flex items-center gap-2 text-sm">
-                <Clock className="w-4 h-4 text-neutral-500" />
-                <span className={cn(
-                  'font-medium',
-                  profile.is_online ? 'text-green-600 dark:text-green-400' : 'text-neutral-600 dark:text-neutral-400'
-                )}>
-                  {getStatusText()}
-                </span>
-              </div>
-
-              {/* Message Button */}
-              {!isOwnProfile && (
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  onClick={handleMessage}
-                  className="liquid-btn-primary w-full max-w-xs rounded-xl px-6 py-3 font-medium flex items-center justify-center gap-2"
-                >
-                  <MessageCircle className="w-5 h-5" />
-                  <span>Send Message</span>
-                </motion.button>
-              )}
             </div>
           </motion.div>
 
-          {/* Bio */}
-          {profile.bio && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-              className="glass rounded-2xl p-6"
-            >
-              <h3 className="text-sm font-semibold text-neutral-700 dark:text-neutral-300 mb-3">
-                About
-              </h3>
-              <p className="text-base text-neutral-900 dark:text-neutral-100 whitespace-pre-wrap">
-                {profile.bio}
-              </p>
-            </motion.div>
-          )}
-
-          {/* Additional Usernames */}
-          {profile.additional_usernames && profile.additional_usernames.length > 0 && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="glass rounded-2xl p-6"
-            >
-              <h3 className="text-sm font-semibold text-neutral-700 dark:text-neutral-300 mb-3">
-                Additional Usernames
-              </h3>
-              <div className="flex flex-wrap gap-2">
-                {profile.additional_usernames.map((username, index) => (
-                  <span
-                    key={index}
-                    className="liquid-badge px-3 py-1.5 text-sm font-medium text-neutral-700 dark:text-neutral-300"
-                  >
-                    {username}
-                  </span>
-                ))}
-              </div>
-            </motion.div>
-          )}
-
-          {/* Account Info */}
+          {/* Additional Info */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="glass rounded-2xl p-6"
+            transition={{ delay: 0.2 }}
+            className="glass-card p-6"
           >
-            <h3 className="text-sm font-semibold text-neutral-700 dark:text-neutral-300 mb-4">
-              Account Information
-            </h3>
-            <div className="space-y-3">
-              <div className="flex items-center gap-3 text-sm">
-                <Calendar className="w-4 h-4 text-neutral-500" />
-                <span className="text-neutral-600 dark:text-neutral-400">
-                  Joined {format(new Date(profile.created_at), 'MMMM d, yyyy')}
-                </span>
+            <h2 className="text-xl font-bold text-white mb-4">Information</h2>
+            <div className="space-y-4">
+              <div className="flex items-start gap-3">
+                <Calendar className="w-5 h-5 text-gray-500 mt-0.5" />
+                <div>
+                  <p className="text-sm text-gray-500">Joined</p>
+                  <p className="text-white">{format(new Date(profile.created_at), 'MMMM dd, yyyy')}</p>
+                </div>
               </div>
-              {profile.is_bot && (
-                <div className="flex items-center gap-3 text-sm">
-                  <Bot className="w-4 h-4 text-neutral-500" />
-                  <span className="text-neutral-600 dark:text-neutral-400">
-                    Automated System Bot
-                  </span>
+
+              {profile.additional_usernames && profile.additional_usernames.length > 0 && (
+                <div className="flex items-start gap-3">
+                  <Mail className="w-5 h-5 text-gray-500 mt-0.5" />
+                  <div>
+                    <p className="text-sm text-gray-500">Additional Usernames</p>
+                    <div className="flex flex-wrap gap-2 mt-1">
+                      {profile.additional_usernames.map((username, index) => (
+                        <span key={index} className="px-3 py-1 bg-gray-800/50 text-gray-300 rounded-lg text-sm">
+                          {username}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               )}
             </div>

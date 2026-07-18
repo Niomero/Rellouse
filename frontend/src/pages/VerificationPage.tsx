@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { Shield, Send } from 'lucide-react'
+import { motion } from 'framer-motion'
+import { Shield, Send, CheckCircle, Loader2 } from 'lucide-react'
 import { useAuthStore } from '../store/authStore'
 
 const VerificationPage = () => {
@@ -25,138 +26,159 @@ const VerificationPage = () => {
 
   if (user?.role === 'verified' || user?.role === 'administrator' || user?.role === 'owner') {
     return (
-      <div className="max-w-4xl mx-auto p-6">
-        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8 text-center">
-          <Shield size={64} className="mx-auto mb-4 text-verified" />
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-            You're Already Verified!
+      <div className="h-full flex items-center justify-center bg-gray-900 p-6">
+        <motion.div
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          className="glass-card p-12 text-center max-w-md"
+        >
+          <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-indigo-600 to-purple-600 flex items-center justify-center shadow-2xl shadow-indigo-500/30">
+            <Shield className="w-10 h-10 text-white" />
+          </div>
+          <h1 className="text-3xl font-bold text-white mb-3">
+            You're Verified!
           </h1>
-          <p className="text-gray-600 dark:text-gray-400">
-            Your account has verified status.
+          <p className="text-gray-400">
+            Your account already has verified status.
           </p>
-        </div>
+        </motion.div>
       </div>
     )
   }
 
   if (success) {
     return (
-      <div className="max-w-4xl mx-auto p-6">
-        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8 text-center">
-          <Shield size={64} className="mx-auto mb-4 text-green-500" />
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+      <div className="h-full flex items-center justify-center bg-gray-900 p-6">
+        <motion.div
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          className="glass-card p-12 text-center max-w-md"
+        >
+          <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-green-600 to-emerald-600 flex items-center justify-center shadow-2xl shadow-green-500/30">
+            <CheckCircle className="w-10 h-10 text-white" />
+          </div>
+          <h1 className="text-3xl font-bold text-white mb-3">
             Request Submitted!
           </h1>
-          <p className="text-gray-600 dark:text-gray-400">
+          <p className="text-gray-400">
             Your verification request has been submitted successfully. Our team will review it soon.
           </p>
-        </div>
+        </motion.div>
       </div>
     )
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
-      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8">
-        <div className="flex items-center space-x-3 mb-6">
-          <Shield size={32} className="text-verified" />
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-            Request Verification
-          </h1>
-        </div>
+    <div className="h-full overflow-y-auto bg-gray-900 p-6">
+      <div className="max-w-3xl mx-auto space-y-6">
+        {/* Header */}
+        <motion.div
+          initial={{ y: -20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+        >
+          <div className="flex items-center gap-3 mb-3">
+            <div className="p-2 rounded-xl bg-indigo-500/20">
+              <Shield className="w-6 h-6 text-indigo-400" />
+            </div>
+            <h1 className="text-3xl font-bold gradient-text">Request Verification</h1>
+          </div>
+          <p className="text-gray-400">
+            Submit your verification request to get the verified badge on your profile.
+          </p>
+        </motion.div>
 
-        <p className="text-gray-600 dark:text-gray-400 mb-8">
-          Submit your verification request to get the verified badge on your profile.
-          Please provide detailed information about yourself and your online presence.
-        </p>
-
-        <form onSubmit={handleSubmit} className="space-y-6">
+        {/* Form */}
+        <motion.form
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          onSubmit={handleSubmit}
+          className="glass-card p-8 space-y-6"
+        >
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label className="block text-sm font-semibold text-gray-300 mb-2">
               Description *
             </label>
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+              placeholder="Tell us about yourself and why you should be verified..."
+              className="w-full px-4 py-3 bg-gray-800/50 border border-gray-700/50 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-transparent resize-none transition-all"
               rows={4}
-              placeholder="Tell us about yourself, your work, achievements, etc."
               required
-              minLength={50}
-              maxLength={2000}
             />
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-              Minimum 50 characters
-            </p>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label className="block text-sm font-semibold text-gray-300 mb-2">
               Telegram Links
             </label>
             <input
               type="text"
               value={telegramLinks}
               onChange={(e) => setTelegramLinks(e.target.value)}
-              className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-              placeholder="https://t.me/yourchannel (comma-separated)"
+              placeholder="https://t.me/username"
+              className="w-full px-4 py-3 bg-gray-800/50 border border-gray-700/50 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-transparent transition-all"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label className="block text-sm font-semibold text-gray-300 mb-2">
               Social Media Links
             </label>
             <input
               type="text"
               value={socialLinks}
               onChange={(e) => setSocialLinks(e.target.value)}
-              className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-              placeholder="Twitter, Instagram, etc. (comma-separated)"
+              placeholder="Twitter, Instagram, etc."
+              className="w-full px-4 py-3 bg-gray-800/50 border border-gray-700/50 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-transparent transition-all"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label className="block text-sm font-semibold text-gray-300 mb-2">
               Website Links
             </label>
             <input
               type="text"
               value={websiteLinks}
               onChange={(e) => setWebsiteLinks(e.target.value)}
-              className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-              placeholder="https://yourwebsite.com (comma-separated)"
+              placeholder="https://yourwebsite.com"
+              className="w-full px-4 py-3 bg-gray-800/50 border border-gray-700/50 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-transparent transition-all"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label className="block text-sm font-semibold text-gray-300 mb-2">
               Additional Materials
             </label>
             <textarea
               value={additionalMaterials}
               onChange={(e) => setAdditionalMaterials(e.target.value)}
-              className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+              placeholder="Any additional information or links..."
+              className="w-full px-4 py-3 bg-gray-800/50 border border-gray-700/50 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-transparent resize-none transition-all"
               rows={3}
-              placeholder="Any additional information that supports your verification request"
             />
           </div>
 
           <button
             type="submit"
-            disabled={isSubmitting}
-            className="w-full bg-primary-500 hover:bg-primary-600 text-white font-medium py-3 rounded-lg transition-colors flex items-center justify-center space-x-2 disabled:opacity-50"
+            disabled={isSubmitting || !description.trim()}
+            className="w-full py-4 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-semibold rounded-xl shadow-lg shadow-indigo-500/30 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
           >
             {isSubmitting ? (
-              <span>Submitting...</span>
+              <>
+                <Loader2 className="w-5 h-5 animate-spin" />
+                Submitting...
+              </>
             ) : (
               <>
-                <Send size={20} />
-                <span>Submit Request</span>
+                <Send className="w-5 h-5" />
+                Submit Request
               </>
             )}
           </button>
-        </form>
+        </motion.form>
       </div>
     </div>
   )
